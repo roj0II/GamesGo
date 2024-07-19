@@ -37,6 +37,15 @@ CREATE TABLE `game` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `game`
+--
+
+LOCK TABLES `game` WRITE;
+/*!40000 ALTER TABLE `game` DISABLE KEYS */;
+/*!40000 ALTER TABLE `game` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gamegenre`
 --
 
@@ -44,14 +53,25 @@ DROP TABLE IF EXISTS `gamegenre`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `gamegenre` (
+  `id` varchar(45) NOT NULL,
   `idGame` int NOT NULL,
   `idGenre` int NOT NULL,
-  PRIMARY KEY (`idGame`,`idGenre`),
-  KEY `idGenre` (`idGenre`),
+  PRIMARY KEY (`id`),
+  KEY `gamegenre_ibfk_2_idx` (`idGenre`),
+  KEY `gamegenre_ibfk_1_idx` (`idGame`),
   CONSTRAINT `gamegenre_ibfk_1` FOREIGN KEY (`idGame`) REFERENCES `game` (`id`),
   CONSTRAINT `gamegenre_ibfk_2` FOREIGN KEY (`idGenre`) REFERENCES `genre` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gamegenre`
+--
+
+LOCK TABLES `gamegenre` WRITE;
+/*!40000 ALTER TABLE `gamegenre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gamegenre` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `genre`
@@ -67,6 +87,15 @@ CREATE TABLE `genre` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genre`
+--
+
+LOCK TABLES `genre` WRITE;
+/*!40000 ALTER TABLE `genre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genre` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `rent`
@@ -85,6 +114,15 @@ CREATE TABLE `rent` (
   CONSTRAINT `rent_ibfk_1` FOREIGN KEY (`idTransaction`) REFERENCES `transaction` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rent`
+--
+
+LOCK TABLES `rent` WRITE;
+/*!40000 ALTER TABLE `rent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rent` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `shipping`
@@ -109,6 +147,15 @@ CREATE TABLE `shipping` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `shipping`
+--
+
+LOCK TABLES `shipping` WRITE;
+/*!40000 ALTER TABLE `shipping` DISABLE KEYS */;
+/*!40000 ALTER TABLE `shipping` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `storage`
 --
 
@@ -124,6 +171,15 @@ CREATE TABLE `storage` (
   CONSTRAINT `storage_ibfk_1` FOREIGN KEY (`idGame`) REFERENCES `game` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `storage`
+--
+
+LOCK TABLES `storage` WRITE;
+/*!40000 ALTER TABLE `storage` DISABLE KEYS */;
+/*!40000 ALTER TABLE `storage` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `transaction`
@@ -148,6 +204,15 @@ CREATE TABLE `transaction` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -168,6 +233,15 @@ CREATE TABLE `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -178,4 +252,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-18 15:15:56
+-- Dump completed on 2024-07-19 17:23:03
