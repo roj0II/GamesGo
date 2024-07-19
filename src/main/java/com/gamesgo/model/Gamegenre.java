@@ -14,7 +14,8 @@ public class Gamegenre implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private int id;
+	private int id; 
+	//test
 	@ManyToOne
 	@JoinColumn(name = "idGame")
 	private Game game;
