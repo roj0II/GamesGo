@@ -2,14 +2,18 @@ package com.gamesgo.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Game implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id 
+	@Id
 	private int id;
 	
 	private String title;
@@ -21,5 +25,7 @@ public class Game implements Serializable {
 	private float downloadPrice;
 	private String type;
 	
+	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
+	private List<Gamegenre> gameGenres; 
 	
 }
