@@ -14,10 +14,10 @@ public class Shipping implements Serializable {
 	private int id;
 	@ManyToOne
 	@JoinColumn(name="idTransaction")
-	private int idTransaction;
+	private Transaction transaction;
 	@ManyToOne
 	@JoinColumn(name="idUser")
-	private int idUser;
+	private User user;
 	Date shippingDate;
 	Date scheduleDeliveryDate;
 	private String status;
