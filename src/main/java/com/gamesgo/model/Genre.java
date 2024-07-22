@@ -22,4 +22,28 @@ public class Genre implements Serializable {
 	@OneToMany(mappedBy = "genre", cascade = CascadeType.REMOVE)
 	private List<Gamegenre> gameGenres;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Gamegenre> getGameGenres() {
+		return gameGenres;
+	}
+
+	public void setGameGenres(List<Gamegenre> gameGenres) {
+		this.gameGenres = gameGenres;
+	}
+
 }

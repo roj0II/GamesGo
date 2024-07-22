@@ -23,4 +23,29 @@ public class Gamegenre implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idGenre")
 	private Genre genre;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
 }

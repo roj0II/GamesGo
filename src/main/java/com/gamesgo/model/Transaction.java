@@ -31,4 +31,44 @@ public class Transaction implements Serializable {
 	@OneToMany(mappedBy = "transaction", cascade = CascadeType.REMOVE)
 	private List<Shipping> shipments;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public List<Rent> getRents() {
+		return rents;
+	}
+
+	public void setRents(List<Rent> rents) {
+		this.rents = rents;
+	}
+
+	public List<Shipping> getShipments() {
+		return shipments;
+	}
+
+	public void setShipments(List<Shipping> shipments) {
+		this.shipments = shipments;
+	}
+
 }

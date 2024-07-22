@@ -131,4 +131,12 @@ public class User implements Serializable {
 		this.admin = admin;
 	}
 
+	public List<Transaction> getTranscactions() {
+		return transcactions;
+	}
+
+	public void setTranscactions(List<Transaction> transcactions) {
+		this.transcactions = transcactions;
+	}
+
 }
