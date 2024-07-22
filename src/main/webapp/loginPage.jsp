@@ -11,16 +11,20 @@
 <body>
 	<div class="container">
 		<div class="form-container sign-up-container">
-			<form action="#">
+			<form action="/register" method="POST">
 				<h1>Crea Account</h1>
-				<input type="text" placeholder="Nome e cognome" />
-				<input type="email" placeholder="Email" />
-				<input type="text" placeholder="Indirizzo completo" />
-				<input type="text" placeholder="Numero di telefono" />
-				<input type="text" placeholder="Nome utente" />
-				<input type="password" placeholder="Password" />
-				<button>Registrati</button>
+        		<input type="text" class="form-control" name="name" placeholder="Nome" required>
+        		<input type="email" class="form-control" name="email" placeholder="Email" required>
+			    <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+		        <input type="text" class="form-control" name="address" placeholder="Indirizzo completo" required>
+		        <input type="text" class="form-control" name="phoneNumber" placeholder="Numero di telefono" required>
+			    <input type="text" class="form-control" name="username" placeholder="Nome Utente" required>
+				<input type="password" type="password" class="form-control" name="password" placeholder="Password" required/>
+				<button type="submit" value="Registrati"></button>
 			</form>
+			
+    
+    
 		</div>
 		<div class="form-container sign-in-container">
 			<form action="#">
