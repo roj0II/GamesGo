@@ -26,6 +26,10 @@ public class Game implements Serializable {
 	private String type;
 	
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
-	private List<Gamegenre> gameGenres; 
+	private List<Gamegenre> gameGenres;
+	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
+	private List<Storage> storage;
+	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
+	private List<Transaction> transactions;
 	
 }
