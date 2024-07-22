@@ -31,15 +31,17 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String name, @RequestParam String email, @RequestParam String address,
-                           @RequestParam String phoneNumber, @RequestParam String username, @RequestParam String password) {
-        User user = new User(name, email, address, phoneNumber, username, password);
-        
+    public String register(@RequestParam String username, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String address,
+                           @RequestParam String phoneNumber, @RequestParam String password) {
+    	System.out.println(username);
+        User user = new User(username, name, surname, address, phoneNumber, email, password, false);
         boolean registered = userService.register(user);
         if (registered) {
-            return "Registration successful";
+        	// Aggiungiamo un messaggio di successo con la sessione.
+    		return "loginPage.jsp";
         } else {
-            return "User already exists";
+        	// aggiungiamo un messaggio di errore con la sessione.
+    		return "loginPage.jsp";
         }
     }
     
