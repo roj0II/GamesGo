@@ -14,12 +14,14 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int id;
-	@OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-	private List <Transaction> transcactionList;
+	
 	private String username;
 	private String name;
 	private String surname;
 	private String address;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+	private List <Transaction> transcactions;;
 	
 	public User(int id, String username, String name, String surname,
 			String address, String phone, String email, String password, boolean admin) {

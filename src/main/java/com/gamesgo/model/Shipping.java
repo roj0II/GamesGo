@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Shipping implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
 	@ManyToOne
@@ -18,8 +20,8 @@ public class Shipping implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private User user;
-	Date shippingDate;
-	Date scheduleDeliveryDate;
+	private Date shippingDate;
+	private Date scheduleDeliveryDate;
 	private String status;
 	
 }
