@@ -7,6 +7,7 @@
 <title>GamesGo</title>
 </head>
 <body>
+<h1>Funziona qualcosa finalmente</h1>
 <!-- todo home page del nostro sito forse. -->
 
 </body>
