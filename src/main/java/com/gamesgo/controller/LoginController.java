@@ -18,12 +18,17 @@ public class LoginController {
 	public String login () {
 		return "loginPage.jsp";
 	}
-
 	
 	@PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
         boolean authenticated = userService.authenticate(username, password);
         if (authenticated) {
+        	User user = userService.findByUsername(username);
+        	if (user.isAdmin()) {
+        		// ritorniamo la pagina che verrà modificata per l'otp.
+        	} else {
+        		
+        	}
             return "Login successful";
         } else {
             return "Invalid username or password";

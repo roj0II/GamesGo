@@ -16,6 +16,10 @@ public class UserService {
         User user = userRepository.findByUsername(username);
         return user != null && user.getPassword().equals(password);
     }
+    
+    public User findByUsername (String username) {
+    	return userRepository.findByUsername(username);
+    }
 
     public boolean register(User user) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
