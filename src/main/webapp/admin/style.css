@@ -1,7 +1,3 @@
-/* author: https://codepen.io/Gogh/pen/poqaPOM
-Vincent Van Goggles
- */
-/*==================== GOOGLE FONTS ====================*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
 
 /*==================== VARIABLES CSS ====================*/
@@ -52,10 +48,9 @@ body {
 
 /*==================== SERVICE CARD ====================*/
 .card__container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 60px;
-  justify-content: center;
   width: 100%;
   max-width: 90%;
   margin: auto;
@@ -69,8 +64,9 @@ body {
   --transition: 0.5s ease-in-out;
 
   font-family: inherit;
-  height: 350px;
-  width: 300px;
+  height: 200px;
+  width: 100%;
+  max-width: 200px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -86,23 +82,23 @@ body {
   transition: var(--transition);
 }
 .card__bx::before {
-  inset: -10px 50px;
+  inset: -10px 30px;
   border-top: 4px solid var(--clr);
   transform: skewY(15deg);
   border-bottom: 4px solid var(--clr);
 }
 .card__bx:hover::before {
-  inset: -10px 40px;
+  inset: -10px 20px;
   transform: skewY(0deg);
 }
 .card__bx::after {
-  inset: 60px -10px;
+  inset: 40px -10px;
   border-left: 4px solid var(--clr);
   transform: skew(15deg);
   border-right: 4px solid var(--clr);
 }
 .card__bx:hover::after {
-  inset: 40px -10px;
+  inset: 30px -10px;
   transform: skew(0deg);
 }
 .card__bx .card__data {
@@ -111,20 +107,33 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   text-align: center;
-  padding: 0 20px;
+  padding: 0 8px;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
+.card__bx .card__data a {
+  position: relative;
+  display: inline-flex;
+  padding: 4px 10px; /* Diminuito padding */
+  text-decoration: none;
+  font-size: 0.8rem; /* Diminuito font-size */
+  font-weight: 500;
+  margin-top: 8px;
+  border: 2px solid var(--clr);
+  color: var(--dark-color);
+  background-color: var(--clr);
+  transition: var(--transition);
+}
 .card__bx .card__data .card__icon {
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--text-color);
   background-color: var(--dark-color);
   transition: var(--transition);
@@ -136,17 +145,17 @@ body {
 .card__bx:hover .card__data .card__icon {
   color: var(--dark-color);
   background-color: var(--clr);
-  box-shadow: 0 0 0 4px var(--dark-color), 0 0 0 300px var(--clr);
+  box-shadow: 0 0 0 4px var(--dark-color), 0 0 0 200px var(--clr);
 }
 .card__bx .card__data .card__content {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .card__bx .card__data h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: var(--white-color);
   transition: var(--transition);
@@ -156,7 +165,7 @@ body {
   transition: var(--transition);
 }
 .card__bx .card__data p {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--dark-alt-color);
   transition: var(--transition);
 }
@@ -167,10 +176,10 @@ body {
 .card__bx .card__data a {
   position: relative;
   display: inline-flex;
-  padding: 8px 15px;
+  padding: 6px 12px;
   text-decoration: none;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 8px;
   border: 2px solid var(--clr);
   color: var(--dark-color);
   background-color: var(--clr);
