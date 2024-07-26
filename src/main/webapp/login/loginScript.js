@@ -20,7 +20,7 @@ function validateInput() {
 
 	if (inputValue.toLowerCase().includes(targetWord)) {
 		submitButton.innerHTML = "Accedi Admin";
-		submitButton.onclick = function() { window.location.href = 'admin.jsp'; };
+		submitButton.onclick = function() { window.location.href = 'admin.html'; };
 	} else {
 		submitButton.innerHTML = "Accedi Utente";
 		submitButton.onclick = function() { window.location.href = 'user.jsp'; };
