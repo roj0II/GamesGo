@@ -22,6 +22,15 @@ public class Rent implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	private String type;
+	private String key;
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
 
 	public int getId() {
 		return id;
