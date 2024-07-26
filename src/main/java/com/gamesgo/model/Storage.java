@@ -12,13 +12,33 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Storage implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@ManyToOne
-	@JoinColumn(name = "idGame")
-	private Game game;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int amount;
+	
+	@ManyToOne
+	@JoinColumn(name = "idGame")
+	private Game game;
+	
+	private int amountRetail;
+	private int amountDigital;
+
+	public int getAmountRetail() {
+		return amountRetail;
+	}
+
+	public void setAmountRetail(int amountRetail) {
+		this.amountRetail = amountRetail;
+	}
+
+	public int getAmountDigital() {
+		return amountDigital;
+	}
+
+	public void setAmountDigital(int amountDigital) {
+		this.amountDigital = amountDigital;
+	}
 
 	public Game getGame() {
 		return game;
@@ -36,11 +56,4 @@ public class Storage implements Serializable {
 		this.id = id;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
 }
