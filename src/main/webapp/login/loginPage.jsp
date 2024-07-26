@@ -4,8 +4,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login e Registrazione</title>
 	<link rel="stylesheet" href="login/loginStyle.css">
+	<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/esgcc-basic-icon-library/1-login.png">
+	<title>Login e Registrazione</title>
+	
 </head>
 
 <body>
@@ -21,7 +23,7 @@
 		        <input type="text" class="form-control" name="phoneNumber" placeholder="Numero di telefono" required>
 				<input type="password" type="password" class="form-control" name="password" placeholder="Password" required/>
 				<input type="password" type="password" class="form-control" name="password" placeholder="Conferma Password" required/>
-				<button type="submit" value="Registrati"></button>
+				<button type="submit" value="Registrati">Registrati</button>
 			</form>
 			
     
