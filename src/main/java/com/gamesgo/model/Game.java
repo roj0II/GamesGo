@@ -24,8 +24,8 @@ public class Game implements Serializable {
 	private Date releaseDate;
 	private String description;
 	private String photoUrl;
-	private float price;
-	private float downloadPrice;
+	private float priceRetail;
+	private float priceDigital;
 	
 	
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
@@ -71,17 +71,17 @@ public class Game implements Serializable {
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-	public float getPrice() {
-		return price;
+	public float getPriceRetail() {
+		return priceRetail;
 	}
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPriceRetail(float price) {
+		this.priceRetail = price;
 	}
-	public float getDownloadPrice() {
-		return downloadPrice;
+	public float getPriceDigital() {
+		return priceDigital;
 	}
-	public void setDownloadPrice(float downloadPrice) {
-		this.downloadPrice = downloadPrice;
+	public void setPriceDigital(float priceDigital) {
+		this.priceDigital = priceDigital;
 	}
 	public List<Gamegenre> getGameGenres() {
 		return gameGenres;
