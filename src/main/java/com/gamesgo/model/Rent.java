@@ -21,6 +21,7 @@ public class Rent implements Serializable {
 	private Transaction transaction;
 	private Date startDate;
 	private Date endDate;
+	private String type;
 
 	public int getId() {
 		return id;
@@ -52,6 +53,14 @@ public class Rent implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

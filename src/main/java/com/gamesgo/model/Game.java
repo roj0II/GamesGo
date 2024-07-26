@@ -26,7 +26,7 @@ public class Game implements Serializable {
 	private String photoUrl;
 	private float price;
 	private float downloadPrice;
-	private String type;
+	
 	
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
 	private List<Gamegenre> gameGenres;
@@ -82,12 +82,6 @@ public class Game implements Serializable {
 	}
 	public void setDownloadPrice(float downloadPrice) {
 		this.downloadPrice = downloadPrice;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
 	}
 	public List<Gamegenre> getGameGenres() {
 		return gameGenres;
