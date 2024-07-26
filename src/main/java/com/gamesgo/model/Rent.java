@@ -22,14 +22,14 @@ public class Rent implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	private String type;
-	private String key;
+	private String productKey;
 
-	public String getKey() {
-		return key;
+	public String getProductKey() {
+		return productKey;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setProductKey(String productKey) {
+		this.productKey = productKey;
 	}
 
 	public int getId() {
