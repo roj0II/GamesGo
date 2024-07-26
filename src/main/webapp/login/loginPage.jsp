@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login e Registrazione</title>
-	<link rel="stylesheet" href="loginStyle.css">
+	<link rel="stylesheet" href="login/loginStyle.css">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="loginScript.js"></script>
+	<script src="login/loginScript.js"></script>
 </body>
 
 </html>

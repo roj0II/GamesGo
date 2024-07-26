@@ -16,7 +16,12 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String login () {
-		return "loginPage.jsp";
+		return "login/loginPage.jsp";
+	}
+	
+	@GetMapping("/admin")
+	public String admin () {
+		return "admin/index.html";
 	}
 	
 	@PostMapping("/login")
