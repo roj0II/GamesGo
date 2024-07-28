@@ -12,7 +12,7 @@ public class GameGenreDtoBuilder {
 	@Autowired
 	private static GameRepository gameRep;
 	@Autowired
-	public static GenreRepository genreRep;
+	private static GenreRepository genreRep;
 	
 	public static Gamegenre fromDtoToEntity (GameGenreDto gameGenreDto) {
 		Gamegenre gameGenre = new Gamegenre();
