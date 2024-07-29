@@ -44,49 +44,28 @@ public class LoginController {
         	if (user.isAdmin() && adminLogin) {
                 session.setAttribute("accediForm", "hidden");
                 session.setAttribute("otpForm", "");
+                // inserisco l'otp nel database, con l'id dell'utente. user.getId();
+                
                 System.out.println("inviamo un otp all'email associata all'account.");
         		return "login/loginPage.jsp";
         		// ritorniamo la pagina che verrà modificata per l'otp.
         	} else {
-        		
+        		// apriamo la pagina con il catalogo.
+        		return "";
         	}
-            return "Login successful";
         } else {
+        	// ritorno la pagina con il messaggio d'errore.
             return "Invalid username or password";
         }
-		// return "admin/index.html";
 	}
 	
 	@PostMapping("/logAdmin")
-	public String adminLoginOtp (HttpSession session,@RequestParam String username, @RequestParam String password) {
-		System.out.println(username);
-		
+	public String adminLoginOtp (HttpSession session,@RequestParam String otp) {
+		System.out.println(otp);
+		// cerco nel database il codice otp, se c'è prendo l'utente e lo imposto nella sessione dell'utente. sennò errore.
 		return "admin/index.html";
 	}
 	
-	
-	@GetMapping("/logUser")
-	public String userLogin (@RequestParam String username, @RequestParam String password) {
-		return "admin/index.html";
-	}
-	
-	
-	//@PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        boolean authenticated = userService.authenticate(username, password);
-        if (authenticated) {
-        	User user = userService.findByUsername(username);
-        	if (user.isAdmin()) {
-        		// ritorniamo la pagina che verrà modificata per l'otp.
-        	} else {
-        		
-        	}
-            return "Login successful";
-        } else {
-            return "Invalid username or password";
-        }
-    }
-
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String address,
                            @RequestParam String phoneNumber, @RequestParam String password) {
