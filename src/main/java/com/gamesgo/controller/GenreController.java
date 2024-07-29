@@ -43,7 +43,6 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		model.addAttribute("genreForm", genre);
 		return "insertGenre.jsp";
 	}
-	
 
 	@PostMapping("insert")
 	public String insert(Model model,@ModelAttribute("genreForm") GenreDto g) {
