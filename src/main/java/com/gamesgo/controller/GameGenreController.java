@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.gamesgo.dto.GameGenreDto;
-import com.gamesgo.dto.GenreDto;
 import com.gamesgo.dto.builder.GameGenreDtoBuilder;
-import com.gamesgo.dto.builder.GenreDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Gamegenre;
-import com.gamesgo.model.Genre;
 import com.gamesgo.repository.GameGenreRepository;
 
 @Controller
