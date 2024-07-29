@@ -10,9 +10,9 @@ import com.gamesgo.repository.GenreRepository;
 
 public class GameGenreDtoBuilder {
 	@Autowired
-	public static GameRepository gameRep;
+	private static GameRepository gameRep;
 	@Autowired
-	public static GenreRepository genreRep;
+	private static GenreRepository genreRep;
 	
 	public static Gamegenre fromDtoToEntity (GameGenreDto gameGenreDto) {
 		Gamegenre gameGenre = new Gamegenre();

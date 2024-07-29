@@ -12,20 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gamesgo.dto.GenreDto;
 import com.gamesgo.dto.builder.GenreDtoBuilder;
+import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Genre;
 import com.gamesgo.repository.GenreRepository;
 
 @Controller
 @RequestMapping("genre")
-public class GenreController {
+public class GenreController implements CrudControllerI<GenreDto> {
+	
+	@Autowired
+	private GenreRepository genRep;
 	
 	@GetMapping("/")
 	public String main(Model model) {
 		return "genre.jsp";
 	}
-	
-	@Autowired
-	private GenreRepository genRep;
 	
 	@DeleteMapping("/{id}")
 	public String delete(Model model, @PathVariable int id) {
