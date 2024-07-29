@@ -4,13 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.gamesgo.dto.GameGenreDto;
+import com.gamesgo.dto.builder.GameGenreDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
+import com.gamesgo.model.Gamegenre;
 import com.gamesgo.repository.GameGenreRepository;
 
 @Controller
-@RequestMapping("gameGenre")
+@RequestMapping("gamegenre")
 public class GameGenreController implements CrudControllerI<GameGenreDto> {
 
 	@GetMapping("/")
@@ -20,35 +25,35 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 
 	@Autowired
 	private GameGenreRepository gameGenreRep;
-	
-	@GetMapping("preInsert")
+
+	@GetMapping("insert")
 	public String preInsert(Model model) {
 		GameGenreDto gameGenreDto = new GameGenreDto();
-		model.addAttribute("genreForm", gameGenreDto);
+		model.addAttribute("gameGenreForm", gameGenreDto);
 		return "insertGameGenre.jsp";
 	}
 
-	@Override
+	@PostMapping("insert")
 	public String insert(Model model, GameGenreDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		return "redirect:/gamegenre/";
 	}
 
-	@Override
+	@GetMapping("update/{id}")
 	public String preUpdate(Model model, int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Gamegenre gameG = gameGenreRep.findById(id).orElse(new Gamegenre());
+		model.addAttribute("gameGenreForm", GameGenreDtoBuilder.fromEntityToDto(gameG));
+		return "editGameGenre.jsp";
 	}
 
-	@Override
-	public String update(Model model, GameGenreDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping("update")
+	public String update(Model model,@ModelAttribute("genreForm") GameGenreDto dto) {
+		gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		return "redirect:/gamegenre/";
 	}
 
-	@Override
-	public String delete(Model model, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(Model model, @PathVariable int id) {
+		gameGenreRep.deleteById(id);
+		return "redirect:/gamegenre/";
 	}
 }
