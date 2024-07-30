@@ -52,10 +52,10 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		Genre genre = genRep.findById(id).orElse(new Genre());
 		
         model.addAttribute("genreForm", GenreDtoBuilder.fromEntityToDto(genre));
-        return "editGenre.jsp";
+        return "/genre/editGenre.jsp";
     }
 	
-	@GetMapping("update")
+	@PostMapping("update")
     public String update(Model model,@ModelAttribute("genreForm") GenreDto g) {
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
 		return "redirect:/genre/";

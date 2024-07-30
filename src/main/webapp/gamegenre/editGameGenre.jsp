@@ -9,7 +9,7 @@
 <title>Edit Game Genre</title>
 </head>
 <body>
-<h1 class="mb-4">Modifica genere del gioco</h1>
+<h1 class="mb-4">Modifica genere o gioco</h1>
     <f:form modelAttribute="gameGenreForm" method="POST" action="/gamegenre/update">
         <div class="form-group">
         	<f:input path="id" type="hidden"/>
