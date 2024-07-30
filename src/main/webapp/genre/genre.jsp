@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Genre</title>
+<title>Genere</title>
 </head>
 <body>
-	<h1>Lista di Genre</h1>
+	<h1>Lista di Generi</h1>
 	<form action="/genre/insert">
-		<button type="submit">Crea Genre</button>
+		<button type="submit">Crea Genere</button>
 	</form>
 	<table>
 	        <tr>
