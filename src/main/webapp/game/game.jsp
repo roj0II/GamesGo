@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <!DOCTYPE html>
 <html>
@@ -50,6 +50,7 @@ table.center {
 			<th>Title</th>
 			<th>Author</th>
 			<th>Description</th>
+			<th>Photo_url</th>
 			<th>Price Retail</th>
 			<th>Price Digital</th>
 			<th>Release date</th>
@@ -62,6 +63,7 @@ table.center {
 					<td>${game.id}</td>
 					<td>${game.title}</td>
 					<td>${game.author }</td>
+					<td>${game.photoUrl }</td>
 					<td>${game.description }</td>
 					<td>${game.priceRetail }</td>
 					<td>${game.priceDigital}</td>
