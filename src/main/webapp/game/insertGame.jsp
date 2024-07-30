@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Insert Game</h1>
-<f:form modelAttribute="gameForm" action="/gameCtr/insert" method="post">
+<f:form modelAttribute="gameForm" action="/game/insert" method="post">
 <f:label path="title">Title</f:label>
 <f:input path="title"/>
 <f:label path="author">Author</f:label>

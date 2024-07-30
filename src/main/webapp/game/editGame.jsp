@@ -5,12 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <h1>Insert Game</h1>
-<f:form modelAttribute="gameForm" action="/gameCtr/edit" method="post">
+<f:form modelAttribute="gameForm" action="/game/update" method="post">
+<f:hidden path="id"/>
 <f:label path="title">Title</f:label>
 <f:input path="title"/>
 <f:label path="author">Author</f:label>
