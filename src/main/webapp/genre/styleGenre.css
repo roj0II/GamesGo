@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+/*==================== VARIABLES CSS ====================*/
+:root {
+  /*========== Colors ==========*/
+  --text-color: #000000;
+  --bg-color: #222222;
+  --button-bg-color: #66FFFF;
+  --button-hover-bg-color: #9dffff;
+  --table-header-bg-color: #333333;
+  --table-row-bg-color: #2e2e2e;
+  --table-border-color: #777777;
+
+  /*========== Font and typography ==========*/
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: 0.938rem;
+}
+
+@media screen and (min-width: 968px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+}
+
+/*==================== BASE ====================*/
+*,
+*:after,
+*:before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--normal-font-size);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-weight: 400;
+  font-family: var(--body-font);
+  transition: all 0.2s ease;
+}
+
+.icon {
+	max-width: 120px;
+	width: 100%;
+	color: --button-bg-color;
+	padding: 1rem 1rem;
+}
+
+.button-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*==================== REUSABLE CSS CLASSES ====================*/
+.container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.title-row {
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 0;
+  max-height: 100px;
+  display: grid;
+  place-items: center;
+}
+
+/*==================== TABLE ====================*/
+.table__container {
+  width: 100%;
+  max-width: 60%;
+  margin: auto;
+  padding: 20px;
+  background-color: var(--table-row-bg-color);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 12px;
+  text-align: center;
+  border: 1px solid var(--table-border-color);
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background-color: var(--table-header-bg-color);
+  color: var(--white-color);
+  width: 300px;
+}
+
+td {
+  width: 200px;
+}
+
+tr:nth-child(even) {
+  background-color: var(--table-row-bg-color);
+}
+
+tr:nth-child(odd) {
+  background-color: var(--dark-alt-color);
+}
+
+td .buttons {
+  display: flex;
+  gap: 20px;
+  width: 180px;
+  justify-content: center;
+  align-items: center;
+}
+
+td .buttons a {
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--white-color);
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+td .buttons a:hover {
+  background-color: var(--button-hover-bg-color);
+}

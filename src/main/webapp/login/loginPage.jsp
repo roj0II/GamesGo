@@ -24,8 +24,8 @@
 			    <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
 		        <input type="text" class="form-control" name="address" placeholder="Indirizzo completo" required>
 		        <input type="text" class="form-control" name="phoneNumber" placeholder="Numero di telefono" required>
-				<input type="password" type="password" class="form-control" name="password" placeholder="Password" required/>
-				<input type="password" type="password" class="form-control" name="password" placeholder="Conferma Password" required/>
+				<input type="password" class="form-control" name="password" placeholder="Password" required/>
+				<input type="password" class="form-control" name="password" placeholder="Conferma Password" required/>
 				<button type="submit" value="Registrati">Registrati</button>
 			</form>
 			
