@@ -20,7 +20,7 @@
 	            <tr>
 	                <td>${genre.name}</td>
 	                <td>
-	                    <form action="/genre/edit/${genre.id}" method="POST">
+	                    <form action="/genre/update/${genre.id}">
 	                            <button type="submit">Modifica</button>
 	                    </form>
 	                    <form action="/genre/delete/${genre.id}">

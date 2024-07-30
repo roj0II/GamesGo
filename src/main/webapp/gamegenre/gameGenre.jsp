@@ -22,10 +22,10 @@
 				<td>${gamegenre.game.title}</td>
 				<td>${gamegenre.genre.name}</td>
 				<td>
-					<form action="/gamegenre/update/${gamegenre.id}" method="POST">
+					<form action="/gamegenre/update/${gamegenre.id}">
 						<button type="submit">Modifica</button>
 					</form>
-					<form action="/genre/delete/${gamegenre.id}">
+					<form action="/gamegenre/delete/${gamegenre.id}">
 						<button type="submit">Elimina</button>
 					</form>
 				</td>
