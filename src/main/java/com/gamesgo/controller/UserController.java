@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.gamesgo.dto.UserDto;
 import com.gamesgo.dto.builder.UserDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
@@ -20,7 +19,7 @@ import com.gamesgo.repository.UserRepository;
 public class UserController implements CrudControllerI<UserDto> {
 	@Autowired
 	private UserRepository uRep;
-	
+
 	@GetMapping("/")
 	public String main(Model model) {
 		model.addAttribute("users", uRep.findAll());
@@ -48,7 +47,7 @@ public class UserController implements CrudControllerI<UserDto> {
 	}
 
 	@PostMapping("update")
-	public String update(Model model,@ModelAttribute("userForm") UserDto dto) {
+	public String update(Model model, @ModelAttribute("userForm") UserDto dto) {
 		uRep.save(UserDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/user/";
 	}
@@ -58,9 +57,5 @@ public class UserController implements CrudControllerI<UserDto> {
 		uRep.deleteById(id);
 		return "redirect:/user/";
 	}
-
-	
-
-	
 
 }
