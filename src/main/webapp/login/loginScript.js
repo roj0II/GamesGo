@@ -20,9 +20,9 @@ function validateInput() {
 
 	if (inputValue.toLowerCase().includes(targetWord)) {
 		submitButton.innerHTML = "Accedi Admin";
-		submitButton.onclick = function() { window.location.href = 'admin'; };
+		//submitButton.onclick = function() { window.location.href = 'logAdmin'; };
 	} else {
-		submitButton.innerHTML = "Accedi Utente";
-		submitButton.onclick = function() { window.location.href = 'user.jsp'; };
+		submitButton.innerHTML = "Accedi";
+		//submitButton.onclick = function() { window.location.href = 'logUser'; };
 	}
 }

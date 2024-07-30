@@ -32,46 +32,84 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Se usi JSP, devi includere anche questa dipendenza -->
-	    <dependency>
-	        <groupId>org.apache.tomcat.embed</groupId>
-	        <artifactId>tomcat-embed-jasper</artifactId>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-web</artifactId>
-	    </dependency>
-	    <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <!-- <version>3.0.1</version> -->
-        </dependency>
-	</dependencies>
+    <!-- Spring Boot Data JPA: Fornisce il supporto per l'integrazione di Spring Data JPA, facilitando la gestione dei dati con JPA (Java Persistence API). Include il supporto per i repository, la gestione delle entità e altre funzionalità legate ai dati. -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Spring Boot DevTools: Fornisce strumenti di sviluppo aggiuntivi per migliorare l'esperienza di sviluppo, come il riavvio automatico dell'applicazione e il supporto per la configurazione dinamica durante lo sviluppo. -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <scope>runtime</scope>
+        <optional>true</optional>
+    </dependency>
+
+    <!-- MySQL Connector/J: Il driver JDBC per connettersi a un database MySQL. È necessario per l'integrazione di Spring Data JPA con MySQL come database. -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!-- Spring Boot Starter Tomcat: Fornisce un contenitore web Tomcat incorporato per l'esecuzione dell'applicazione. Specificare <scope>provided</scope> indica che Tomcat è fornito dal contenitore di servlet dell'ambiente di esecuzione e non deve essere incluso nel pacchetto dell'applicazione. -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Boot Starter Test: Fornisce le dipendenze per il testing dell'applicazione, inclusi JUnit, AssertJ, e Spring Test per i test unitari e di integrazione. -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Tomcat Embed Jasper: Necessario per il supporto delle JSP (JavaServer Pages) in un'applicazione Spring Boot. Include il supporto per il compilatore JSP e le librerie associate. -->
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+    </dependency>
+
+    <!-- Spring Boot Starter Web: Fornisce le dipendenze necessarie per lo sviluppo di applicazioni web, inclusi Spring MVC, Jackson per JSON, e altre funzionalità web di base. -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Jakarta Servlet JSP JSTL: La libreria JSTL (JavaServer Pages Standard Tag Library) per le JSP. Fornisce una serie di tag utili per lavorare con JSP e semplificare il codice JSP. -->
+    <dependency>
+        <groupId>org.glassfish.web</groupId>
+        <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+
+    <!-- Jakarta Servlet API: Fornisce le classi e le interfacce per le Servlet e JSP nel contesto di Jakarta EE (ex Java EE). Specificare <scope>provided</scope> indica che questa libreria è fornita dal contenitore di servlet e non deve essere inclusa nel pacchetto dell'applicazione. -->
+    <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>5.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <!-- Jakarta Servlet JSP API: Fornisce il supporto per le JSP nel contesto di Jakarta EE. Specificare <scope>provided</scope> indica che questa libreria è fornita dal contenitore di servlet e non deve essere inclusa nel pacchetto dell'applicazione. -->
+    <dependency>
+        <groupId>jakarta.servlet.jsp</groupId>
+        <artifactId>jakarta.servlet.jsp-api</artifactId>
+        <version>3.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+    
+    <!-- Jakarta Servlet JSP JSTL API: Fornisce il supporto per la JSTL (JavaServer Pages Standard Tag Library) per le JSP. -->
+    <dependency>
+        <groupId>jakarta.servlet.jsp.jstl</groupId>
+        <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+</dependencies>
+
 
 	<build>
 		<plugins>

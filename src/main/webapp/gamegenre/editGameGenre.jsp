@@ -6,15 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Genre</title>
+<title>Edit Game Genre</title>
 </head>
 <body>
-	<h1 class="mb-4">Modifica Genre</h1>
-    <f:form modelAttribute="genreForm" method="POST" action="/genre/update">
+<h1 class="mb-4">Modifica genere del gioco</h1>
+    <f:form modelAttribute="gameGenreForm" method="POST" action="/gamegenre/update">
         <div class="form-group">
         	<f:input path="id" type="hidden"/>
-            <f:label path="name">Nome:</f:label>
-            <f:input path="name"/>
+            <f:label path="idGame">ID Gioco:</f:label>
+            <f:input path="idGame"/>
+            <f:label path="idGenre">ID Genere:</f:label>
+            <f:input path="idGenre"/>
         </div>
         
         <button type="submit">Salva</button>

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="it">
 
 <head>
@@ -30,19 +33,27 @@
     
 		</div>
 		<div class="form-container sign-in-container">
-			<form action="#">
+			<form class="${accediForm}" action="/login" method="POST">
 				<h1>Accedi</h1>
 				<input type="text" placeholder="Nome utente" name="username" id="username" oninput="validateInput()"/>
 				<input type="password" placeholder="Password" name="password"/>
 				<div class="buttons-container">
-                    <button type="button" id=submitButton>Accedi</button>
+                    <button type="submit" id=submitButton>Accedi</button>
+                </div>
+			</form>
+			
+			<form class="${otpForm}" action="/logAdmin" method="POST">
+				<h1>Verifica Otp</h1>
+				<input type="text" placeholder="Codice Otp" name="otp" id="otp"/>
+				<div class="buttons-container">
+                    <button type="button" id=submitButton>Verifica</button>
                 </div>
 			</form>
 		</div>
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-left">
-					<h1>Sei gi�dei nostri?</h1>
+					<h1>Sei già dei nostri?</h1>
 					<p>Bentornato, accedi al tuo account.</p>
 					<button class="ghost" id="signIn">Accedi</button>
 				</div>

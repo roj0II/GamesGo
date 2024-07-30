@@ -25,13 +25,14 @@ public class GenreController implements CrudControllerI<GenreDto> {
 	
 	@GetMapping("/")
 	public String main(Model model) {
+        model.addAttribute("genres", genRep.findAll());
 		return "genre.jsp";
 	}
 	
-	@DeleteMapping("/{id}")
+	@GetMapping("/delete/{id}")
 	public String delete(Model model, @PathVariable int id) {
 		genRep.deleteById(id);
-		return "genre.jsp";
+		return "redirect:/genre/";
 	}
 	//  edit
 	
@@ -42,12 +43,11 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		model.addAttribute("genreForm", genre);
 		return "insertGenre.jsp";
 	}
-	
 
 	@PostMapping("insert")
 	public String insert(Model model,@ModelAttribute("genreForm") GenreDto g) {
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
-		return "genre.jsp";
+		return "redirect:/genre/";
 	}
 	
 	@GetMapping("update/{id}")
@@ -61,7 +61,6 @@ public class GenreController implements CrudControllerI<GenreDto> {
 	@GetMapping("update")
     public String update(Model model,@ModelAttribute("genreForm") GenreDto g) {
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
-        return "genre.jsp";
-    }
-	
+		return "redirect:/genre/";
+	}
 }
