@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="styleGenre.css">
-<title>Genre</title>
+<title>Genere</title>
 </head>
 <body>
 	 <div class="title-row">
@@ -47,3 +47,27 @@
     </table>
   </div>
 </div>
+	<h1>Lista di Generi</h1>
+	<form action="/genre/insert">
+		<button type="submit">Crea Genere</button>
+	</form>
+	<table>
+	        <tr>
+	            <th>Nome</th>
+	        </tr>
+	        <c:forEach var="genre" items="${genres}">
+	            <tr>
+	                <td>${genre.name}</td>
+	                <td>
+	                    <form action="/genre/edit/${genre.id}" method="POST">
+	                            <button type="submit">Modifica</button>
+	                    </form>
+	                    <form action="/genre/delete/${genre.id}">
+	                            <button type="submit">Elimina</button>
+	                    </form>
+	                </td>
+	            </tr>
+	        </c:forEach>
+	</table>
+</body>
+</html>

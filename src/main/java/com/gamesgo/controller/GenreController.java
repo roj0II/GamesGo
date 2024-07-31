@@ -3,6 +3,7 @@ package com.gamesgo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,8 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		genRep.deleteById(id);
 		return "redirect:/genre/";
 	}
+	//  edit
+	
 	
 	@GetMapping("insert")
 	public String preInsert(Model model) {
@@ -52,10 +55,10 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		Genre genre = genRep.findById(id).orElse(new Genre());
 		
         model.addAttribute("genreForm", GenreDtoBuilder.fromEntityToDto(genre));
-        return "/genre/editGenre.jsp";
+        return "editGenre.jsp";
     }
 	
-	@PostMapping("update")
+	@GetMapping("update")
     public String update(Model model,@ModelAttribute("genreForm") GenreDto g) {
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
 		return "redirect:/genre/";

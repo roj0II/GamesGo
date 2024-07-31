@@ -20,7 +20,6 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 
 	@GetMapping("/")
 	public String main(Model model) {
-		model.addAttribute("gameGenreList", gameGenreRep.findAll());
 		return "gameGenre.jsp";
 	}
 
@@ -44,16 +43,15 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	public String preUpdate(Model model, int id) {
 		Gamegenre gameG = gameGenreRep.findById(id).orElse(new Gamegenre());
 		model.addAttribute("gameGenreForm", GameGenreDtoBuilder.fromEntityToDto(gameG));
-		return "/gamegenre/editGameGenre.jsp";
+		return "editGameGenre.jsp";
 	}
 
-	@PostMapping("update")
-	public String update(Model model, @ModelAttribute("genreForm") GameGenreDto dto) {
+	@GetMapping("update")
+	public String update(Model model,@ModelAttribute("genreForm") GameGenreDto dto) {
 		gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/gamegenre/";
 	}
 
-	@GetMapping("/delete/{id}")
 	public String delete(Model model, @PathVariable int id) {
 		gameGenreRep.deleteById(id);
 		return "redirect:/gamegenre/";

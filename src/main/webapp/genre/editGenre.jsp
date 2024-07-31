@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Genre</title>
+<title>Modifica Genere</title>
 </head>
 <body>
 	<h1 class="mb-4">Modifica Genre</h1>
-    <f:form modelAttribute="genreForm" method="PUT" action="/genre/update">
+    <f:form modelAttribute="genreForm" method="POST" action="/genre/update">
         <div class="form-group">
         	<f:input path="id" type="hidden"/>
             <f:label path="name">Nome:</f:label>
