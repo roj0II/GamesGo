@@ -1,13 +1,21 @@
 package com.gamesgo.controller;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gamesgo.model.Otp;
 import com.gamesgo.model.User;
+import com.gamesgo.repository.OtpRepository;
 import com.gamesgo.service.UserService;
+import com.gamesgo.util.EmailManager;
+import com.gamesgo.util.OTPCodeGenerator;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -15,6 +23,9 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private OtpRepository otpRep;
 	
 	@GetMapping("/login")
 	public String login (HttpSession session) {
@@ -29,7 +40,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String adminLogin (HttpSession session,@RequestParam String username, @RequestParam String password) {
+	public String adminLogin (HttpSession session,@RequestParam String username, @RequestParam String password) throws MessagingException, IOException {
 		System.out.println(username);
 		boolean adminLogin = false;
 		if (username.toLowerCase().startsWith("admin_")) {
@@ -45,6 +56,20 @@ public class LoginController {
                 session.setAttribute("accediForm", "hidden");
                 session.setAttribute("otpForm", "");
                 // inserisco l'otp nel database, con l'id dell'utente. user.getId();
+
+                String otpCode = OTPCodeGenerator.generateOTPCode();
+                
+                Otp otp = new Otp();
+                otp.setCode(otpCode);
+                otp.setUser(user);
+                otpRep.save(otp);
+                
+                EmailManager.sendMail(user.getEmail(), otpCode);
+
+                
+                // invio l'email
+                // 
+                
                 
                 System.out.println("inviamo un otp all'email associata all'account.");
         		return "login/loginPage.jsp";
@@ -73,11 +98,11 @@ public class LoginController {
         User user = new User(username, name, surname, address, phoneNumber, email, password, false);
         boolean registered = userService.register(user);
         if (registered) {
-        	// Aggiungiamo un messaggio di successo con la sessione.
+        	// Ricarichiamo la pagina | con o senza messaggio di successo.
     		return "login/loginPage.jsp";
         } else {
-        	// aggiungiamo un messaggio di errore con la sessione.
-    		return "loginPage.jsp";
+        	// Mandiamo un errore e ricarichiamo la pagina.
+        	return "loginPage.jsp";
         }
     }
     
