@@ -17,14 +17,13 @@ import com.gamesgo.repository.GameGenreRepository;
 @Controller
 @RequestMapping("gamegenre")
 public class GameGenreController implements CrudControllerI<GameGenreDto> {
-
+	@Autowired
+	private GameGenreRepository gameGenreRep;
+	
 	@GetMapping("/")
 	public String main(Model model) {
 		return "gameGenre.jsp";
 	}
-
-	@Autowired
-	private GameGenreRepository gameGenreRep;
 
 	@GetMapping("insert")
 	public String preInsert(Model model) {
