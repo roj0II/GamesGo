@@ -26,13 +26,13 @@
 		<c:forEach var="user" items="${users}">
 			<tr>
 				<td>${user.username}</td>
-				<td>${gamegenre.name}</td>
-				<td>${gamegenre.surname}</td>
-				<td>${gamegenre.adress}</td>
-				<td>${gamegenre.phone}</td>
-				<td>${gamegenre.email}</td>
-				<td>${gamegenre.password}</td>
-				<td>${gamegenre.admin}</td>
+				<td>${user.name}</td>
+				<td>${user.surname}</td>
+				<td>${user.address}</td>
+				<td>${user.phone}</td>
+				<td>${user.email}</td>
+				<td>${user.password}</td>
+				<td>${user.admin}</td>
 				<td>
 					<form action="/user/update/${user.id}">
 						<button type="submit">Modifica</button>

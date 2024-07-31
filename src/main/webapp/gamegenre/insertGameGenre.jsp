@@ -9,7 +9,7 @@
 <title>Insert Game Genre</title>
 </head>
 <body>
-	<h1 class="mb-4">Inserisci il genere del gioco</h1>
+	<h1 class="mb-4">Inserisci gioco e genere</h1>
 	<f:form modelAttribute="gameGenreForm" method="POST"
 		action="/gamegenre/insert">
 		<div class="form-group">

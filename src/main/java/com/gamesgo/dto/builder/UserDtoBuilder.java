@@ -24,7 +24,7 @@ public class UserDtoBuilder {
 		dtu.setId(user.getId());
 		dtu.setUsername(user.getUsername());
 		dtu.setName(user.getName());
-		dtu.setSurname(dtu.getSurname());
+		dtu.setSurname(user.getSurname());
 		dtu.setAddress(user.getAddress());
 		dtu.setPhone(user.getAddress());
 		dtu.setEmail(user.getEmail());
