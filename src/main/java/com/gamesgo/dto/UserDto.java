@@ -83,6 +83,5 @@ public class UserDto {
 		this.admin = admin;
 	}
 
-	
-
 }
+

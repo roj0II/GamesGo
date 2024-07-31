@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Genre</title>
+<title>Modifica Genere</title>
 </head>
 <body>
 	<h1 class="mb-4">Modifica Genre</h1>

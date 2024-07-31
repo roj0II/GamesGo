@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert Genre</title>
+<title>Inserisci Genere</title>
 </head>
 <body>
 		<h1 class="mb-4">Inserisci Genre</h1>
