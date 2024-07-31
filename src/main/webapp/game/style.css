@@ -59,6 +59,10 @@ body {
 	margin-right: 60px;
 }
 
+.icon {
+	color: --button-bg-color;
+}
+
 .buttons {
 	max-width: 180px;
 	width: 100%;

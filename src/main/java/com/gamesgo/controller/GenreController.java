@@ -26,7 +26,7 @@ public class GenreController implements CrudControllerI<GenreDto> {
 	@GetMapping("/")
 	public String main(Model model) {
         model.addAttribute("genres", genRep.findAll());
-		return "index.jsp";
+		return "genre.jsp";
 	}
 	
 	@GetMapping("/delete/{id}")

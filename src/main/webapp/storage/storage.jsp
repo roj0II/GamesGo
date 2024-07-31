@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Storage</title>
     <!-- Web Icon -->
     <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
     <!-- Bootstrap CSS -->
@@ -21,20 +21,16 @@
     <div class="container">
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
-            <h1 class="header-title">Lista di Giochi</h1>
-            <a href="/game/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
+            <h1 class="header-title">Magazzino</h1>
+            <a href="/storage/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Title</th>
-					<th>Author</th>
-					<th>Description</th>
-					<th>Photo_url</th>
-					<th>Price Retail</th>
-					<th>Price Digital</th>
-					<th>Release date</th>
+                    <th>Game</th>
+					<th>Digital Ammount</th>
+					<th>Retail Ammount</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -42,17 +38,11 @@
 	            <c:forEach var="game" items="${gameListForm}"> <!-- da sistemare -->
 				<tr>
 					<td>${game.id}</td>
-					<td>${game.title}</td>
-					<td>${game.author }</td>
-					<td>${game.photoUrl }</td>
-					<td>${game.description }</td>
-					<td>${game.priceRetail }</td>
-					<td>${game.priceDigital}</td>
-					<td>${game.releaseDate}</td>
+				
 					<td class="table-actions">
-	                        <a href="/game/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/storage/update/${genre.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/game/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/storage/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>

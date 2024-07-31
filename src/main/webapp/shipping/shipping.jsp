@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Shipping</title>
     <!-- Web Icon -->
     <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
     <!-- Bootstrap CSS -->
@@ -22,10 +22,10 @@
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
             <h1 class="header-title">Lista di Giochi</h1>
-            <a href="/game/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
+            <a href="/shipping/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-striped">        <!-- da sistemare -->
             <thead>
                 <tr>
                     <th>Title</th>
@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="game" items="${gameListForm}"> <!-- da sistemare -->
+	            <c:forEach var="game" items="${gameListForm}"> 
 				<tr>
 					<td>${game.id}</td>
 					<td>${game.title}</td>
@@ -50,9 +50,9 @@
 					<td>${game.priceDigital}</td>
 					<td>${game.releaseDate}</td>
 					<td class="table-actions">
-	                        <a href="/game/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/shipping/update/${genre.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/game/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/shipping/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>
