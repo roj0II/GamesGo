@@ -15,7 +15,7 @@ public class Otp {
 	private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
     private String code;
