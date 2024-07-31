@@ -6,22 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="styleGenre.css">
 <title>Genre</title>
 </head>
 <body>
-	<div class="title-row">
-		<h1><a class="icon" href="/admin">
-	         <i class="fa-solid fa-arrow-left"></i>
-	        </a>
-				Lista di Genre
-	        <a class="icon" href="/genre/insert">
-	         <i class="fa-solid fa-circle-plus"></i>
-	        </a>
-	     </h1>
-	 </div>
+	 <div class="title-row">
+            <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
+            <h1>Lista di Generi</h1>
+            <a href="/genre/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
+        </div>
 	 
 	 <div class="container">
   <div class="table__container">
@@ -38,8 +34,10 @@
 			<td>${genre.name}</td>
 			<td><div class="button-box">
 				  <div class="buttons">
-		          <a href="/genre/update/${genre.id}">Modifica</a>
-		          <a href="/genre/delete/${genre.id}">Elimina</a>
+		          <a href="/genre/update/${genre.id}">
+		          <i class="fas fa-edit"></i>Modifica</a>
+		          <a href="/genre/delete/${genre.id}">
+		          <i class="fas fa-trash"></i>Elimina</a>
 		        </div>
 		    </div>
 		    </td>

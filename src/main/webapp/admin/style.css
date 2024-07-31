@@ -63,6 +63,7 @@ body {
   --button-color: #333333;
   --transition: 0.5s ease-in-out;
 
+  cursor: pointer;
   font-family: inherit;
   height: 200px;
   width: 100%;
