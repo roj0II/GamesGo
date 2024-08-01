@@ -43,7 +43,7 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	public String preUpdate(Model model,@PathVariable int id) {
 		Gamegenre gameG = gameGenreRep.findById(id).orElse(new Gamegenre());
 		model.addAttribute("gameGenreForm", GameGenreDtoBuilder.fromEntityToDto(gameG));
-		return "editGameGenre.jsp";
+		return "/gamegenre/editGameGenre.jsp";
 	}
 
 	@GetMapping("update")
