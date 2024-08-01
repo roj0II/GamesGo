@@ -1,0 +1,61 @@
+package com.gamesgo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.gamesgo.dto.TransactionDto;
+import com.gamesgo.dto.builder.TransactionDtoBuilder;
+import com.gamesgo.interfaces.CrudControllerI;
+import com.gamesgo.model.Transaction;
+import com.gamesgo.repository.TransactionRepository;
+
+@Controller
+@RequestMapping("transaction")
+public class TransactionController implements CrudControllerI<TransactionDto> {
+	@Autowired
+	private TransactionRepository transRep;
+
+	@GetMapping("/")
+	public String main(Model model) {
+		model.addAttribute("transactions", transRep.findAll());
+		return "transaction.jsp";
+	}
+
+	@GetMapping("insert")
+	public String preInsert(Model model) {
+		TransactionDto dtoTransaction = new TransactionDto();
+		model.addAttribute("transactionForm", dtoTransaction);
+		return "insertTransaction.jsp";
+	}
+
+	@PostMapping("insert")
+	public String insert(Model model, @ModelAttribute("transactionForm") TransactionDto dto) {
+		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
+		return "redirect:/transaction/";
+	}
+
+	@GetMapping("update/{id}")
+	public String preUpdate(Model model, @PathVariable int id) {
+		Transaction t = transRep.findById(id).orElse(new Transaction());
+		model.addAttribute("transactionForm", TransactionDtoBuilder.fromEntityToDto(t));
+		return "/transaction/editTransaction.jsp";
+	}
+
+	@PostMapping("update")
+	public String update(Model model, @ModelAttribute("transactionForm") TransactionDto dto) {
+		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
+		return "redirect:/transaction/";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(Model model, @PathVariable int id) {
+		transRep.deleteById(id);
+		return "redirect:/transaction/";
+	}
+
+}

@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="gamegenre" items="${genres}"> <!-- da sistemare -->
+	            <c:forEach var="gamegenre" items="${gameGenreList}"> <!-- da sistemare -->
 				<tr>
 					<td>${genre.name}</td>
 					<td class="table-actions">
