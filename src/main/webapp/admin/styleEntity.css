@@ -5,8 +5,6 @@
   /*========== Colors ==========*/
   --text-color: #FFFFFF;
   --bg-color: #222222;
-  --button-bg-color: #66FFFF;
-  --button-hover-bg-color: #9dffff;
   --table-header-bg-color: #333333;
   --table-row-bg-color: #2e2e2e;
   --table-border-color: #777777;
@@ -51,16 +49,18 @@ body {
 }
 
 .header-title {
-	color: var(--text-color);
+	color: var(--main-color);
 	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	margin-left: 60px;
+	margin-left: 10px;
 	margin-right: 60px;
 }
 
-.icon {
-	color: --button-bg-color;
+.icons {
+  color: var(--main-color);
+  box-shadow: 0 0 0 4px var(--dark-color), 0 0 0 6px var(--clr);
+  margin-left: 50px;
 }
 
 .buttons {
@@ -141,28 +141,4 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
   background-color: var(--dark-alt-color);
-}
-
-td .buttons {
-  display: flex;
-  gap: 20px;
-  width: 180px;
-  justify-content: center;
-  align-items: center;
-}
-
-td .buttons a {
-  padding: 6px 12px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--white-color);
-  background-color: var(--button-bg-color);
-  border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-td .buttons a:hover {
-  background-color: var(--button-hover-bg-color);
 }
