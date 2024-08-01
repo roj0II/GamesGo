@@ -7,6 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/popup.css">
 	<link rel="stylesheet" href="login/loginStyle.css">
 	<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/esgcc-basic-icon-library/1-login.png">
 	<title>Login e Registrazione</title>
@@ -65,7 +66,17 @@
 			</div>
 		</div>
 	</div>
+	<c:if test="${error}">
+        <div class="popup-item show">
+            <div class="popup ${color}">
+                <label class="close"></label>
+                <h3>${title}</h3>
+                <p>${message}</p>
+            </div>
+        </div>
+    </c:if>
 	<script src="login/loginScript.js"></script>
+	<script src="javascript/popup.js"></script>
 </body>
 
 </html>
