@@ -36,8 +36,8 @@
             <tbody>
 	            <c:forEach var="gamegenre" items="${gameGenreList}"> <!-- da sistemare -->
 				<tr>
-					<td>${gamegenre.idGame}</td>
-					<td>${gamegenre.idGenre}</td>
+					<td>${gamegenre.game.id}</td>
+					<td>${gamegenre.genre.id}</td>
 					<td class="table-actions">
 	                        <a href="/gamegenre/update/${gamegenre.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
