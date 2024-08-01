@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,8 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String login (HttpSession session) {
-        session.setAttribute("accediForm", "");
-        session.setAttribute("otpForm", "hidden");
+		// model.setAttribute("accediForm", "");
+		// model.setAttribute("otpForm", "hidden");
 		return "login/loginPage.jsp";
 	}
 	
@@ -40,8 +41,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String adminLogin (HttpSession session,@RequestParam String username, @RequestParam String password) throws MessagingException, IOException {
-		System.out.println(username);
+	public String adminLogin (Model model, HttpSession session,@RequestParam String username, @RequestParam String password) throws MessagingException, IOException {
+		System.out.println("Username? " + username);
 		boolean adminLogin = false;
 		if (username.toLowerCase().startsWith("admin_")) {
 			username = username.substring(6);
@@ -49,12 +50,12 @@ public class LoginController {
 			adminLogin = true;
 		}
 		boolean authenticated = userService.authenticate(username, password);
-		System.out.println(authenticated);
+		System.out.println("Autenticato? " + authenticated);
         if (authenticated) {
         	User user = userService.findByUsername(username);
         	if (user.isAdmin() && adminLogin) {
-                session.setAttribute("accediForm", "hidden");
-                session.setAttribute("otpForm", "");
+        		model.addAttribute("accediForm", "hidden");
+        		model.addAttribute("otpForm", "");
                 // inserisco l'otp nel database, con l'id dell'utente. user.getId();
 
                 String otpCode = OTPCodeGenerator.generateOTPCode();
@@ -68,9 +69,6 @@ public class LoginController {
                 // Inviamo l'email all'utente con il codice.
                 EmailManager.sendMail(user.getEmail(), otpCode);
                 
-                // ritorniamo la pagina login, con la vista dell'otp.
-                session.setAttribute("accediForm", "hidden");
-                session.setAttribute("otpForm", "");
                 return "login/loginPage.jsp";
         		// ritorniamo la pagina che verrà modificata per l'otp.
         	} else {
@@ -78,8 +76,17 @@ public class LoginController {
         		return "apriamo la pagina con il catalogo.";
         	}
         } else {
+        	System.out.println("Username o Password non validi.");
+        	
+        	model.addAttribute("error", true);
+        	model.addAttribute("message", "Username o Password non validi.");
+        	model.addAttribute("color", "red");
+        	model.addAttribute("title", "Error!");
+
+            session.setAttribute("accediForm", "");
+            session.setAttribute("otpForm", "hidden");
         	// ritorno la pagina con il messaggio d'errore.
-            return "Invalid username or password";
+            return "login/loginPage.jsp";
         }
 	}
 	
