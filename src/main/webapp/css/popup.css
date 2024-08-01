@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+
+/* Popup CSS */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --tr: all 0.5s ease 0s;
+    --blue: #0070e0;
+    --red: #db3056;
+    --green: #03a65a;
+    --yellow: #fc8621;
+}
+
+.show {
+	opacity: 1 !important;
+	display: block !important;
+}
+
+.popup-item {
+    /* overflow: hidden; */
+    max-height: 25rem;
+    transition: all 0.5s ease 0s;
+    position: fixed;
+    animation: show-popup 4s ease 3s 1;
+    z-index: 4;
+    opacity: 0;
+    display: none;
+    top: 1em;
+    left: 4em;
+    }
+.popup {
+    background: #fff;
+    padding: 1rem 2rem 1rem 3rem;
+    text-align: center;
+    border-radius: 1rem;
+    position: relative;
+    font-weight: 300;
+    margin: 1rem 0;
+    text-align: left;
+    max-width: 16rem;
+    transition: all 0.5s ease 0s;
+    border: 0.15rem solid #fff2;
+    box-shadow: 0 0 1.5rem 0 #1a1f4360;
+}
+
+.popup:before {
+    content: "";
+    position: absolute;
+    width: 0.5rem;
+    height: calc(100% - 1.5rem);
+    top: 0.75rem;
+    left: 0.5rem;
+    z-index: 0;
+    border-radius: 1rem;
+    background: var(--blue);
+}
+
+/* Specific styles for red popup */
+.popup.red:before {
+    background: var(--red) !important;
+}
+
+.popup.yellow:before {
+    background: var(--yellow) !important;
+}
+.popup.blue:before {
+    background: var(--blue) !important;
+}
+.popup.green:before {
+    background: var(--green) !important;
+}
+
+.popup h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1.35rem;
+    font-weight: 600;
+    position: relative;
+    color: var(--blue);
+}
+
+.popup.red h3{
+	color: var(--red);
+}
+.popup.yellow h3{
+	color: var(--yellow);
+}
+.popup.blue h3{
+	color: var(--blue);
+}
+.popup.green h3{
+	color: var(--green);
+}
+
+@keyframes show-popup { 
+	0%, 50%, 100% { max-height: 0; opacity: 0; }
+	10%, 25% { max-height: 15rem; opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    width: 1.35rem;
+    height: 1.35rem;
+    text-align: center;
+    right: 1rem;
+    cursor: pointer;
+    border-radius: 100%;
+}
+/* Popup Container */
+
+.close:after {
+    position: absolute;
+    font-family: 'Varela Round', san-serif;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    font-size: 1.8rem;
+    content: "+";
+    transform: rotate(-45deg);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #595959;
+    text-indent: 1px;
+}
