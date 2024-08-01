@@ -43,7 +43,7 @@ public class StorageController implements CrudControllerI<StorageDto> {
 	public String preUpdate(Model model, @PathVariable int id) {
 		Storage s = storageRep.findById(id).orElse(new Storage());
 		model.addAttribute("storageForm", StorageDtoBuilder.fromEntityToDto(s));
-		return "/storage/editStorage/";
+		return "/storage/editStorage.jsp";
 	}
 
 	@PostMapping("update")
