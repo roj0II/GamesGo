@@ -28,19 +28,20 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Game</th>
-                    <th>Genre</th>
+                    <th>ID Game</th>
+                    <th>ID Genre</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="gamegenre" items="${genres}"> <!-- da sistemare -->
+	            <c:forEach var="gamegenre" items="${gameGenreList}"> <!-- da sistemare -->
 				<tr>
-					<td>${genre.name}</td>
+					<td>${gamegenre.idGame}</td>
+					<td>${gamegenre.idGenre}</td>
 					<td class="table-actions">
-	                        <a href="/gamegenre/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/gamegenre/update/${gamegenre.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/gamegenre/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/gamegenre/delete/${gamegenre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>
