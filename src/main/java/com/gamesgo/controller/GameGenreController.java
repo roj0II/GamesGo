@@ -22,6 +22,7 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	
 	@GetMapping("/")
 	public String main(Model model) {
+		model.addAttribute("gameGenreList", gameGenreRep.findAll());
 		return "gameGenre.jsp";
 	}
 

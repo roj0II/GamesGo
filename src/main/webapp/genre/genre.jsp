@@ -12,19 +12,25 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- Our CSS -->
-    <link href="style.css" rel="stylesheet">
+    <link href="../admin/styleEntity.css" rel="stylesheet">
+    <style>
+    	:root {
+    		--main-color: #66FFFF;
+    	}
+    </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
-            <h1 class="header-title">Lista di Generi</h1>
+            <div class="icons">
+	            <i class="fa-solid fa-mars-and-venus fa-2xl"></i>
+	         </div>   
+	            <h1 class="header-title">Lista di Generi</h1> 
             <a href="/genre/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
-
         <table class="table table-striped">
             <thead>
                 <tr>

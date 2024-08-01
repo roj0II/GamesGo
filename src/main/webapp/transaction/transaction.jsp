@@ -21,27 +21,28 @@
     <div class="container">
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
-            <h1 class="header-title">Lista di Giochi</h1>
+            <h1 class="header-title">Transazioni</h1>
             <a href="/transaction/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Game</th>
-					<th>User</th>
+                    <th>ID User</th>
+					<th>ID Game</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="game" items="${gameListForm}"> <!-- da sistemare -->
+	            <c:forEach var="transaction" items="${transactions}"> <!-- da sistemare -->
 				<tr>
-					<td>${game.id}</td>
+					<td>${transaction.idUser}</td>
+					<td>${transaction.idGame}</td>
 					
 					<td class="table-actions">
-	                        <a href="/transaction/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/transaction/update/${transaction.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/transaction/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/transaction/delete/${transaction.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>
