@@ -32,8 +32,6 @@ public class GenreController implements CrudControllerI<GenreDto> {
 		genRep.deleteById(id);
 		return "redirect:/genre/";
 	}
-	//  edit
-	
 	
 	@GetMapping("insert")
 	public String preInsert(Model model) {
@@ -44,6 +42,19 @@ public class GenreController implements CrudControllerI<GenreDto> {
 
 	@PostMapping("insert")
 	public String insert(Model model,@ModelAttribute("genreForm") GenreDto g) {
+		Genre genre = genRep.findByName(GenreDtoBuilder.fromDtoToEntity(g).getName());
+		if (genre!=null) { // se troviamo un Genre con il nome uguale a quell che stiamo inserendo, ERORRE, già esiste quel genere.
+			
+			
+
+        	model.addAttribute("show", "show");
+        	model.addAttribute("message", "Questo nome esiste già.");
+        	model.addAttribute("color", "red");
+        	model.addAttribute("title", "Error!");
+			// messaggio d'errore.
+			model.addAttribute("genreForm", g);
+			return "insertGenre.jsp";
+		} 
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
 		return "redirect:/genre/";
 	}
