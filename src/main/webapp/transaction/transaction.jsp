@@ -36,8 +36,8 @@
             <tbody>
 	            <c:forEach var="transaction" items="${transactions}"> <!-- da sistemare -->
 				<tr>
-					<td>${transaction.idUser}</td>
-					<td>${transaction.idGame}</td>
+					<td>${transaction.user.id}</td>
+					<td>${transaction.game.id}</td>
 					
 					<td class="table-actions">
 	                        <a href="/transaction/update/${transaction.id}" class="btn btn-warning btn-sm">
