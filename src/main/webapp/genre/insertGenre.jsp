@@ -18,5 +18,7 @@
             
             <button type="submit">Salva</button>
         </f:form>
+        
+    <jsp:include page="../fragments/popup.jsp" />
 </body>
 </html>
