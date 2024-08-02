@@ -6,38 +6,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Genre</title>
+    <title>GameGenre</title>
     <!-- Web Icon -->
     <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- Our CSS -->
-    <link href="style.css" rel="stylesheet">
+    <link href="/css/styleEntity.css" rel="stylesheet">
+    <style>
+    	:root {
+    		--main-color: #FF66FF;
+    	}
+    </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
-            <h1 class="header-title">Lista di Gioco e Genere</h1>
+            <div class="icons">
+	            <i class="fa-solid fa-mars-and-venus-burst fa-2xl"></i>
+	         </div>
+	            <h1 class="header-title">Lista di Giochi e Generi</h1> 
             <a href="/gamegenre/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
-
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID Game</th>
-                    <th>ID Genre</th>
+                    <th>Game</th>
+                    <th>Genre</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="gamegenre" items="${gameGenreList}"> <!-- da sistemare -->
+	            <c:forEach var="gamegenre" items="${gameGenreList}">
 				<tr>
-					<td>${gamegenre.game.id}</td>
-					<td>${gamegenre.genre.id}</td>
+					<td>${gamegenre.game.title}</td>
+					<td>${gamegenre.genre.name}</td>
 					<td class="table-actions">
 	                        <a href="/gamegenre/update/${gamegenre.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
@@ -45,7 +51,7 @@
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>
-				</c:forEach>   								 <!-- da sistemare -->
+				</c:forEach>
             </tbody>
         </table>
     </div>
