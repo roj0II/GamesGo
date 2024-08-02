@@ -50,9 +50,9 @@
 					<td>${game.priceDigital}</td>
 					<td>${game.releaseDate}</td>
 					<td class="table-actions">
-	                        <a href="/game/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/game/update/${game.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/game/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/game/delete/${game.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>

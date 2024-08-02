@@ -18,41 +18,35 @@
 </head>
 <body>
 
-    <div class="container">
+   <div class="container">
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
             <h1 class="header-title">Lista di Giochi</h1>
             <a href="/rent/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
 
-        <table class="table table-striped">			<!-- da sistemare -->
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Title</th>
-					<th>Author</th>
-					<th>Description</th>
-					<th>Photo_url</th>
-					<th>Price Retail</th>
-					<th>Price Digital</th>
-					<th>Release date</th>
-                    <th>Action</th>
+                	<th>ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Type</th>
+                    <th>Product Key</th>
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="game" items="${gameListForm}"> 
+	            <c:forEach var="rent" items="${rentListForm}"> <!-- da sistemare -->
 				<tr>
-					<td>${game.id}</td>
-					<td>${game.title}</td>
-					<td>${game.author }</td>
-					<td>${game.photoUrl }</td>
-					<td>${game.description }</td>
-					<td>${game.priceRetail }</td>
-					<td>${game.priceDigital}</td>
-					<td>${game.releaseDate}</td>
+					<td>${rent.id}</td>
+					<td>${rent.startDate}</td>
+					<td>${rent.endDate}</td>
+					<td>${rent.type }</td>
+					<td>${rent.productKey }</td>					
 					<td class="table-actions">
-	                        <a href="/rent/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/rent/update/${rent.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/rent/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/rent/delete/${rent.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>

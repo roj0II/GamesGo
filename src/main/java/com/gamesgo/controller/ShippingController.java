@@ -1,0 +1,81 @@
+package com.gamesgo.controller;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gamesgo.dto.ShippingDto;
+import com.gamesgo.dto.builder.ShippingDtoBuilder;
+import com.gamesgo.interfaces.CrudControllerI;
+import com.gamesgo.model.Shipping;
+import com.gamesgo.repository.ShippingRepository;
+@Controller
+@RequestMapping("/shipping")
+public class ShippingController implements CrudControllerI<ShippingDto> {
+	@Autowired
+	ShippingRepository shippingRep;
+	
+	@Override
+	@GetMapping("/")
+	public String main(Model model) {
+		List<ShippingDto> shippingDtoList=new ArrayList<>();
+		List<Shipping> shippingList=new ArrayList<>();
+		shippingList=shippingRep.findAll();
+		for(Shipping s:shippingList) {
+			shippingDtoList.add(ShippingDtoBuilder.fromEntityToDto(s));
+		}
+		model.addAttribute("shippingListForm", shippingDtoList);
+		return "shipping.jsp";
+	}
+
+	@Override
+	@GetMapping("/insert")
+	public String preInsert(Model model) {
+		ShippingDto shippingDto=new ShippingDto();
+		model.addAttribute("shippingForm", shippingDto);
+		return "/shipping/insertShipping.jsp";
+	}
+
+	@Override
+	@PostMapping("/insert")
+	public String insert(Model model,@ModelAttribute("shippingForm") ShippingDto dto) {
+		Shipping shipping=ShippingDtoBuilder.fromDtoToEntity(dto);
+		shippingRep.save(shipping);
+		return "redirect:/shipping/";
+	}
+
+	@Override
+	@GetMapping("/update/{id}")
+	public String preUpdate(Model model,@PathVariable int id) {
+		Shipping shipping=shippingRep.findById(id).orElse(new Shipping());
+		ShippingDto shippingDto=ShippingDtoBuilder.fromEntityToDto(shipping);
+		model.addAttribute("shippingForm", shippingDto);
+		return "/shipping/editShipping.jsp";
+	}
+
+	@Override
+	@PostMapping("/update")
+	public String update(Model model, @ModelAttribute("shippingForm")ShippingDto dto) {
+		Shipping shipping=ShippingDtoBuilder.fromDtoToEntity(dto);
+		shippingRep.save(shipping);
+		
+		return "redirect:/shipping/";
+	}
+
+	@Override
+	@GetMapping("/delete/{id}")
+	public String delete(Model model, @PathVariable int id) {
+		shippingRep.deleteById(id);
+		return "redirect:/shipping/";
+	}
+
+}

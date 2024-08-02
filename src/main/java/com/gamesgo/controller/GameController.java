@@ -63,7 +63,7 @@ public class GameController implements CrudControllerI<GameDto>{
 	}
 
 
-	@PostMapping("/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String delete(Model model,@PathVariable int id){
 	this.gameRep.deleteById(id);
 	
