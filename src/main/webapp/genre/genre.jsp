@@ -14,7 +14,7 @@
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- Our CSS -->
-    <link href="../admin/styleEntity.css" rel="stylesheet">
+    <link href="/css/styleEntity.css" rel="stylesheet">
     <style>
     	:root {
     		--main-color: #66FFFF;
