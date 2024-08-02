@@ -74,7 +74,11 @@ body {
 	color: var(--bg-color);
 	border-radius: 0.8rem;
 	padding: 14px;
-	opacity: 40%;
+	opacity: 60%;
+}
+
+.buttons:hover {
+	opacity: 100%;
 }
 
 .input-label {
