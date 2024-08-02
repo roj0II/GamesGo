@@ -1,6 +1,8 @@
 package com.gamesgo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,7 @@ import com.gamesgo.repository.GameGenreRepository;
 public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	@Autowired
 	private GameGenreRepository gameGenreRep;
-	
+
 	@GetMapping("/")
 	public String main(Model model) {
 		model.addAttribute("gameGenreList", gameGenreRep.findAll());
@@ -35,23 +37,34 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 
 	@PostMapping("insert")
 	public String insert(Model model, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
-		gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		try {
+			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		} catch (DataIntegrityViolationException e) {
+			model.addAttribute("gameGenreForm", dto);
+			return "insertGameGenre.jsp";
+		}
 		return "redirect:/gamegenre/";
 	}
 
 	@GetMapping("update/{id}")
-	public String preUpdate(Model model,@PathVariable int id) {
+	public String preUpdate(Model model, @PathVariable int id) {
 		Gamegenre gameG = gameGenreRep.findById(id).orElse(new Gamegenre());
 		model.addAttribute("gameGenreForm", GameGenreDtoBuilder.fromEntityToDto(gameG));
 		return "/gamegenre/editGameGenre.jsp";
 	}
 
-	@GetMapping("update")
+	@PostMapping("update")
 	public String update(Model model, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
-		gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		try {
+			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
+		} catch (JpaObjectRetrievalFailureException e) {
+			model.addAttribute("gameGenreForm", dto);
+			return "/gamegenre/editGameGenre.jsp";
+		}
 		return "redirect:/gamegenre/";
 	}
 
+	@GetMapping("delete/{id}")
 	public String delete(Model model, @PathVariable int id) {
 		gameGenreRep.deleteById(id);
 		return "redirect:/gamegenre/";
