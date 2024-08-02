@@ -19,14 +19,16 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	@Column(nullable = false, unique = true)
 	private String username;
 	private String name;
 	private String surname;
 	private String address;
+	@Column(nullable = false, unique = true)
 	private String phone;
 	@Column(nullable = false, unique = true)
 	private String email;
+	@Column(nullable = false)
 	private String password;
 	@Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
 	private boolean admin;

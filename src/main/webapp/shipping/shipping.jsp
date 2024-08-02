@@ -28,31 +28,26 @@
         <table class="table table-striped">        <!-- da sistemare -->
             <thead>
                 <tr>
-                    <th>Title</th>
-					<th>Author</th>
-					<th>Description</th>
-					<th>Photo_url</th>
-					<th>Price Retail</th>
-					<th>Price Digital</th>
-					<th>Release date</th>
+                    <th>Id</th>
+					<th>Shipping Date</th>
+					<th>Schedule Delivery Date</th>
+					<th>Status</th>
+					
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-	            <c:forEach var="game" items="${gameListForm}"> 
+	            <c:forEach var="shipping" items="${shippingListForm}"> 
 				<tr>
-					<td>${game.id}</td>
-					<td>${game.title}</td>
-					<td>${game.author }</td>
-					<td>${game.photoUrl }</td>
-					<td>${game.description }</td>
-					<td>${game.priceRetail }</td>
-					<td>${game.priceDigital}</td>
-					<td>${game.releaseDate}</td>
+					<td>${shipping.id}</td>
+					<td>${shipping.shippingDate}</td>
+					<td>${shipping.scheduleDeliveryDate }</td>
+					<td>${shipping.status }</td>
+					
 					<td class="table-actions">
-	                        <a href="/shipping/update/${genre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/shipping/update/${shipping.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/shipping/delete/${genre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/shipping/delete/${shipping.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>

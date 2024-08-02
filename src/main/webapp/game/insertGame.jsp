@@ -14,17 +14,17 @@
 <f:label path="title">Title</f:label>
 <f:input path="title"/>
 <f:label path="author">Author</f:label>
-<f:input path="author"/>
+<f:input  type="date" path="author"/>
 <f:label path="releaseDate">Release date</f:label>
-<f:input path="releaseDate"/>
+<f:input  type="date" path="releaseDate"/>
 <f:label path="description">Description</f:label>
-<f:input path="description"/>
+<f:input  path="description"/>
 <f:label path="photoUrl">Photo url</f:label>
-<f:input path="photoUrl"/>
+<f:input   path="photoUrl"/>
 <f:label path="priceRetail">Price retail</f:label>
-<f:input path="priceRetail"/>
+<f:input  path="priceRetail"/>
 <f:label path="priceDigital">Price digital</f:label>
-<f:input path="priceDigital"/>
+<f:input  path="priceDigital"/>
 <input type="submit" value="Insert" />
 </f:form>
 </body>
