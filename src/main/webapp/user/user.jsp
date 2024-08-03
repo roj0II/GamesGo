@@ -28,7 +28,7 @@
             <div class="icons">
 	            <i class="fa-solid fa-mars-and-venus-burst fa-2xl"></i>
 	         </div>
-	            <h1 class="header-title">Lista di Giochi e Generi</h1> 
+	            <h1 class="header-title">Utenti</h1> 
             <a href="/user/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
         <table class="table table-striped">
