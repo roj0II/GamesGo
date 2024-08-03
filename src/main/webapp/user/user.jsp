@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameGenre</title>
+    <title>User</title>
     <!-- Web Icon -->
     <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
     <!-- Bootstrap CSS -->
@@ -17,7 +17,7 @@
     <link href="/css/styleEntity.css" rel="stylesheet">
     <style>
     	:root {
-    		--main-color: #FF66FF;
+    		--main-color: #FF6666;
     	}
     </style>
 </head>
@@ -26,9 +26,9 @@
         <div class="header-buttons">
             <a href="/admin" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Indietro</a>
             <div class="icons">
-	            <i class="fa-solid fa-mars-and-venus-burst fa-2xl"></i>
+	            <i class="fa-solid fa-users fa-2xl"></i>
 	         </div>
-	            <h1 class="header-title">Utenti</h1> 
+	            <h1 class="header-title">Lista di Utenti</h1> 
             <a href="/user/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
         <table class="table table-striped">

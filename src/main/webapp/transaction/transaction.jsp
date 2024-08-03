@@ -22,7 +22,7 @@
 <link href="/css/styleEntity.css" rel="stylesheet">
 <style>
 :root {
-	--main-color: #FF66FF;
+	--main-color: #FFB366;
 }
 </style>
 </head>
@@ -32,9 +32,9 @@
 			<a href="/admin" class="btn btn-primary"><i
 				class="fas fa-arrow-left"></i> Indietro</a>
 			<div class="icons">
-				<i class="fa-solid fa-mars-and-venus-burst fa-2xl"></i>
+				<i class="fa-solid fa-credit-card fa-2xl"></i>
 			</div>
-			<h1 class="header-title">Transazioni</h1>
+			<h1 class="header-title">Lista di Transazioni</h1>
 			<a href="/transaction/insert" class="btn btn-success"><i
 				class="fas fa-plus"></i> Aggiungi</a>
 		</div>
