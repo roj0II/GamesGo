@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.gamesgo.model.User;
 import com.gamesgo.repository.UserRepository;
+import com.gamesgo.util.PasswordManager;
 
 @Service
 public class UserService {
@@ -14,7 +15,7 @@ public class UserService {
 
     public boolean authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
-        return user != null && user.getPassword().equals(password);
+        return user != null && PasswordManager.checkPassword(password, user.getPassword());
     }
     
     public User findByUsername (String username) {
