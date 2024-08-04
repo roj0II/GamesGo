@@ -86,9 +86,9 @@ body {
 }
 
 .overlay {
-	background: #ff416c;
-	background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-	background: linear-gradient(to right, #ff4b2b, #ff416c);
+	background: #0D90F8;
+	background: -webkit-linear-gradient(to right, #0171F9, #0D90F8);
+	background: linear-gradient(to right, #0171F9, #0D90F8);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -163,8 +163,8 @@ form input {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #ff4b2b;
-	background: #ff4b2b;
+	border: 1px solid #0171F9;
+	background: #0171F9;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
