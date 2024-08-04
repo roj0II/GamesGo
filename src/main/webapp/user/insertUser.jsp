@@ -45,18 +45,32 @@
 					<tr>
 						<td>Username</td>
 						<td><f:input class="input-label" path="username" /></td>
+					</tr>
+					<tr>
 						<td>Nome</td>
 						<td><f:input class="input-label" path="name" /></td>
+					</tr>
+					<tr>
 						<td>Cognome</td>
 						<td><f:input class="input-label" path="surname" /></td>
+					</tr>
+					<tr>
 						<td>Indirizzo</td>
 						<td><f:input class="input-label" path="address" /></td>
+					</tr>
+					<tr>
 						<td>Telefono</td>
 						<td><f:input class="input-label" path="phone" /></td>
+					</tr>
+					<tr>
 						<td>E-mail</td>
 						<td><f:input class="input-label" path="email" /></td>
+					</tr>
+					<tr>
 						<td>Password</td>
 						<td><f:input class="input-label" path="password" /></td>
+					</tr>
+					<tr>
 						<td>Amministratore</td>
 						<td><f:input class="input-label" path="admin" /></td>
 					</tr>

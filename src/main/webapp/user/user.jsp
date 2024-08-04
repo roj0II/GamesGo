@@ -57,9 +57,9 @@
 				<td>${user.password}</td>
 				<td>${user.admin}</td>
 				<td class="table-actions">
-	                        <a href="/user/update/${gamegenre.id}" class="btn btn-warning btn-sm">
+	                        <a href="/user/update/${user.id}" class="btn btn-warning btn-sm">
 	                        <i class="fas fa-edit"></i> Modifica</a>
-	                        <a href="/user/delete/${gamegenre.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
+	                        <a href="/user/delete/${user.id}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 	                        <i class="fas fa-trash"></i> Elimina</a>
 	                </td>
 				</tr>

@@ -1,10 +1,6 @@
 package com.gamesgo.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Properties;
 
@@ -15,8 +11,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import org.springframework.core.io.ClassPathResource;
 
 public class EmailManager {
 	final static String mailUsername = "gamesgo@libero.it";
