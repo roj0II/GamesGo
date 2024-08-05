@@ -17,6 +17,7 @@ import com.gamesgo.repository.OtpRepository;
 import com.gamesgo.service.UserService;
 import com.gamesgo.util.EmailManager;
 import com.gamesgo.util.OTPCodeGenerator;
+import com.gamesgo.util.PasswordManager;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -111,7 +112,7 @@ public class LoginController {
     public String register(@RequestParam String username, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String address,
                            @RequestParam String phoneNumber, @RequestParam String password) {
     	System.out.println(username);
-        User user = new User(username, name, surname, address, phoneNumber, email, password, false);
+        User user = new User(username, name, surname, address, phoneNumber, email, PasswordManager.hashPassword(password), false);
         boolean registered = userService.register(user);
         if (registered) {
         	// Ricarichiamo la pagina | con o senza messaggio di successo.

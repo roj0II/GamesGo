@@ -1,4 +1,11 @@
-/* Login Style */
+
+:root {
+  /*========== Colors ==========*/
+  --button-color: #0171F9;
+  --right-panel-color: #0171F9;
+  --left-panel-color: #0D90F8;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -86,9 +93,9 @@ body {
 }
 
 .overlay {
-	background: #ff416c;
-	background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-	background: linear-gradient(to right, #ff4b2b, #ff416c);
+	background: var(--right-panel-color);
+	background: -webkit-linear-gradient(to right, var(--right-panel-color), var(--left-panel-color));
+	background: linear-gradient(to right, var(--right-panel-color), var(--left-panel-color));
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -163,8 +170,8 @@ form input {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #ff4b2b;
-	background: #ff4b2b;
+	border: 1px solid var(--button-color);
+	background: var(--button-color);
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -172,6 +179,7 @@ button {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	transition: background 1.5s ease, border 1.5s ease;
 }
 
 button:active {
