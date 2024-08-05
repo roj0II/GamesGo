@@ -16,9 +16,45 @@
     <!-- Our CSS -->
     <link href="/css/styleEntity.css" rel="stylesheet">
     <style>
-    	:root {
-    		--main-color: #FF6666;
-    	}
+    
+	:root {
+		--main-color: #FF6666;
+	}
+	
+	#showButton {
+		padding: 10px 20px;
+		font-size: 16px;
+	}
+	
+	.fa-regular.fa-eye-slash {
+		cursor: pointer;
+	}
+	
+	.fa-regular.fa-eye {
+		cursor: pointer;
+	}
+	
+	.container-password {
+	    position: relative;
+	    width: 200px;
+	    height: 200px;
+	    margin: 20px auto;
+	    text-align: center;
+	}
+	
+	.overlay {
+	    display: none;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    padding: 20px;
+	    background: rgba(0, 0, 0, 0.8);
+	    color: #fff;
+	    border-radius: 5px;
+	    z-index: 10;
+	}
+
     </style>
 </head>
 <body>
@@ -54,7 +90,10 @@
 				<td>${user.address}</td>
 				<td>${user.phone}</td>
 				<td>${user.email}</td>
-				<td>${user.password}</td>
+				<td>
+					<i class="showButton fa-regular fa-eye-slash"></i>
+        			<div class="overlay">${user.password}</div>
+        		</td>
 				<td>${user.admin}</td>
 				<td class="table-actions">
 	                        <a href="/user/update/${user.id}" class="btn btn-warning btn-sm">
@@ -79,6 +118,29 @@
 	    	  window.location.href = event.target.href;
 	      }
 	    }
+	  </script>
+	  <script>
+		  document.querySelectorAll('.showButton').forEach(function(button) {
+		        button.addEventListener('click', function() {
+		            var container = button.parentElement;
+		            var overlay = container.querySelector('.overlay');
+	
+		            if (overlay.style.display === 'none' || overlay.style.display === '') {
+		                overlay.style.display = 'block';
+		                button.classList.remove('fa-eye-slash');
+		                button.classList.add('fa-eye');
+		                setTimeout(() => {
+		                    overlay.style.display = 'none';
+		                    button.classList.remove('fa-eye');
+		                    button.classList.add('fa-eye-slash');
+		                }, 5500);
+		            } else {
+		                overlay.style.display = 'none';
+		                button.classList.remove('fa-eye');
+	                    button.classList.add('fa-eye-slash');
+		            }
+		        });
+		    });
 	  </script>
 </body>
 </html>

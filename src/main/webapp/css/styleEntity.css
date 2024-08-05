@@ -130,11 +130,12 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
 }
 
 th, td {
   padding: 12px 12px;
-  text-align: center;
   border: 1px solid var(--table-border-color);
   text-align: center;
   vertical-align: middle;
@@ -144,11 +145,15 @@ th {
   background-color: var(--table-header-bg-color);
   color: var(--text-color);
   width: 300px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 td {
   width: 300px;
   color: var(--text-color);
+  text-align: center;
+  vertical-align: middle;
 }
 
 tr:nth-child(even) {
