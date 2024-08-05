@@ -41,7 +41,7 @@
 	                <td><f:input class="input-label" path="idGame"/></td>
 	            </tr>
 	            <tr>
-	                <td>Genre</td>
+	                <td>Genre<f:input path="id" type="hidden"/></td>
 	                <td><f:input class="input-label" path="idGenre"/></td>
 	            </tr>
 	        </thead>
