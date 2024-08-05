@@ -37,7 +37,7 @@ public class UserController implements CrudControllerI<UserDto> {
 	@PostMapping("insert")
 	public String insert(Model model, @ModelAttribute("userForm") UserDto dto) {
 		uRep.save(UserDtoBuilder.fromDtoToEntity(dto));
-		return "redirect:/gamegenre/";
+		return "redirect:/user/";
 	}
 
 	@GetMapping("update/{id}")
