@@ -57,7 +57,6 @@
 				<c:forEach var="game" items="${gameListForm}">
 					<!-- da sistemare -->
 					<tr>
-
 						<td>${game.title}</td>
 						<td>${game.author }</td>
 						<td>${game.photoUrl }</td>
