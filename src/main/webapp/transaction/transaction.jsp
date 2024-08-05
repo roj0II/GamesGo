@@ -34,7 +34,7 @@
 			<div class="icons">
 				<i class="fa-solid fa-credit-card fa-2xl"></i>
 			</div>
-			<h1 class="header-title">Lista di Transazioni</h1>
+			<h1 class="header-title">Transazioni</h1>
 			<a href="/transaction/insert" class="btn btn-success"><i
 				class="fas fa-plus"></i> Aggiungi</a>
 		</div>

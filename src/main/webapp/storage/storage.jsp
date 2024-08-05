@@ -16,17 +16,24 @@
 	rel="stylesheet">
 <!-- Font Awesome CSS -->
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 	rel="stylesheet">
 <!-- Our CSS -->
-<link href="style.css" rel="stylesheet">
+<link href="/css/styleEntity.css" rel="stylesheet">
+<style>
+:root {
+	--main-color: #6699FF;
+}
+</style>
 </head>
 <body>
-
 	<div class="container">
 		<div class="header-buttons">
 			<a href="/admin" class="btn btn-primary"><i
 				class="fas fa-arrow-left"></i> Indietro</a>
+			<div class="icons">
+				<i class="fa-solid fa-box-open fa-2xl"></i>
+			</div>
 			<h1 class="header-title">Magazzino</h1>
 			<a href="/storage/insert" class="btn btn-success"><i
 				class="fas fa-plus"></i> Aggiungi</a>
@@ -35,9 +42,9 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Game ID</th>
-					<th>Digital Ammount</th>
-					<th>Retail Ammount</th>
+					<th>ID Gioco</th>
+					<th>Digitale</th>
+					<th>Retail</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -49,15 +56,15 @@
 						<td>${storage.amountDigital}</td>
 						<td>${storage.amountRetail}</td>
 						<td class="table-actions"><a
-							href="/storage/update/${storage.id}" class="btn btn-warning btn-sm">
-								<i class="fas fa-edit"></i> Modifica
+							href="/storage/update/${storage.id}"
+							class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>
+								Modifica
 						</a> <a href="/storage/delete/${storage.id}"
 							class="btn btn-danger btn-sm" onclick="confirmDelete(event)">
 								<i class="fas fa-trash"></i> Elimina
 						</a></td>
 					</tr>
 				</c:forEach>
-				<!-- da sistemare -->
 			</tbody>
 		</table>
 	</div>
