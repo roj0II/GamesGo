@@ -2,6 +2,7 @@ package com.gamesgo.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +21,9 @@ public class Storage implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idGame")
 	private Game game;
-	
+	@Column(nullable=false)
 	private int amountRetail;
+	@Column(nullable=false)
 	private int amountDigital;
 
 	public int getAmountRetail() {
