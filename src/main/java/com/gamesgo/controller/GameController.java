@@ -47,6 +47,7 @@ public class GameController implements CrudControllerI<GameDto>{
 		
 		return "game.jsp";
 	}
+	
 	@GetMapping("/insert")
 	public String preInsert(Model model) {
 		GameDto gameDto = new GameDto();
@@ -62,13 +63,13 @@ public class GameController implements CrudControllerI<GameDto>{
 		return "redirect:/game/";
 	}
 
-
 	@GetMapping("/delete/{id}")
 	public String delete(Model model,@PathVariable int id){
 	this.gameRep.deleteById(id);
 	
 	return "redirect:/game/";
 	}
+	
 	@GetMapping("/update/{id}")
 	public String preUpdate(Model model, @PathVariable int id) {
 		Game game=gameRep.findById(id).orElse(new Game());
@@ -76,21 +77,12 @@ public class GameController implements CrudControllerI<GameDto>{
 		model.addAttribute("gameForm",gameDto);
 		return "/game/editGame.jsp";
 	}
+	
 	@PostMapping("/update")
 	public String update(Model model, @ModelAttribute("gameForm") GameDto gameDto) {
 		Game game=GameDtoBuilder.fromDtoToEntity(gameDto);
 		gameRep.save(game);
 		
 		return "redirect:/game/";
-	}
-	
-
-	
-
-
-	
-
-	
-
-	
+	}	
 }

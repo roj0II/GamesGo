@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container ${registerForm}">
 		<div class="form-container sign-up-container">
 			<form action="/register" method="POST">
 				<h1>Crea Account</h1>
@@ -26,11 +26,10 @@
 		        <input type="text" class="form-control" name="address" placeholder="Indirizzo completo" required>
 		        <input type="text" class="form-control" name="phoneNumber" placeholder="Numero di telefono" required>
 				<input type="password" class="form-control" name="password" placeholder="Password" required/>
-				<input type="password" class="form-control" name="password" placeholder="Conferma Password" required/>
+				<input type="password" class="form-control" name="confermaPassword" placeholder="Conferma Password" required/>
 				<button type="submit" value="Registrati">Registrati</button>
 			</form>
 			
-    
     
 		</div>
 		<div class="form-container sign-in-container">

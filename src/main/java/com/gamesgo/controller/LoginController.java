@@ -109,17 +109,30 @@ public class LoginController {
 	}
 	
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String address,
-                           @RequestParam String phoneNumber, @RequestParam String password) {
-    	System.out.println(username);
-        User user = new User(username, name, surname, address, phoneNumber, email, PasswordManager.hashPassword(password), false);
-        boolean registered = userService.register(user);
+    public String register(Model model, HttpSession session, @RequestParam String username, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String address,
+                           @RequestParam String phoneNumber, @RequestParam String password, @RequestParam String confermaPassword) {
+    	boolean registered;
+    	if (password.equals(confermaPassword)) {
+    		User user = new User(username, name, surname, address, phoneNumber, email, PasswordManager.hashPassword(password), false);
+    		registered = userService.register(user);    		
+    	} else {
+    		registered = false;
+    	}
         if (registered) {
-        	// Ricarichiamo la pagina | con o senza messaggio di successo.
+        	model.addAttribute("error", true);
+        	model.addAttribute("message", "Ora puoi effettuare l'accesso.");
+        	model.addAttribute("color", "green");
+        	model.addAttribute("title", "Registrato correttamente!");
+        	
     		return "login/loginPage.jsp";
         } else {
-        	// Mandiamo un errore e ricarichiamo la pagina.
-        	return "loginPage.jsp";
+        	model.addAttribute("error", true);
+        	model.addAttribute("message", "Utente già esistente o password non confermata.");
+        	model.addAttribute("color", "red");
+        	model.addAttribute("title", "Error!");
+        	
+        	model.addAttribute("registerForm", "right-panel-active");
+        	return "login/loginPage.jsp";
         }
     }
     
