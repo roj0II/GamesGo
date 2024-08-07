@@ -9,7 +9,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String login () {
-		return "index.jsp";
+		return "logo/logo.html";
 	}
 	
 }
