@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,13 +19,19 @@ public class Game implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	@Column(nullable=false, unique=true)
 	private String title;
+	@Column(nullable=false)
 	private String author;
+	@Column(nullable=false)
 	private Date releaseDate;
+	@Column(nullable=false, unique=true)
 	private String description;
+	@Column(nullable=false)
 	private String photoUrl;
+	@Column(nullable=false)
 	private float priceRetail;
+	@Column(nullable=false)
 	private float priceDigital;
 	
 	

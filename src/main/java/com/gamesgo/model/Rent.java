@@ -2,6 +2,8 @@ package com.gamesgo.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,9 +21,13 @@ public class Rent implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idTransaction")
 	private Transaction transaction;
+	@Column(nullable=false)
 	private Date startDate;
+	@Column(nullable=false)
 	private Date endDate;
+	@Column(nullable=false)
 	private String type;
+	@Column(nullable=false, unique=true)
 	private String productKey;
 
 	public String getProductKey() {
