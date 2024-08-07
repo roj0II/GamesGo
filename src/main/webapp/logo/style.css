@@ -1,0 +1,85 @@
+/* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.logo-container {
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.g {
+    font-size: 50px;
+    font-weight: bold;
+    transition: transform 1s, opacity 1s;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.left-g {
+    color: #3498db;
+    margin: 0;
+}
+
+.right-g {
+    color: #e74c3c;
+	transform: scale(-1);
+	margin: 0;
+}
+
+.full-text {
+	transform: translate(-31px, -2.5px);
+    font-size: 50px;
+    font-weight: bold;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #2c3e50;
+    transition: opacity 1.8s;
+    pointer-events: none; /* Prevent clicking the text */
+    white-space: nowrap; /* Ensure text doesn't break */
+}
+
+.full-text-o {
+	transform: translate(112px, -2.5px);
+    font-size: 50px;
+    font-weight: bold;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #2c3e50;
+    transition: opacity 1.8s;
+    pointer-events: none; /* Prevent clicking the text */
+    white-space: nowrap; /* Ensure text doesn't break */
+}
+
+.logo.open .left-g {
+    transform: translateX(-70px);
+}
+
+.logo.open .right-g {
+    transform: translateX(58px);
+}
+
+.logo.open .full-text {
+    opacity: 1;
+}
+
+.logo.open .full-text-o {
+    opacity: 1;
+}
