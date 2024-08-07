@@ -36,7 +36,20 @@ public class UserController implements CrudControllerI<UserDto> {
 
 	@PostMapping("insert")
 	public String insert(Model model, @ModelAttribute("userForm") UserDto dto) {
-		uRep.save(UserDtoBuilder.fromDtoToEntity(dto));
+		User user = uRep.findByUsername(UserDtoBuilder.fromDtoToEntity(dto).getUsername());
+		if (user != null) { // Inserimento di un utente già presente.
+			
+			// Messaggio di errore.
+			model.addAttribute("show", "show");
+        	model.addAttribute("message", "Username non disponibile.");
+        	model.addAttribute("color", "red");
+        	model.addAttribute("title", "Errore!");
+        	
+        	model.addAttribute("userForm", dto);
+			return "insertUser.jsp";
+		}
+		
+		uRep.save(UserDtoBuilder.fromDtoToEntity(dto)); // Salvataggio nel DB
 		return "redirect:/user/";
 	}
 
