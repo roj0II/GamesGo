@@ -36,19 +36,42 @@ public class UserController implements CrudControllerI<UserDto> {
 
 	@PostMapping("insert")
 	public String insert(Model model, @ModelAttribute("userForm") UserDto dto) {
-		User user = uRep.findByUsername(UserDtoBuilder.fromDtoToEntity(dto).getUsername());
-		if (user != null) { // Inserimento di un utente già presente.
-			
+		User userName = uRep.findByUsername(UserDtoBuilder.fromDtoToEntity(dto).getUsername());
+		User userPhone = uRep.findByPhone(UserDtoBuilder.fromDtoToEntity(dto).getPhone());
+		User userEmail = uRep.findByEmail(UserDtoBuilder.fromDtoToEntity(dto).getEmail());
+
+		if (userName != null) { // Inserimento di un username già presente.
+
 			// Messaggio di errore.
 			model.addAttribute("show", "show");
-        	model.addAttribute("message", "Username non disponibile.");
-        	model.addAttribute("color", "red");
-        	model.addAttribute("title", "Errore!");
-        	
-        	model.addAttribute("userForm", dto);
+			model.addAttribute("message", "Username non disponibile.");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Errore!");
+
+			model.addAttribute("userForm", dto);
+			return "insertUser.jsp";
+		} else if (userPhone != null) { // Inserimento di un telefono già presente.
+
+			// Messaggio di errore.
+			model.addAttribute("show", "show");
+			model.addAttribute("message", "Il numero di telefono inserito è già associato ad un altro account.");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Errore!");
+
+			model.addAttribute("userForm", dto);
+			return "insertUser.jsp";
+		} else if (userEmail != null) { // Inserimento di una mail già presente.
+
+			// Messaggio di errore.
+			model.addAttribute("show", "show");
+			model.addAttribute("message", "La mail inserita è già associata ad un altro account.");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Errore!");
+
+			model.addAttribute("userForm", dto);
 			return "insertUser.jsp";
 		}
-		
+
 		uRep.save(UserDtoBuilder.fromDtoToEntity(dto)); // Salvataggio nel DB
 		return "redirect:/user/";
 	}
