@@ -21,8 +21,11 @@ public class User implements Serializable {
 	private int id;
 	@Column(nullable = false, unique = true)
 	private String username;
+	@Column(nullable=false)
 	private String name;
+	@Column(nullable=false)
 	private String surname;
+	@Column(nullable=false)
 	private String address;
 	@Column(nullable = false, unique = true)
 	private String phone;

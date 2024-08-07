@@ -3,6 +3,7 @@ package com.gamesgo.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,11 @@ public class Shipping implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idUser")
 	private User user;
+	@Column(nullable=false)
 	private Date shippingDate;
+	@Column(nullable=false)
 	private Date scheduleDeliveryDate;
+	@Column(nullable=false)
 	private String status;
 
 	public int getId() {
