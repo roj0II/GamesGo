@@ -34,7 +34,7 @@ body {
 
 .right-g {
     color: #e74c3c;
-	transform: scale(-1);
+	transform: rotate(180deg);
 	margin: 0;
 }
 
@@ -73,7 +73,7 @@ body {
 }
 
 .logo.open .right-g {
-    transform: translateX(58px);
+	transform: rotate(360deg);
 }
 
 .logo.open .full-text {
