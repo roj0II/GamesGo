@@ -57,6 +57,21 @@ public class RentController implements CrudControllerI<RentDto>{
 	@PostMapping("/insert")
 	public String insert(Model model,@ModelAttribute("rentForm" ) RentDto dto) {
 		Rent rent=RentDtoBuilder.fromDtoToEntity(dto);
+		Rent rentFound=rentRep.findByProductKey(dto.getProductKey());
+		if(rentFound!=null) {
+			
+				
+				model.addAttribute("show", "show");
+		    	model.addAttribute("message", "Questo product key esiste già.");
+		    	model.addAttribute("color", "red");
+		    	model.addAttribute("title", "Error!");
+
+				model.addAttribute("gameForm", dto);
+				return "/rent/insertRent.jsp";
+
+				
+			
+		}
 		rentRep.save(rent);
 		return "redirect:/rent/";
 	}
@@ -74,6 +89,18 @@ public class RentController implements CrudControllerI<RentDto>{
 	@PostMapping("/update")
 	public String update(Model model, @ModelAttribute("rentForm") RentDto dto) {
 		Rent rent=RentDtoBuilder.fromDtoToEntity(dto);
+		Rent rentFound=rentRep.findByProductKey(dto.getProductKey());
+		if(rentFound!=null && rentFound.getId()!=dto.getId()) {
+			
+			
+			model.addAttribute("show", "show");
+	    	model.addAttribute("message", "Questo product key esiste già.");
+	    	model.addAttribute("color", "red");
+	    	model.addAttribute("title", "Error!");
+
+			model.addAttribute("gameForm", dto);
+			return "/rent/editRent.jsp";
+		}
 		rentRep.save(rent);
 		return "redirect:/rent/";
 	}

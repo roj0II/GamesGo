@@ -59,8 +59,21 @@ public class GameController implements CrudControllerI<GameDto>{
 	@PostMapping("/insert")
 	public String insert(Model model, @ModelAttribute("gameForm") GameDto gameDto) {
 		Game game = GameDtoBuilder.fromDtoToEntity(gameDto);
+		Game gameFound=gameRep.findByTitle(gameDto.getTitle());
+		if(gameFound!=null) { 
+			
+		model.addAttribute("show", "show");
+    	model.addAttribute("message", "Questo titolo esiste già.");
+    	model.addAttribute("color", "red");
+    	model.addAttribute("title", "Error!");
+
+		model.addAttribute("gameForm", gameDto);
+		return "/game/insertGame.jsp";
+
+		}
 		gameRep.save(game);
 		return "redirect:/game/";
+		
 	}
 
 	@GetMapping("/delete/{id}")
@@ -81,6 +94,16 @@ public class GameController implements CrudControllerI<GameDto>{
 	@PostMapping("/update")
 	public String update(Model model, @ModelAttribute("gameForm") GameDto gameDto) {
 		Game game=GameDtoBuilder.fromDtoToEntity(gameDto);
+		Game gameFound=gameRep.findByTitle(gameDto.getTitle());
+		if(gameFound!=null && gameFound.getId()!=gameDto.getId()) {
+			model.addAttribute("show", "show");
+	    	model.addAttribute("message", "Questo titolo esiste già.");
+	    	model.addAttribute("color", "red");
+	    	model.addAttribute("title", "Error!");
+
+			model.addAttribute("gameForm", gameDto);
+			return "/game/editGame.jsp";
+		}
 		gameRep.save(game);
 		
 		return "redirect:/game/";
