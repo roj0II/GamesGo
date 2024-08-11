@@ -44,14 +44,13 @@ public class UserController implements CrudControllerI<UserDto> {
 		User userPhone = uRep.findByPhone(UserDtoBuilder.fromDtoToEntity(dto).getPhone());
 		User userEmail = uRep.findByEmail(UserDtoBuilder.fromDtoToEntity(dto).getEmail());
 		
-		String errMsg; // Dichiarazione messaggio di errore
 		String userErr = "Username non disponibile.";
 		String phoneErr = "Il numero di telefono inserito è già associato ad un altro account.";
 		String emailErr = "La mail inserita è già associata ad un altro account.";
 		
 		if (userName != null) { // Inserimento di un username già presente.
 			dto.setUsername(null); // Annulla la stringa username
-			errMsg = userErr;
+			String errMsg = userErr;
 
 			if (userPhone != null) {
 				dto.setPhone(null);  // Annulla la stringa telefono
@@ -72,7 +71,7 @@ public class UserController implements CrudControllerI<UserDto> {
 			return "insertUser.jsp";
 		} else if (userPhone != null) { // Inserimento di un telefono già presente.
 			dto.setPhone(null); // Annulla la stringa telefono
-			errMsg = phoneErr;
+			String errMsg = phoneErr;
 
 			if (userEmail != null) {
 				dto.setEmail(null); // Annulla la stringa email
@@ -88,7 +87,7 @@ public class UserController implements CrudControllerI<UserDto> {
 			return "insertUser.jsp";
 		} else if (userEmail != null) { // Inserimento di una mail già presente.
 			dto.setEmail(null); // Annulla la stringa email
-			errMsg = emailErr;
+			String errMsg = emailErr;
 			
 			// Messaggio di errore.
 			model.addAttribute("show", "show");
