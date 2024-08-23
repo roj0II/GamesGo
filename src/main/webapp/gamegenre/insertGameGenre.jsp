@@ -38,23 +38,59 @@
 	        <thead>
 	            <tr>
 	                <td>Game</td>
-	                <td><f:input class="input-label" path="idGame"/></td>
+	                <td>
+	                    <input id="gameInput" class="input-label" list="gameList" name="idGame" />
+	                    <datalist id="gameList">
+	                        <c:forEach items="${games}" var="game">
+	                            <option value="${game.id}">${game.title}</option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
 	            </tr>
 	            <tr>
 	                <td>Genre</td>
-	                <td><f:input class="input-label" path="idGenre"/></td>
+	                <td>
+	                    <input id="genreInput" class="input-label" list="genreList" name="idGenre" />
+	                    <datalist id="genreList">
+	                        <c:forEach items="${genres}" var="genre">
+	                            <option value="${genre.id}">${genre.name}</option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
 	            </tr>
 	        </thead>
 	    </table>
 	    <button type="submit" class="buttons">Salva</button>
 	</f:form>
     </div>
-    
+
+    <!-- Include il file popup -->
     <jsp:include page="../fragments/popup.jsp" />
     
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script di validazione -->
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const gameInput = document.getElementById("gameInput").value;
+            const genreInput = document.getElementById("genreInput").value;
+            
+            const games = Array.from(document.querySelectorAll("#gameList option")).map(option => option.value);
+            const genres = Array.from(document.querySelectorAll("#genreList option")).map(option => option.value);
+            
+            if (!games.includes(gameInput)) {
+                alert("Il gioco inserito non è valido.");
+                event.preventDefault();
+            }
+            
+            if (!genres.includes(genreInput)) {
+                alert("Il genere inserito non è valido.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
