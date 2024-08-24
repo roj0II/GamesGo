@@ -34,6 +34,7 @@
         </div>
         
         <f:form modelAttribute="gameGenreForm" method="POST" action="/gamegenre/update">
+        <f:input path="id" type="hidden"/>
 	    <table class="table table-striped">
 	        <thead>
 	            <tr>
