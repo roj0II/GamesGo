@@ -5,15 +5,11 @@ import java.sql.Date;
 import com.gamesgo.model.Transaction;
 
 public class RentDto {
+	
+
+	
 	private int id;
 	private Transaction transaction;
-
-	public Transaction getTransaction() {
-		return transaction;
-	}
-	public void setTransaction(Transaction transaction) {
-		this.transaction = transaction;
-	}
 	private Date startDate;
 	private Date endDate;
 	private String type;
@@ -24,7 +20,12 @@ public class RentDto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
 	public Date getStartDate() {
 		return startDate;
 	}
