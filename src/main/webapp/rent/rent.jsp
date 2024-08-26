@@ -49,6 +49,7 @@
 					<th>Type</th>
 					<th>Product Key</th>
 					<th>Action</th>
+					<th>Transaction</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,6 +61,7 @@
 						<td>${rent.endDate}</td>
 						<td>${rent.type }</td>
 						<td>${rent.productKey }</td>
+						<td>${rent.transaction.id }</td>
 						<td class="table-actions"><a href="/rent/update/${rent.id}"
 							class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>
 								Modifica

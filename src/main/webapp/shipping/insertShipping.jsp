@@ -59,7 +59,14 @@
 						<td>Status</td>
 						<td><f:input class="input-label" path="status" /></td>
 					</tr>
-					
+					<tr>
+						<td>Transaction</td>
+						<td><f:input class="input-label" path="transaction.id" /></td>
+					</tr>
+					<tr>
+						<td>User</td>
+						<td><f:input class="input-label" path="user.id" /></td>
+					</tr>
 				</thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>

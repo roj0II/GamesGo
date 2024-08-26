@@ -2,11 +2,29 @@ package com.gamesgo.dto;
 
 import java.sql.Date;
 
+import com.gamesgo.model.Transaction;
+import com.gamesgo.model.User;
+
 public class ShippingDto {
 	private int id;
 	private Date shippingDate;
 	private Date scheduleDeliveryDate;
 	private String status;
+	private User user;
+	private Transaction transaction;
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}

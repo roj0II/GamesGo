@@ -10,6 +10,8 @@ public class ShippingDtoBuilder {
 		shipping.setScheduleDeliveryDate(shippingDto.getScheduleDeliveryDate());
 		shipping.setShippingDate(shippingDto.getShippingDate());
 		shipping.setStatus(shippingDto.getStatus());
+		shipping.setUser(shippingDto.getUser());
+		shipping.setTransaction(shippingDto.getTransaction());
 		return shipping;
 	}
 	public static ShippingDto fromEntityToDto(Shipping shipping) {
@@ -18,6 +20,8 @@ public class ShippingDtoBuilder {
 		shippingDto.setScheduleDeliveryDate(shipping.getScheduleDeliveryDate());
 		shippingDto.setShippingDate(shipping.getShippingDate());
 		shippingDto.setStatus(shipping.getStatus());
+		shippingDto.setUser(shipping.getUser());
+		shippingDto.setTransaction(shipping.getTransaction());
 		return shippingDto;
 	}
 }

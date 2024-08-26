@@ -46,6 +46,14 @@
 <td><f:input path="scheduleDeliveryDate" type="date"/></td>
 </tr>
 <tr>
+<td>User</td>
+<td><f:input path="user.id"/></td>
+</tr>
+<tr>
+<td>Transaction</td>
+<td><f:input path="transaction.id"/></td>
+</tr>
+<tr>
 <td>Status</td>
 <td><f:input path="status"/></td>
 </tr>

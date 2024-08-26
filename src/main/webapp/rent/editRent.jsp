@@ -59,7 +59,10 @@
 						<td>Type</td>
 						<td><f:input class="input-label" path="type" /></td>
 					</tr>
-
+					<tr>
+						<td>Transaction</td>
+						<td><f:input class="input-label" type="number" path="transaction.id" /></td>
+					</tr>
 				</thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>

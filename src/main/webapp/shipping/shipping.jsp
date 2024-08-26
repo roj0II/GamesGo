@@ -48,7 +48,8 @@
 					<th>Shipping Date</th>
 					<th>Schedule Delivery Date</th>
 					<th>Status</th>
-
+					<th>User</th>
+					<th>Transaction</th>	
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -59,7 +60,8 @@
 						<td>${shipping.shippingDate}</td>
 						<td>${shipping.scheduleDeliveryDate }</td>
 						<td>${shipping.status }</td>
-
+						<td>${shipping.user.id }</td>
+						<td>${shipping.transaction.id }</td>
 						<td class="table-actions"><a
 							href="/shipping/update/${shipping.id}"
 							class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>
