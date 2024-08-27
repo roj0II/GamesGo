@@ -24,6 +24,12 @@
 :root {
 	--main-color: #66FF66;
 }
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
 </style>
 </head>
 <body>
@@ -58,8 +64,12 @@
 					<!-- da sistemare -->
 					<tr>
 						<td>${game.title}</td>
-						<td>${game.author }</td>
-						<td>${game.photoUrl }</td>
+						<td>${game.author}</td>
+						<td>
+							<a href="${game.photoUrl}" target="_blank">
+        					<img src="${game.photoUrl}" alt="Impossibile caricare.">
+    						</a>
+						</td>
 						<td>${game.description}</td>
 						<td>${game.priceRetail}</td>
 						<td>${game.priceDigital}</td>

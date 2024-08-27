@@ -70,7 +70,7 @@
 	                        </c:forEach>
 	                    </datalist>
 	                </td>
-	            </tr>
+	            	</tr>
 				</thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>

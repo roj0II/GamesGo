@@ -1,7 +1,7 @@
 package com.gamesgo.controller;
 
 import java.util.ArrayList;
-
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,20 @@ import com.gamesgo.dto.ShippingDto;
 import com.gamesgo.dto.builder.ShippingDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Shipping;
+import com.gamesgo.model.Transaction;
+import com.gamesgo.model.User;
 import com.gamesgo.repository.ShippingRepository;
+import com.gamesgo.repository.TransactionRepository;
+import com.gamesgo.repository.UserRepository;
 @Controller
 @RequestMapping("/shipping")
 public class ShippingController implements CrudControllerI<ShippingDto> {
 	@Autowired
 	ShippingRepository shippingRep;
+	@Autowired
+	UserRepository uRep;
+	@Autowired
+	TransactionRepository transRep;
 	
 	@Override
 	@GetMapping("/")
@@ -42,6 +50,12 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 	public String preInsert(Model model) {
 		ShippingDto shippingDto=new ShippingDto();
 		model.addAttribute("shippingForm", shippingDto);
+		model.addAttribute("users",uRep.findAll().stream()
+	            .sorted(Comparator.comparing(User::getUsername))
+	            .toList());
+		model.addAttribute("trans",transRep.findAll().stream()
+	            .sorted(Comparator.comparing(Transaction::getId))
+	            .toList());
 		return "/shipping/insertShipping.jsp";
 	}
 
@@ -59,6 +73,12 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 		Shipping shipping=shippingRep.findById(id).orElse(new Shipping());
 		ShippingDto shippingDto=ShippingDtoBuilder.fromEntityToDto(shipping);
 		model.addAttribute("shippingForm", shippingDto);
+		model.addAttribute("users",uRep.findAll().stream()
+	            .sorted(Comparator.comparing(User::getUsername))
+	            .toList());
+		model.addAttribute("trans",transRep.findAll().stream()
+	            .sorted(Comparator.comparing(Transaction::getId))
+	            .toList());
 		return "/shipping/editShipping.jsp";
 	}
 

@@ -3,7 +3,6 @@ package com.gamesgo.controller;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,19 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gamesgo.dto.RentDto;
-import com.gamesgo.dto.builder.GameDtoBuilder;
 import com.gamesgo.dto.builder.RentDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
-import com.gamesgo.model.Game;
 import com.gamesgo.model.Rent;
 import com.gamesgo.model.Transaction;
-import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.RentRepository;
 import com.gamesgo.repository.TransactionRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 @Controller
 @RequestMapping("/rent")
 public class RentController implements CrudControllerI<RentDto>{
