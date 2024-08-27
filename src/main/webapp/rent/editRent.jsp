@@ -41,7 +41,8 @@
 		</div>
 		<h1>Modifica Rent</h1>
 		<f:form modelAttribute="rentForm" action="/rent/update" method="post">
-			<table>
+		<f:input path="id" type="hidden"/>
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<td>Start Date<f:input path="id" type="hidden" /></td>
@@ -60,9 +61,16 @@
 						<td><f:input class="input-label" path="type" /></td>
 					</tr>
 					<tr>
-						<td>Transaction</td>
-						<td><f:input class="input-label" type="number" path="transaction.id" /></td>
-					</tr>
+	                <td>Transaction</td>
+					<td>
+	                    <f:input path="transaction.id" id="transInput" class="input-label" list="transList" name="transaction.id" />
+	                    <datalist id="transList">
+	                        <c:forEach items="${trans}" var="tran">
+	                            <option value="${tran.id}"></option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
+	            </tr>
 				</thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>
@@ -72,5 +80,17 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const transInput = document.getElementById("transInput").value;
+            
+            const trans = Array.from(document.querySelectorAll("#transList option")).map(option => option.value);
+            
+            if (!trans.includes(transInput)) {
+                alert("La transazione inserita non è valida.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

@@ -48,8 +48,8 @@
 					<th>End Date</th>
 					<th>Type</th>
 					<th>Product Key</th>
-					<th>Action</th>
 					<th>Transaction</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -45,9 +45,16 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<td>ID Gioco</td>
-						<td><f:input class="input-label" path="idGame" /></td>
-					</tr>
+	                <td>Game</td>
+	                <td>
+	                    <input id="gameInput" class="input-label" list="gameList" name="idGame" />
+	                    <datalist id="gameList">
+	                        <c:forEach items="${games}" var="game">
+	                            <option value="${game.id}">${game.title}</option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
+	            </tr>
 					<tr>
 						<td>Digitale</td>
 						<td><f:input class="input-label" path="amountDigital" /></td>
@@ -70,5 +77,18 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+	<script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const gameInput = document.getElementById("gameInput").value;
+            
+            const games = Array.from(document.querySelectorAll("#gameList option")).map(option => option.value);
+            
+            if (!games.includes(gameInput)) {
+                alert("Il gioco inserito non è valido.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

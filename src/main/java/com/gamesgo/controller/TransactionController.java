@@ -1,5 +1,7 @@
 package com.gamesgo.controller;
 
+import java.util.Comparator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gamesgo.dto.TransactionDto;
 import com.gamesgo.dto.builder.TransactionDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
+import com.gamesgo.model.Game;
 import com.gamesgo.model.Transaction;
+import com.gamesgo.model.User;
+import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
+import com.gamesgo.repository.UserRepository;
 
 @Controller
 @RequestMapping("transaction")
 public class TransactionController implements CrudControllerI<TransactionDto> {
 	@Autowired
 	private TransactionRepository transRep;
+	@Autowired
+	private GameRepository gameRep;
+	@Autowired
+	private UserRepository uRep;
 
 	@GetMapping("/")
 	public String main(Model model) {
@@ -30,6 +40,12 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 	public String preInsert(Model model) {
 		TransactionDto dtoTransaction = new TransactionDto();
 		model.addAttribute("transactionForm", dtoTransaction);
+		model.addAttribute("users",uRep.findAll().stream()
+	            .sorted(Comparator.comparing(User::getUsername))
+	            .toList());
+		model.addAttribute("games",gameRep.findAll().stream()
+	            .sorted(Comparator.comparing(Game::getTitle))
+	            .toList());
 		return "insertTransaction.jsp";
 	}
 
@@ -43,6 +59,12 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 	public String preUpdate(Model model, @PathVariable int id) {
 		Transaction t = transRep.findById(id).orElse(new Transaction());
 		model.addAttribute("transactionForm", TransactionDtoBuilder.fromEntityToDto(t));
+		model.addAttribute("users",uRep.findAll().stream()
+	            .sorted(Comparator.comparing(User::getUsername))
+	            .toList());
+		model.addAttribute("games",gameRep.findAll().stream()
+	            .sorted(Comparator.comparing(Game::getTitle))
+	            .toList());
 		return "/transaction/editTransaction.jsp";
 	}
 

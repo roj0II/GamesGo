@@ -1,7 +1,7 @@
 package com.gamesgo.controller;
 
 import java.util.ArrayList;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +18,12 @@ import com.gamesgo.dto.RentDto;
 import com.gamesgo.dto.builder.GameDtoBuilder;
 import com.gamesgo.dto.builder.RentDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
+import com.gamesgo.model.Game;
 import com.gamesgo.model.Rent;
+import com.gamesgo.model.Transaction;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.RentRepository;
+import com.gamesgo.repository.TransactionRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -30,6 +33,8 @@ import jakarta.persistence.TypedQuery;
 public class RentController implements CrudControllerI<RentDto>{
 	@Autowired
 	RentRepository rentRep;
+	@Autowired
+	private TransactionRepository transRep;
 	@PersistenceContext
 	private EntityManager entityManager;
 	@Override
@@ -50,6 +55,9 @@ public class RentController implements CrudControllerI<RentDto>{
 	public String preInsert(Model model) {
 		RentDto rentDto=new RentDto();
 		model.addAttribute("rentForm",rentDto);
+		model.addAttribute("trans",transRep.findAll().stream()
+	            .sorted(Comparator.comparing(Transaction::getId))
+	            .toList());
 		return "/rent/insertRent.jsp";
 	}
 
@@ -82,6 +90,9 @@ public class RentController implements CrudControllerI<RentDto>{
 		Rent rent=rentRep.findById(id).orElse(new Rent());
 		RentDto rentDto=RentDtoBuilder.fromEntityToDto(rent);
 		model.addAttribute("rentForm", rentDto);
+		model.addAttribute("trans",transRep.findAll().stream()
+	            .sorted(Comparator.comparing(Transaction::getId))
+	            .toList());
 		return "/rent/editRent.jsp";
 	}
 

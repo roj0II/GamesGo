@@ -44,15 +44,29 @@
 			action="/transaction/insert">
 			<table class="table table-striped">
 				<thead>
-					<tr>
-						<td>User ID</td>
-						<td><f:input class="input-label" path="idUser" /></td>
-					</tr>
-					<tr>
-						<td>Game ID</td>
-						<td><f:input class="input-label" path="idGame" /></td>
-					</tr>
-				</thead>
+	            <tr>
+	                <td>User</td>
+	                <td>
+	                    <input id="userInput" class="input-label" list="userList" name="idUser" />
+	                    <datalist id="userList">
+	                        <c:forEach items="${users}" var="user">
+	                            <option value="${user.id}">${user.username}</option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>Game</td>
+	                <td>
+	                    <input id="gameInput" class="input-label" list="gameList" name="idGame" />
+	                    <datalist id="gameList">
+	                        <c:forEach items="${games}" var="game">
+	                            <option value="${game.id}">${game.title}</option>
+	                        </c:forEach>
+	                    </datalist>
+	                </td>
+	            </tr>
+	        </thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>
 		</f:form>
@@ -66,5 +80,24 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const gameInput = document.getElementById("gameInput").value;
+            const userInput = document.getElementById("userInput").value;
+            
+            const games = Array.from(document.querySelectorAll("#gameList option")).map(option => option.value);
+            const users = Array.from(document.querySelectorAll("#userList option")).map(option => option.value);
+            
+            if (!games.includes(gameInput)) {
+                alert("Il gioco inserito non è valido.");
+                event.preventDefault();
+            }
+            
+            if (!users.includes(userInput)) {
+                alert("L'utente inserito non è valido.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
