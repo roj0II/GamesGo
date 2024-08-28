@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class Game implements Serializable {
 	private float priceDigital;
 	
 	
-	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Gamegenre> gameGenres;
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
 	private List<Storage> storage;

@@ -25,11 +25,12 @@
 	--main-color: #66FF66;
 }
 
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-	}
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+	
 </style>
 </head>
 <body>
