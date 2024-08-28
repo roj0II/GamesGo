@@ -123,6 +123,16 @@ public class LoginController {
 	public String register(Model model, HttpSession session, @RequestParam String username, @RequestParam String name,
 			@RequestParam String surname, @RequestParam String email, @RequestParam String address,
 			@RequestParam String phoneNumber, @RequestParam String password, @RequestParam String confermaPassword) {
+		if (!isValidUsername(username)) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Sono consentiti solo caratteri alfanumerici, underscores, trattini e punti.");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Username non valido");
+
+			model.addAttribute("registerForm", "right-panel-active");
+			
+			return "login/loginPage.jsp";
+        } 
 		boolean registered;
 		if (password.equals(confermaPassword)) {
 			User user = new User(username, name, surname, address, phoneNumber, email,
@@ -148,5 +158,11 @@ public class LoginController {
 			return "login/loginPage.jsp";
 		}
 	}
+	
+	// Metodo per controllare se un username contiene solo caratteri consentiti
+	public static boolean isValidUsername(String s) {
+        // Regex che permette lettere, numeri, underscore, trattino e punto
+        return s.matches("[a-zA-Z0-9._-]+");
+    }
 
 }
