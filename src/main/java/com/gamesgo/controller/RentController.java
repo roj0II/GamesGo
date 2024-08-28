@@ -30,8 +30,7 @@ public class RentController implements CrudControllerI<RentDto>{
 	RentRepository rentRep;
 	@Autowired
 	private TransactionRepository transRep;
-	@PersistenceContext
-	private EntityManager entityManager;
+	
 	@Override
 	@GetMapping("/")
 	public String main(Model model) {
