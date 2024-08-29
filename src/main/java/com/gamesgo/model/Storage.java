@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Storage implements Serializable {
@@ -18,8 +19,8 @@ public class Storage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "idGame")
+	@OneToOne
+	@JoinColumn(name = "idGame", unique=true)
 	private Game game;
 	@Column(nullable=false)
 	private int amountRetail;

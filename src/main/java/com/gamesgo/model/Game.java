@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Game implements Serializable {
@@ -38,8 +39,8 @@ public class Game implements Serializable {
 	
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Gamegenre> gameGenres;
-	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
-	private List<Storage> storage;
+	@OneToOne(mappedBy = "game",  cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private Storage storage;
 	@OneToMany(mappedBy = "game",  cascade = CascadeType.REMOVE)
 	private List<Transaction> transactions;
 	
@@ -97,10 +98,10 @@ public class Game implements Serializable {
 	public void setGameGenres(List<Gamegenre> gameGenres) {
 		this.gameGenres = gameGenres;
 	}
-	public List<Storage> getStorage() {
+	public Storage getStorage() {
 		return storage;
 	}
-	public void setStorage(List<Storage> storage) {
+	public void setStorage(Storage storage) {
 		this.storage = storage;
 	}
 	public List<Transaction> getTransactions() {

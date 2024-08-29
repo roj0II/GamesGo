@@ -110,7 +110,8 @@
           <div class="item">
             <div class="thumb">
               <a href="/detail/${game.id}"><img src="${game.photoUrl}" alt="---"></a>
-              <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
+              <span class="price">€ ${game.priceDigital}</span>
+              <span class="price">€ ${game.priceDigital}</span>
             </div>
             <div class="down-content">
               <span class="category">${game.gameGenres.get(0).genre.name}</span>
