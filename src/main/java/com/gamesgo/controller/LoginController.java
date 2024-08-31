@@ -43,10 +43,15 @@ public class LoginController {
 		// se l'utente non è loggato, gli mostreremo una pagina
 		// se è loggato ma non è admin, redirect:/404;
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		
         return AdminManager.checkAdmin(loggedUser,"admin/index.html");
 	}
-	
+	@GetMapping("/logout")
+	public String logout(Model model, HttpSession session) {
+		// se l'utente non è loggato, gli mostreremo una pagina
+		// se è loggato ma non è admin, redirect:/404;
+		session.invalidate();
+        return "redirect:/login";
+	}
 	
 	
 	@PostMapping("/login")
@@ -66,7 +71,10 @@ public class LoginController {
 				// inserisco l'otp nel database, con l'id dell'utente. user.getId();
 
 				String otpCode = OTPCodeGenerator.generateOTPCode();
-
+				
+				// Stampo il codice in console per fare i test.
+				System.out.println(otpCode);
+				
 				// Creiamo un codice otp da associare all'utente ed inserire nel db.
 				Otp otp = new Otp();
 				otp.setCode(otpCode);
@@ -74,7 +82,8 @@ public class LoginController {
 				otpRep.save(otp);
 
 				// Inviamo l'email all'utente con il codice.
-				EmailManager.sendMail(user.getEmail(), otpCode);
+				// Tolto per fare i test.
+				//EmailManager.sendMail(user.getEmail(), otpCode);
 
 				return "login/loginPage.jsp";
 				// ritorniamo la pagina che verrà modificata per l'otp.
@@ -111,18 +120,22 @@ public class LoginController {
 	}
 
 	@GetMapping("/logAdmin")
-	public String adminLoginOtp(HttpSession session, HttpServletRequest request, @RequestParam String otp) {
-		System.out.println("Admin LOGIN");
-		System.out.println(otp);
+	public String adminLoginOtp(Model model, HttpSession session, HttpServletRequest request, @RequestParam String otp) {
+			User loggedUser = (User) session.getAttribute("loggedUser");
 		Otp o = otpRep.findByCode(otp);
 		if (o != null) {
 			// Assegnamo alla sessione lo user ADMIN.
 			request.getSession().setAttribute("loggedUser", o.getUser());
 			// Eliminiamo l'Otp usato.
 			otpRep.delete(o);
-			return "admin/index.html";
+	        return AdminManager.checkAdmin(loggedUser,"admin/index.html");
 		}
 
+		model.addAttribute("error", true);
+		model.addAttribute("message", "Codice otp errato.");
+		model.addAttribute("color", "red");
+		model.addAttribute("title", "Errore");
+		
 		// Errore, otp non trovato.
 		return "login/loginPage.jsp";
 	}
