@@ -16,7 +16,7 @@ public class CatalogController {
 	@Autowired
 	private GenreRepository genRep;
 
-	final private static String catalogPath = "home/shop.jsp";
+	final private static String catalogPath = "home/catalog.jsp";
 
 	@GetMapping("/catalog")
 	public String catalog(Model model) {
