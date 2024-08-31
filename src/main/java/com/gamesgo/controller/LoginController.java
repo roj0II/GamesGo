@@ -15,10 +15,12 @@ import com.gamesgo.model.Otp;
 import com.gamesgo.model.User;
 import com.gamesgo.repository.OtpRepository;
 import com.gamesgo.service.UserService;
+import com.gamesgo.util.AdminManager;
 import com.gamesgo.util.EmailManager;
 import com.gamesgo.util.OTPCodeGenerator;
 import com.gamesgo.util.PasswordManager;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -37,22 +39,25 @@ public class LoginController {
 	}
 
 	@GetMapping("/admin")
-	public String admin() {
-		return "admin/index.html";
+	public String admin(Model model, HttpSession session) {
+		// se l'utente non è loggato, gli mostreremo una pagina
+		// se è loggato ma non è admin, redirect:/404;
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		
+        return AdminManager.checkAdmin(loggedUser,"admin/index.html");
 	}
-
+	
+	
+	
 	@PostMapping("/login")
-	public String adminLogin(Model model, HttpSession session, @RequestParam String username,
+	public String adminLogin(Model model, HttpSession session, HttpServletRequest request, @RequestParam String username,
 			@RequestParam String password) throws MessagingException, IOException {
-		System.out.println("Username? " + username);
 		boolean adminLogin = false;
 		if (username.toLowerCase().startsWith("admin_")) {
 			username = username.substring(6);
-			System.out.println(username + " " + password);
 			adminLogin = true;
 		}
 		boolean authenticated = userService.authenticate(username, password);
-		System.out.println("Autenticato? " + authenticated);
 		if (authenticated) {
 			User user = userService.findByUsername(username);
 			if (user.isAdmin() && adminLogin) {
@@ -74,8 +79,11 @@ public class LoginController {
 				return "login/loginPage.jsp";
 				// ritorniamo la pagina che verrà modificata per l'otp.
 			} else {
+				
+				// Inseriamo in sessione, l'utente che ha eseguito l'accesso con successo.
+				request.getSession().setAttribute("loggedUser", user);
 				// apriamo la pagina con il catalogo.
-				return "apriamo la pagina con il catalogo.";
+		        return "redirect:/";
 			}
 		} else if (username.equals("sex")) {
 			model.addAttribute("error", true);
@@ -103,13 +111,13 @@ public class LoginController {
 	}
 
 	@GetMapping("/logAdmin")
-	public String adminLoginOtp(HttpSession session, @RequestParam String otp) {
+	public String adminLoginOtp(HttpSession session, HttpServletRequest request, @RequestParam String otp) {
 		System.out.println("Admin LOGIN");
 		System.out.println(otp);
 		Otp o = otpRep.findByCode(otp);
 		if (o != null) {
-			// Assegnamo alla sessione l'user.
-			session.setAttribute("user", o.getUser());
+			// Assegnamo alla sessione lo user ADMIN.
+			request.getSession().setAttribute("loggedUser", o.getUser());
 			// Eliminiamo l'Otp usato.
 			otpRep.delete(o);
 			return "admin/index.html";

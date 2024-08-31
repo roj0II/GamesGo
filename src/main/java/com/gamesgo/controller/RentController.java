@@ -18,11 +18,14 @@ import com.gamesgo.dto.builder.RentDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Rent;
 import com.gamesgo.model.Transaction;
+import com.gamesgo.model.User;
 import com.gamesgo.repository.RentRepository;
 import com.gamesgo.repository.TransactionRepository;
+import com.gamesgo.util.AdminManager;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/rent")
 public class RentController implements CrudControllerI<RentDto>{
@@ -33,7 +36,9 @@ public class RentController implements CrudControllerI<RentDto>{
 	
 	@Override
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
 		List<RentDto> rentDtoList=new ArrayList<>();
 		List<Rent> rentList=new ArrayList<>();
 		rentList=rentRep.findAll();
@@ -41,12 +46,12 @@ public class RentController implements CrudControllerI<RentDto>{
 			rentDtoList.add(RentDtoBuilder.fromEntityToDto(r));
 		}
 		model.addAttribute("rentListForm",rentDtoList);
-		return "/rent/rent.jsp";
+		return AdminManager.checkAdmin(loggedUser,"/rent/rent.jsp");
 	}
 
 	@Override
 	@GetMapping("/insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		RentDto rentDto=new RentDto();
 		model.addAttribute("rentForm",rentDto);
 		model.addAttribute("trans",transRep.findAll().stream()
@@ -57,7 +62,7 @@ public class RentController implements CrudControllerI<RentDto>{
 
 	@Override
 	@PostMapping("/insert")
-	public String insert(Model model,@ModelAttribute("rentForm" ) RentDto dto) {
+	public String insert(Model model, HttpSession session,@ModelAttribute("rentForm" ) RentDto dto) {
 		Rent rent=RentDtoBuilder.fromDtoToEntity(dto);
 		Rent rentFound=rentRep.findByProductKey(dto.getProductKey());
 		if(rentFound!=null) {
@@ -80,7 +85,7 @@ public class RentController implements CrudControllerI<RentDto>{
 
 	@Override
 	@GetMapping("/update/{id}")
-	public String preUpdate(Model model,@PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session,@PathVariable int id) {
 		Rent rent=rentRep.findById(id).orElse(new Rent());
 		RentDto rentDto=RentDtoBuilder.fromEntityToDto(rent);
 		model.addAttribute("rentForm", rentDto);
@@ -92,7 +97,7 @@ public class RentController implements CrudControllerI<RentDto>{
 
 	@Override
 	@PostMapping("/update")
-	public String update(Model model, @ModelAttribute("rentForm") RentDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("rentForm") RentDto dto) {
 		Rent rent=RentDtoBuilder.fromDtoToEntity(dto);
 		Rent rentFound=rentRep.findByProductKey(dto.getProductKey());
 		if(rentFound!=null && rentFound.getId()!=dto.getId()) {
@@ -112,7 +117,7 @@ public class RentController implements CrudControllerI<RentDto>{
 
 	@Override
 	@GetMapping("/delete/{id}")
-	public String delete(Model model,@PathVariable int id) {
+	public String delete(Model model, HttpSession session,@PathVariable int id) {
 		rentRep.deleteById(id);
 		return "redirect:/rent/";
 	}
