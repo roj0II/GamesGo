@@ -90,6 +90,7 @@ public class LoginController {
 			} else {
 				
 				// Inseriamo in sessione, l'utente che ha eseguito l'accesso con successo.
+				user.setAdmin(false);
 				request.getSession().setAttribute("loggedUser", user);
 				// apriamo la pagina con il catalogo.
 		        return "redirect:/";
