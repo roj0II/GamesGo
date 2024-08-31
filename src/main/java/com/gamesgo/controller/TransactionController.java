@@ -20,6 +20,8 @@ import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
 import com.gamesgo.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("transaction")
 public class TransactionController implements CrudControllerI<TransactionDto> {
@@ -31,13 +33,13 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 	private UserRepository uRep;
 
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
 		model.addAttribute("transactions", transRep.findAll());
 		return "transaction.jsp";
 	}
 
 	@GetMapping("insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		TransactionDto dtoTransaction = new TransactionDto();
 		model.addAttribute("transactionForm", dtoTransaction);
 		model.addAttribute("users",uRep.findAll().stream()
@@ -50,13 +52,13 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model, @ModelAttribute("transactionForm") TransactionDto dto) {
+	public String insert(Model model, HttpSession session, @ModelAttribute("transactionForm") TransactionDto dto) {
 		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/transaction/";
 	}
 
 	@GetMapping("update/{id}")
-	public String preUpdate(Model model, @PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
 		Transaction t = transRep.findById(id).orElse(new Transaction());
 		model.addAttribute("transactionForm", TransactionDtoBuilder.fromEntityToDto(t));
 		model.addAttribute("users",uRep.findAll().stream()
@@ -69,13 +71,13 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 	}
 
 	@PostMapping("update")
-	public String update(Model model, @ModelAttribute("transactionForm") TransactionDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("transactionForm") TransactionDto dto) {
 		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/transaction/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		transRep.deleteById(id);
 		return "redirect:/transaction/";
 	}

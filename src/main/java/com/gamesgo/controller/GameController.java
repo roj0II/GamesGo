@@ -20,6 +20,7 @@ import com.gamesgo.repository.GameRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/game")
@@ -30,7 +31,7 @@ public class GameController implements CrudControllerI<GameDto>{
 	@PersistenceContext
 	private EntityManager entityManager;
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
 		ArrayList<GameDto> gameListDto = new ArrayList<>();
 		ArrayList<Game> gameList = new ArrayList<>();
         TypedQuery<Game> query = entityManager.createQuery("SELECT g FROM Game g", Game.class);
@@ -44,7 +45,7 @@ public class GameController implements CrudControllerI<GameDto>{
 	}
 	
 	@GetMapping("/insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		GameDto gameDto = new GameDto();
 		model.addAttribute("gameForm", gameDto);
 		return "/game/insertGame.jsp";
@@ -52,7 +53,7 @@ public class GameController implements CrudControllerI<GameDto>{
 	}
 
 	@PostMapping("/insert")
-	public String insert(Model model, @ModelAttribute("gameForm") GameDto gameDto) {
+	public String insert(Model model, HttpSession session, @ModelAttribute("gameForm") GameDto gameDto) {
 		Game game = GameDtoBuilder.fromDtoToEntity(gameDto);
 		Game gameFound=gameRep.findByTitle(gameDto.getTitle());
 		if(gameFound!=null) { 
@@ -72,14 +73,14 @@ public class GameController implements CrudControllerI<GameDto>{
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(Model model,@PathVariable int id){
+	public String delete(Model model, HttpSession session,@PathVariable int id){
 	this.gameRep.deleteById(id);
 	
 	return "redirect:/game/";
 	}
 	
 	@GetMapping("/update/{id}")
-	public String preUpdate(Model model, @PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
 		Game game=gameRep.findById(id).orElse(new Game());
 		GameDto gameDto=GameDtoBuilder.fromEntityToDto(game);
 		model.addAttribute("gameForm",gameDto);
@@ -87,7 +88,7 @@ public class GameController implements CrudControllerI<GameDto>{
 	}
 	
 	@PostMapping("/update")
-	public String update(Model model, @ModelAttribute("gameForm") GameDto gameDto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("gameForm") GameDto gameDto) {
 		Game game=GameDtoBuilder.fromDtoToEntity(gameDto);
 		Game gameFound=gameRep.findByTitle(gameDto.getTitle());
 		if(gameFound!=null && gameFound.getId()!=gameDto.getId()) {

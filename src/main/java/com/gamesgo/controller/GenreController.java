@@ -14,6 +14,8 @@ import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Genre;
 import com.gamesgo.repository.GenreRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("genre")
 public class GenreController implements CrudControllerI<GenreDto> {
@@ -22,26 +24,26 @@ public class GenreController implements CrudControllerI<GenreDto> {
 	private GenreRepository genRep;
 	
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
         model.addAttribute("genres", genRep.findAll());
 		return "genre.jsp";
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		genRep.deleteById(id);
 		return "redirect:/genre/";
 	}
 	
 	@GetMapping("insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		GenreDto genre = new GenreDto();
 		model.addAttribute("genreForm", genre);
 		return "insertGenre.jsp";
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model,@ModelAttribute("genreForm") GenreDto g) {
+	public String insert(Model model, HttpSession session,@ModelAttribute("genreForm") GenreDto g) {
 		Genre genre = genRep.findByName(GenreDtoBuilder.fromDtoToEntity(g).getName());
 		if (genre!=null) { // se troviamo un Genre con il nome uguale a quell che stiamo inserendo, ERORRE, già esiste quel genere.
 			
@@ -60,7 +62,7 @@ public class GenreController implements CrudControllerI<GenreDto> {
 	}
 	
 	@GetMapping("update/{id}")
-    public String preUpdate(Model model, @PathVariable int id) {
+    public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
 		Genre genre = genRep.findById(id).orElse(new Genre());
 		
         model.addAttribute("genreForm", GenreDtoBuilder.fromEntityToDto(genre));
@@ -68,7 +70,7 @@ public class GenreController implements CrudControllerI<GenreDto> {
     }
 	
 	@PostMapping("update")
-    public String update(Model model,@ModelAttribute("genreForm") GenreDto g) {
+    public String update(Model model, HttpSession session,@ModelAttribute("genreForm") GenreDto g) {
 		genRep.save(GenreDtoBuilder.fromDtoToEntity(g));
 		return "redirect:/genre/";
 	}

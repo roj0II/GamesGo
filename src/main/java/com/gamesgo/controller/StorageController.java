@@ -18,6 +18,8 @@ import com.gamesgo.model.Storage;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.StorageRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("storage")
 public class StorageController implements CrudControllerI<StorageDto> {
@@ -28,13 +30,13 @@ public class StorageController implements CrudControllerI<StorageDto> {
 	private GameRepository gameRep;
 
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
 		model.addAttribute("storage", storageRep.findAll());
 		return "storage.jsp";
 	}
 
 	@GetMapping("insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		StorageDto dtStorage = new StorageDto();
 		model.addAttribute("storageForm", dtStorage);
 		model.addAttribute("games",gameRep.findAll().stream()
@@ -44,13 +46,13 @@ public class StorageController implements CrudControllerI<StorageDto> {
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model, @ModelAttribute("storageForm") StorageDto dto) {
+	public String insert(Model model, HttpSession session, @ModelAttribute("storageForm") StorageDto dto) {
 		storageRep.save(StorageDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/storage/";
 	}
 
 	@GetMapping("update/{id}")
-	public String preUpdate(Model model, @PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
 		Storage s = storageRep.findById(id).orElse(new Storage());
 		model.addAttribute("storageForm", StorageDtoBuilder.fromEntityToDto(s));
 		model.addAttribute("games",gameRep.findAll().stream()
@@ -60,13 +62,13 @@ public class StorageController implements CrudControllerI<StorageDto> {
 	}
 
 	@PostMapping("update")
-	public String update(Model model, @ModelAttribute("storageForm") StorageDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("storageForm") StorageDto dto) {
 		storageRep.save(StorageDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/storage/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		storageRep.deleteById(id);
 		return "redirect:/storage/";
 	}

@@ -18,9 +18,13 @@ import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.Game;
 import com.gamesgo.model.Gamegenre;
 import com.gamesgo.model.Genre;
+import com.gamesgo.model.User;
 import com.gamesgo.repository.GameGenreRepository;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.GenreRepository;
+import com.gamesgo.util.AdminManager;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("gamegenre")
@@ -35,13 +39,17 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	private GenreRepository genreRep;
 	
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
 		model.addAttribute("gameGenreList", gameGenreRep.findAll());
-		return "gameGenre.jsp";
+        return AdminManager.checkAdmin(loggedUser,"gameGenre.jsp");
 	}
 
 	@GetMapping("insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
 		GameGenreDto gameGenreDto = new GameGenreDto();
 		model.addAttribute("games",gameRep.findAll().stream()
 	            .sorted(Comparator.comparing(Game::getTitle))
@@ -50,11 +58,13 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	            .sorted(Comparator.comparing(Genre::getName))
 	            .toList()); // Lista Genre
 		model.addAttribute("gameGenreForm", gameGenreDto);
-		return "insertGameGenre.jsp";
+        return AdminManager.checkAdmin(loggedUser,"insertGameGenre.jsp");
+
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
+	public String insert(Model model, HttpSession session, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
+
 		try {
 			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
 		} catch (DataIntegrityViolationException e) {
@@ -65,7 +75,9 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	}
 
 	@GetMapping("update/{id}")
-	public String preUpdate(Model model, @PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
 		Gamegenre gameG = gameGenreRep.findById(id).orElse(new Gamegenre());
 		model.addAttribute("games",gameRep.findAll().stream()
 	            .sorted(Comparator.comparing(Game::getTitle))
@@ -74,11 +86,12 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	            .sorted(Comparator.comparing(Genre::getName))
 	            .toList()); // Lista Genre
 		model.addAttribute("gameGenreForm", GameGenreDtoBuilder.fromEntityToDto(gameG));
-		return "/gamegenre/editGameGenre.jsp";
-	}
+        return AdminManager.checkAdmin(loggedUser,"/gamegenre/editGameGenre.jsp");
+}
 
 	@PostMapping("update")
-	public String update(Model model, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
+		
 		try {
 			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
 		} catch (JpaObjectRetrievalFailureException e) {
@@ -89,7 +102,7 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	}
 
 	@GetMapping("delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		gameGenreRep.deleteById(id);
 		return "redirect:/gamegenre/";
 	}

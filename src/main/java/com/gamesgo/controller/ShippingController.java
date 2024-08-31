@@ -22,6 +22,8 @@ import com.gamesgo.model.User;
 import com.gamesgo.repository.ShippingRepository;
 import com.gamesgo.repository.TransactionRepository;
 import com.gamesgo.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/shipping")
 public class ShippingController implements CrudControllerI<ShippingDto> {
@@ -34,7 +36,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 	
 	@Override
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
 		List<ShippingDto> shippingDtoList=new ArrayList<>();
 		List<Shipping> shippingList=new ArrayList<>();
 		shippingList=shippingRep.findAll();
@@ -47,7 +49,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 
 	@Override
 	@GetMapping("/insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		ShippingDto shippingDto=new ShippingDto();
 		model.addAttribute("shippingForm", shippingDto);
 		model.addAttribute("users",uRep.findAll().stream()
@@ -61,7 +63,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 
 	@Override
 	@PostMapping("/insert")
-	public String insert(Model model,@ModelAttribute("shippingForm") ShippingDto dto) {
+	public String insert(Model model, HttpSession session,@ModelAttribute("shippingForm") ShippingDto dto) {
 		Shipping shipping=ShippingDtoBuilder.fromDtoToEntity(dto);
 		shippingRep.save(shipping);
 		return "redirect:/shipping/";
@@ -69,7 +71,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 
 	@Override
 	@GetMapping("/update/{id}")
-	public String preUpdate(Model model,@PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session,@PathVariable int id) {
 		Shipping shipping=shippingRep.findById(id).orElse(new Shipping());
 		ShippingDto shippingDto=ShippingDtoBuilder.fromEntityToDto(shipping);
 		model.addAttribute("shippingForm", shippingDto);
@@ -84,7 +86,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 
 	@Override
 	@PostMapping("/update")
-	public String update(Model model, @ModelAttribute("shippingForm")ShippingDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("shippingForm")ShippingDto dto) {
 		Shipping shipping=ShippingDtoBuilder.fromDtoToEntity(dto);
 		shippingRep.save(shipping);
 		
@@ -93,7 +95,7 @@ public class ShippingController implements CrudControllerI<ShippingDto> {
 
 	@Override
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		shippingRep.deleteById(id);
 		return "redirect:/shipping/";
 	}

@@ -15,6 +15,8 @@ import com.gamesgo.interfaces.CrudControllerI;
 import com.gamesgo.model.User;
 import com.gamesgo.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("user")
 public class UserController implements CrudControllerI<UserDto> {
@@ -22,20 +24,20 @@ public class UserController implements CrudControllerI<UserDto> {
 	private UserRepository uRep;
 
 	@GetMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
 		model.addAttribute("users", uRep.findAll());
 		return "user.jsp";
 	}
 
 	@GetMapping("insert")
-	public String preInsert(Model model) {
+	public String preInsert(Model model, HttpSession session) {
 		UserDto dtUser = new UserDto();
 		model.addAttribute("userForm", dtUser);
 		return "insertUser.jsp";
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model, @ModelAttribute("userForm") UserDto dto) {
+	public String insert(Model model, HttpSession session, @ModelAttribute("userForm") UserDto dto) {
 		/*
 		 * Verifica che i campi inseriti non siano già inseriti nel DB, quindi fa una
 		 * ricerca in base a quei campi
@@ -104,20 +106,20 @@ public class UserController implements CrudControllerI<UserDto> {
 	}
 
 	@GetMapping("update/{id}")
-	public String preUpdate(Model model, @PathVariable int id) {
+	public String preUpdate(Model model, HttpSession session, @PathVariable int id) {
 		User u = uRep.findById(id).orElse(new User());
 		model.addAttribute("userForm", UserDtoBuilder.fromEntityToDto(u));
 		return "/user/editUser.jsp";
 	}
 
 	@PostMapping("update")
-	public String update(Model model, @ModelAttribute("userForm") UserDto dto) {
+	public String update(Model model, HttpSession session, @ModelAttribute("userForm") UserDto dto) {
 		uRep.save(UserDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/user/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		uRep.deleteById(id);
 		return "redirect:/user/";
 	}
