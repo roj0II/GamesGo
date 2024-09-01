@@ -92,7 +92,7 @@ public class LoginController {
 				// Inseriamo in sessione, l'utente che ha eseguito l'accesso con successo.
 				user.setAdmin(false);
 				request.getSession().setAttribute("loggedUser", user);
-				// apriamo la pagina con il catalogo.
+				// apriamo la pagina home.
 		        return "redirect:/";
 			}
 		} else if (username.equals("sex")) {

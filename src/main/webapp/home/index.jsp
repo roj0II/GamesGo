@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +57,12 @@
                       <li><a href="/" class="active">Home</a></li>
                       <li><a href="/catalog">Our Shop</a></li>
                       <li><a href="/contact">Contact Us</a></li>
-                      <li><a href="/login">Sign In</a></li>
+                      <c:if test="${loggedUser != null}">
+                      	<li><a href="/user">${loggedUser.username}</a></li>
+                      </c:if>
+                      <c:if test="${loggedUser == null}">
+                      	<li><a href="/login">Sign in</a></li>
+                      </c:if>
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
