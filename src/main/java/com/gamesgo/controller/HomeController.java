@@ -16,4 +16,9 @@ public class HomeController {
 		return "home/contact.html";
 	}
 	
+	@GetMapping("/logo")
+	public String logo () {
+		return "logo/logo.html";
+	}
+	
 }
