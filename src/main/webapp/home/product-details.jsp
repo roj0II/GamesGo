@@ -59,9 +59,8 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="shop.html">Our Shop</a></li>
-                      <li><a href="product-details.html" class="active">Product Details</a></li>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/catalog">Our Shop</a></li>
                       <li><a href="contact.html">Contact Us</a></li>
                       <li><a href="#">Sign In</a></li>
                   </ul>   

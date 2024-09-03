@@ -126,7 +126,8 @@ public class LoginController {
 		Otp o = otpRep.findByCode(otp);
 		if (o != null) {
 			// Assegnamo alla sessione lo user ADMIN.
-			request.getSession().setAttribute("loggedUser", o.getUser());
+			loggedUser=o.getUser();
+			request.getSession().setAttribute("loggedUser", loggedUser);
 			// Eliminiamo l'Otp usato.
 			otpRep.delete(o);
 	        return AdminManager.checkAdmin(loggedUser,"admin/index.html");

@@ -59,6 +59,7 @@
                       <li><a href="/contact">Contact Us</a></li>
                       <c:if test="${loggedUser != null}">
                       	<li><a href="/user">${loggedUser.username}</a></li>
+                      	<li><a href="/logout">Log out</a></li>
                       </c:if>
                       <c:if test="${loggedUser == null}">
                       	<li><a href="/login">Sign in</a></li>
