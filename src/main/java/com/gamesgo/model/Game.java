@@ -27,9 +27,9 @@ public class Game implements Serializable {
 	private String author;
 	@Column(nullable=false)
 	private Date releaseDate;
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false, columnDefinition = "TEXT")
 	private String description;
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition = "TEXT")
 	private String photoUrl;
 	@Column(nullable=false)
 	private float priceRetail;
