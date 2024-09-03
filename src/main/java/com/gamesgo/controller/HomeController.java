@@ -23,7 +23,7 @@ public class HomeController {
 	
 	@GetMapping("/logo")
 	public String logo () {
-		return "home/logo.html";
+		return "logo/logo.html";
 	}
 	
 	@PostMapping("/contact")
@@ -35,7 +35,7 @@ public class HomeController {
 			@RequestParam("message") String message
 	) throws Exception {
 		
-		WebhookManager.sendWebhook("https://discord.com/api/webhooks/1280482865393569843/o-PwN4IXGJzw8B-dM6ppPOnsI3PAlsmE4mGH8GOhj1FenH5nUPZ9AKmsct1Y3uCPjLmX", WebhookManager.embedContact(name, surname, subject, email, message));
+		WebhookManager.sendWebhook("https://discord.com/api/webhooks/1280482865393569843/o-PwN4IXGJzw8B-dM6ppPOnsI3PAlsmE4mGH8GOhj1FenH5nUPZ9AKmsct1Y3uCPjLmX", WebhookManager.embedContact(subject, name, surname, email, message));
 
         return "redirect:/contact";
 	}
