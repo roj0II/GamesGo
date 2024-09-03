@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,6 +28,8 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 	@Autowired
 	private UserService userService;
+	
+	
 
 	@Autowired
 	private OtpRepository otpRep;
@@ -50,7 +53,7 @@ public class LoginController {
 		// se l'utente non è loggato, gli mostreremo una pagina
 		// se è loggato ma non è admin, redirect:/404;
 		session.invalidate();
-        return "redirect:/login";
+        return "redirect:/";
 	}
 	
 	
@@ -65,6 +68,7 @@ public class LoginController {
 		boolean authenticated = userService.authenticate(username, password);
 		if (authenticated) {
 			User user = userService.findByUsername(username);
+			
 			if (user.isAdmin() && adminLogin) {
 				model.addAttribute("accediForm", "hidden");
 				model.addAttribute("otpForm", "");
@@ -157,6 +161,15 @@ public class LoginController {
 			return "login/loginPage.jsp";
         } 
 		boolean registered;
+		 boolean exist=userService.findByEmail(email);
+		 	if(exist) {
+		 		model.addAttribute("error", true);
+				model.addAttribute("message", "Email già registrata.");
+				model.addAttribute("color", "red");
+				model.addAttribute("title", "Email non valida");
+								
+				return "login/loginPage.jsp";
+		}
 		if (password.equals(confermaPassword)) {
 			User user = new User(username, name, surname, address, phoneNumber, email,
 					PasswordManager.hashPassword(password), false);
