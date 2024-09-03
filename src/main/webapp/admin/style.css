@@ -195,20 +195,6 @@ body {
   color: var(--dark-color);
   background-color: var(--clr);
 }
-.btn-top-right {
-    position: absolute;  /* Posizionamento assoluto rispetto al primo contenitore posizionato */
-    top: 25px;           /* Distanza dal bordo superiore */
-    right: 25px;         /* Distanza dal bordo destro */
-    padding: 10px 20px;  /* Padding interno del bottone */
-    background-color: #007bff;  /* Colore di sfondo */
-    color: white;        /* Colore del testo */
-    border: none;        /* Rimuove i bordi */
-    border-radius: 5px;  /* Bordi arrotondati */
-    cursor: pointer;     /* Cursore a forma di mano */
-}
-.btn-top-right:hover {
-    background-color: #0056b3;  /* Colore di sfondo al passaggio del mouse */
-}
 .Logout {
 	position: absolute;  
     top: 40px;           
