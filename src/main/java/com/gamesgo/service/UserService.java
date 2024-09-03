@@ -12,7 +12,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    
     public boolean authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
         return user != null && PasswordManager.checkPassword(password, user.getPassword());
@@ -28,5 +28,11 @@ public class UserService {
         }
         userRepository.save(user);
         return true;
+    }
+    public boolean findByEmail(String email) {
+    	if(userRepository.findByEmail(email)!=null)
+    		return true;
+    	else
+    		return false;
     }
 }
