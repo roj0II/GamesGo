@@ -6,7 +6,7 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+	font-family: 'Monoton', cursive;
 }
 
 .logo-container {
@@ -39,7 +39,7 @@ body {
 }
 
 .full-text {
-	transform: translate(-31px, -2.5px);
+	transform: translate(-89px, -2.5px);
     font-size: 50px;
     font-weight: bold;
     opacity: 0;
@@ -54,7 +54,7 @@ body {
 }
 
 .full-text-o {
-	transform: translate(112px, -2.5px);
+	transform: translate(20px, -2.5px);
     font-size: 50px;
     font-weight: bold;
     opacity: 0;
@@ -63,13 +63,13 @@ body {
     right: 0;
     text-align: center;
     color: #2c3e50;
-    transition: opacity 1.8s;
+    transition: opacity 1.4s, transform 1.2s;
     pointer-events: none; /* Prevent clicking the text */
     white-space: nowrap; /* Ensure text doesn't break */
 }
 
 .logo.open .left-g {
-    transform: translateX(-70px);
+    transform: translateX(-127px);
 }
 
 .logo.open .right-g {
@@ -81,5 +81,6 @@ body {
 }
 
 .logo.open .full-text-o {
+	transform: translate(54px, -2.5px);
     opacity: 1;
 }
