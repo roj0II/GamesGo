@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gamesgo.dto.CheckoutDto;
@@ -22,11 +23,11 @@ public class CheckoutController {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	@GetMapping("/checkout/{id}")
+	@PostMapping("/checkout/{id}")
 	public String checkoutForm (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
+		// digital o retail = formatType
+		// buy o rent = transactionType
 		Game game = gameRepository.findById(id).orElse(new Game());
-		// online o fisico = formatType
-		// comprare o affitare = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
 		CheckoutDto cd = new CheckoutDto();
@@ -38,7 +39,7 @@ public class CheckoutController {
 		
 		cd.setGameTitle(game.getTitle());
 		cd.setGamePhotoUrl(game.getPhotoUrl());
-		if (formatType.equals("online")) {
+		if (formatType.equals("digital")) {
 			cd.setGamePrice(game.getPriceDigital());
 		} else {
 			cd.setGamePrice(game.getPriceRetail());
