@@ -62,7 +62,7 @@ https://templatemo.com/tm-589-lugx-gaming
                       <li><a href="/">Home</a></li>
                       <li><a href="/catalog">Our Shop</a></li>
                       <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="#">Sign In</a></li>
+                      <li><a href="/login">Sign In</a></li>
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>

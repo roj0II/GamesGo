@@ -53,7 +53,7 @@ public class LoginController {
 		// se l'utente non è loggato, gli mostreremo una pagina
 		// se è loggato ma non è admin, redirect:/404;
 		session.invalidate();
-        return "redirect:/login";
+        return "redirect:/";
 	}
 	
 	
