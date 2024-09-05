@@ -6,6 +6,13 @@ public class TransactionDto {
 	private int id;
 	private int idUser;
 	private int idGame;
+	private float checkoutPayment;
+	public float getCheckoutPayment() {
+		return checkoutPayment;
+	}
+	public void setCheckoutPayment(float checkoutPayment) {
+		this.checkoutPayment = checkoutPayment;
+	}
 	private Transaction transaction;
 	
 	public Transaction getTransaction() {
