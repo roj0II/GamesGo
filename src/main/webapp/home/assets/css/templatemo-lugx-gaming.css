@@ -1407,7 +1407,7 @@ Single Page Style
     color: gray; /* Cambia il colore del testo */
 }
 
-.single-product form button, .checkbox-button, .transaction-button{
+.single-product form button, .checkbox-button, .transaction-button, .single-product form .next-prev{
   display: inline-block;
   height: 50px;
   line-height: 50px;

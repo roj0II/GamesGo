@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.slide.active {
+    display: block;
+}
+
+button {
+    margin: 10px;
+}

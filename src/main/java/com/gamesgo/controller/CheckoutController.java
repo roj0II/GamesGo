@@ -53,6 +53,9 @@ public class CheckoutController {
 		} else {
 			cd.setGamePrice(game.getPriceRetail());
 		}
+		cd.setOnline(formatType.equals("online"));
+		cd.setRent(transactionType.equals("rent"));
+		
 		
 		
 		model.addAttribute("check", cd);
