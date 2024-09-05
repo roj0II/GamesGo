@@ -79,19 +79,20 @@
       </div>
     </div>
   </div>
-
+			
   <div class="single-product section">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <div class="left-image">
-            <img src="${check.gamePhotoUrl}" alt="">
+          <h4 style="display: inline; margin-left: 20px;">${check.gameTitle}</h4><h4 style="display: inline; margin-left: 340px;">€${check.gamePrice}</h4>
+            <img src="${check.gamePhotoUrl}" alt="" style=" margin-top: 30px;">
           </div>
         </div>
         <div class="col-lg-6 align-self-center">
-          <h4>${check.gameTitle} - € ${check.gamePrice}</h4>
-          <form id="contact-form" action="/contact" method="post">
+          <f:form id="contact-form" modelAttribute="check" action="/?" method="post">
                   <div class="row">
+                  <h4 style="margin-left: 20px;">Informazioni di spedizione e fatturazione</h4>
                   <div class="col-lg-6">
                       		<span style="margin-left: 50px"><b>Nome</b></span>
                       <fieldset style="margin-bottom: 20px">
@@ -122,14 +123,21 @@
                         <input type="text" name="userAddress" id="userAddress" value="${check.userAddress}" required style="width: 630px">
                       </fieldset>
                     </div>
-                    <div class="col-lg-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="orange-button">Send Message Now</button>
-                      </fieldset>
-                    </div>
                   </div>
-                </form>
-        </div>
+                 <div style="align-items: center;">
+                  <label class="transaction-button" id="button3" style="margin-top: 5px;">
+	            	<input type="checkbox" name="transactionType" value="paypal">
+	            	<i class="fa fa-shopping-bag"></i> PayPal
+		        </label>
+		        <label class="transaction-button" id="button4" style="margin-top: 5px; margin-left: 40px;">
+		        	<input type="checkbox" name="transactionType" value="card">
+		            <i class="fa-solid fa-handshake"></i> Carta
+		        </label>
+				</div>
+	            <br> <a href="/transact/transact.jsp"> carta </a>
+	    			<button id="submit" class="orange-button">Conferma e paga €${check.gamePrice}</button>
+        		</f:form>
+        	</div>
         
 		<div class="col-lg-12">
           <div class="sep"></div>
@@ -151,6 +159,30 @@
   <script src="../home/assets/js/owl-carousel.js"></script>
   <script src="../home/assets/js/counter.js"></script>
   <script src="../home/assets/js/custom.js"></script>
+  <script>
+    document.querySelectorAll('.transaction-button input').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                document.querySelectorAll('.transaction-button input').forEach((otherCheckbox) => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                        otherCheckbox.parentElement.classList.remove('active');
+                    }
+                });
+            }
+            checkbox.parentElement.classList.toggle('active', checkbox.checked);
+        });
+    });
+
+    document.getElementById('submit').addEventListener('click', (event) => {
+        const transactionChecked = Array.from(document.querySelectorAll('.transaction-button input')).some(checkbox => checkbox.checked);
+		
+        if (!transactionChecked ) {
+        	event.preventDefault();
+        	alert('Per favore, seleziona un metodo di pagamento.');
+        }
+    });
+</script>
   
   </body>
 </html>

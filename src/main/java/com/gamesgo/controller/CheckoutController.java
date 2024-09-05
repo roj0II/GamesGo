@@ -23,13 +23,22 @@ public class CheckoutController {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	@GetMapping("/checkout/{id}")
+	@PostMapping("/checkout/{id}")
 	public String checkoutForm (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
 		// digital o retail = formatType
 		// buy o rent = transactionType
 		Game game = gameRepository.findById(id).orElse(new Game());
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
+		if (loggedUser == null) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Effettua prima l'accesso.");
+			model.addAttribute("color", "yellow");
+			model.addAttribute("title", "Alert!");
+			
+			return "/login/loginPage.jsp";
+		}
+		
 		CheckoutDto cd = new CheckoutDto();
 		cd.setUserAddress(loggedUser.getAddress());
 		cd.setUserEmail(loggedUser.getEmail());

@@ -76,6 +76,17 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
+.single-product form input {
+  width: 80px;
+  height: 50px;
+  background-color: #f7f7f7;
+  border: 1px solid #e7e7e7;
+  border-radius: 25px;
+  text-align: center;
+  float: left;
+  margin-right: 15px;
+}
+
 html, body {
   font-family: 'Poppins', sans-serif;
   -ms-text-size-adjust: 100%;

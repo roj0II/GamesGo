@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/popup.css">
+<link rel="stylesheet" href="/css/popup.css">
 	<div class="popup-item ${show}">
 	    <div class="popup ${color}">
 	        <label class="close"></label>
@@ -6,4 +6,4 @@
 	        <p>${message}</p>
 	    </div>
 	</div>
-<script src="../javascript/popup.js"></script>
+<script src="/javascript/popup.js"></script>
