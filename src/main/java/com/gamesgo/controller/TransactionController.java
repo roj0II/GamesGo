@@ -53,6 +53,15 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 
 	@PostMapping("insert")
 	public String insert(Model model, HttpSession session, @ModelAttribute("transactionForm") TransactionDto dto) {
+		if(dto.getCheckoutPayment()<0) {
+			model.addAttribute("show", "show");
+	    	model.addAttribute("message", "Un pagamento non può essere minore di 0.");
+	    	model.addAttribute("color", "red");
+	    	model.addAttribute("title", "Error!");
+
+			model.addAttribute("TransactionForm", dto);
+			return "/transaction/insertTransaction.jsp";
+		}
 		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/transaction/";
 	}
@@ -72,6 +81,15 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 
 	@PostMapping("update")
 	public String update(Model model, HttpSession session, @ModelAttribute("transactionForm") TransactionDto dto) {
+		if(dto.getCheckoutPayment()<0) {
+			model.addAttribute("show", "show");
+	    	model.addAttribute("message", "Un pagamento non può essere minore di 0.");
+	    	model.addAttribute("color", "red");
+	    	model.addAttribute("title", "Error!");
+
+			model.addAttribute("TransactionForm", dto);
+			return "/transaction/editTransaction.jsp";
+		}
 		transRep.save(TransactionDtoBuilder.fromDtoToEntity(dto));
 		return "redirect:/transaction/";
 	}
