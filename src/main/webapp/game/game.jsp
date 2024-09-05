@@ -52,8 +52,8 @@ img {
 				<tr>
 					<th>Title</th>
 					<th>Author</th>
-					<th>Description</th>
 					<th>Photo_url</th>
+					<th>Description</th>
 					<th>Price Retail</th>
 					<th>Price Digital</th>
 					<th>Release date</th>
