@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Lugx Gaming Shop HTML5 Template</title>
+    <title>GamesGo: Home</title>
 
     <!-- Bootstrap core CSS -->
     <link href="home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -81,13 +81,13 @@
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="caption header-text">
-            <h6>Welcome to lugx</h6>
+            <h6>Benvenuto in GamesGo</h6>
             <h2>BEST GAMING SITE EVER!</h2>
             <p>LUGX Gaming is free Bootstrap 5 HTML CSS website template for your gaming websites. You can download and use this layout for commercial purposes. Please tell your friends about TemplateMo.</p>
             <div class="search-input">
               <form id="search" action="#">
-                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                <button role="button">Search Now</button>
+                <input type="text" placeholder="Cerca gioco per titolo o autore" id='searchText' name="searchKeyword" onkeypress="handle" />
+                <button role="button">Cerca</button>
               </form>
             </div>
           </div>
@@ -122,7 +122,7 @@
               <div class="image">
                 <img src="home/assets/images/featured-02.png" alt="" style="max-width: 44px;">
               </div>
-              <h4>User More</h4>
+              <h4>Consegna Rapida</h4>
             </div>
           </a>
         </div>
@@ -132,7 +132,7 @@
               <div class="image">
                 <img src="home/assets/images/featured-03.png" alt="" style="max-width: 44px;">
               </div>
-              <h4>Reply Ready</h4>
+              <h4>I Migliori Prezzi</h4>
             </div>
           </a>
         </div>
