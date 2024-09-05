@@ -44,7 +44,9 @@
 				<tr>
 					<th>ID User</th>
 					<th>ID Game</th>
+					<th>Total</th>
 					<th>Action</th>
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -53,6 +55,7 @@
 					<tr>
 						<td>${transaction.user.id}</td>
 						<td>${transaction.game.id}</td>
+						<td>${transaction.checkoutPayment }</td>
 						<td class="table-actions"><a
 							href="/transaction/update/${transaction.id}"
 							class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>

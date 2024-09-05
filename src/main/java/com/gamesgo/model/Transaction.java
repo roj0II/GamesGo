@@ -23,6 +23,14 @@ public class Transaction implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idGame")
 	private Game game;
+	private float checkoutPayment;
+	public float getCheckoutPayment() {
+		return checkoutPayment;
+	}
+
+	public void setCheckoutPayment(float checkoutPayment) {
+		this.checkoutPayment = checkoutPayment;
+	}
 
 	@OneToMany(mappedBy = "transaction", cascade = CascadeType.REMOVE)
 	private List<Rent> rents;

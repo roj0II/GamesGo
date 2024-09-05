@@ -16,6 +16,7 @@ public class TransactionDtoBuilder {
 		Game g = new Game();
 		g.setId(dto.getIdGame());
 		transaction.setGame(g);
+		transaction.setCheckoutPayment(dto.getCheckoutPayment());
 
 		return transaction;
 	}
@@ -25,7 +26,7 @@ public class TransactionDtoBuilder {
 		transDto.setId(transaction.getId());
 		transDto.setIdUser(transaction.getUser().getId());
 		transDto.setIdGame(transaction.getGame().getId());
-
+		transDto.setCheckoutPayment(transaction.getCheckoutPayment());
 		return transDto;
 	}
 }

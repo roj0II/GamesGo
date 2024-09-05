@@ -66,6 +66,10 @@
 	                    </datalist>
 	                </td>
 	            </tr>
+	            <tr>
+			<td>Total</td>
+			<td><f:input class="input-label" path="checkoutPayment" /></td>
+			</tr>
 	        </thead>
 			</table>
 			<button type="submit" class="buttons">Salva</button>
