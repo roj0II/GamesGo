@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Lugx Gaming - Product Detail</title>
+	<link rel="icon" type="image/x-icon" href="${game.photoUrl}">
+    <title>${game.title}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +23,16 @@
     <link rel="stylesheet" href="../home/assets/css/owl.css">
     <link rel="stylesheet" href="../home/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 589 lugx gaming
-
-https://templatemo.com/tm-589-lugx-gaming
-
--->
+	<style>
+       button {
+            margin: 10px;
+            padding: 10px;
+        }
+        .selected {
+            background-color: lightgreen;
+        }
+    </style>
   </head>
 
 <body>
@@ -97,10 +101,16 @@ https://templatemo.com/tm-589-lugx-gaming
           <h4>${game.title}</h4>
           <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
           <p>${game.description}</p>
-          <form id="qty" action="#">
-            <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-            <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
-          </form>
+          	<button id="button1" onclick="toggleButton(1)"><i class="fa-solid fa-gamepad"></i>Gioco Fisico</button>
+    		<button id="button2" onclick="toggleButton(2)"><i class="fa-solid fa-earth-americas"></i>Gioco Digitale</button>
+
+			<br>
+			<button id="button3" onclick="toggleButton(3)"><i class="fa fa-shopping-bag"></i>Acquisto</button>
+    		<button id="button4" onclick="toggleButton(4)"><i class="fa-solid fa-handshake"></i>Noleggio</button>
+
+            <br>
+    		<button id="submit" onclick="handleSubmit()">Submit</button>
+
           <ul>
             <li><span>Game ID:</span> ${game.id}</li>
             <li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
@@ -221,6 +231,67 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="../home/assets/js/owl-carousel.js"></script>
   <script src="../home/assets/js/counter.js"></script>
   <script src="../home/assets/js/custom.js"></script>
+  <script>
+        // Variabili di stato per controllare i bottoni selezionati
+        let selectedButtons = [];
 
+        // Funzione per gestire la selezione/deselezione dei bottoni
+        function toggleButton(buttonId) {
+            const button = document.getElementById(`button${buttonId}`);
+            
+            if (selectedButtons.includes(buttonId)) {
+                // Se già selezionato, lo deseleziono
+                selectedButtons = selectedButtons.filter(id => id !== buttonId);
+                button.classList.remove("selected");
+            } else {
+                // Se non selezionato, aggiungo il bottone all'array di selezione
+                if (selectedButtons.length < 2) {
+                    selectedButtons.push(buttonId);
+                    button.classList.add("selected");
+                } else {
+                    alert("Puoi selezionare solo due bottoni!");
+                }
+            }
+        }
+
+        // Funzione per gestire il submit e le azioni in base alla selezione
+        function handleSubmit() {
+            if (selectedButtons.length !== 2) {
+                alert("Devi selezionare esattamente due bottoni.");
+                return;
+            }
+
+            // Ordinare i bottoni per garantire coerenza nelle condizioni
+            selectedButtons.sort();
+
+            // Logica per eseguire le azioni a seconda dei bottoni selezionati
+            if (selectedButtons.includes(1) && selectedButtons.includes(2)) {
+                alert("Hai selezionato Button 1 e Button 2! Azione 1.");
+                // Azione 1
+            } else if (selectedButtons.includes(1) && selectedButtons.includes(3)) {
+                alert("Hai selezionato Button 1 e Button 3! Azione 2.");
+                // Azione 2
+            } else if (selectedButtons.includes(2) && selectedButtons.includes(4)) {
+                alert("Hai selezionato Button 2 e Button 4! Azione 3.");
+                // Azione 3
+            } else if (selectedButtons.includes(3) && selectedButtons.includes(4)) {
+                alert("Hai selezionato Button 3 e Button 4! Azione 4.");
+                // Azione 4
+            } else {
+                alert("Combinazione non valida.");
+            }
+
+            // Resetto i bottoni dopo il submit
+            resetButtons();
+        }
+
+        // Funzione per resettare la selezione dei bottoni
+        function resetButtons() {
+            selectedButtons = [];
+            document.querySelectorAll("button").forEach(button => {
+                button.classList.remove("selected");
+            });
+        }
+    </script>
   </body>
 </html>
