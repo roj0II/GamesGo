@@ -101,21 +101,38 @@
           <h4>${game.title}</h4>
           <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
           <p>${game.description}</p>
-          	<button id="button1" onclick="toggleButton(1)"><i class="fa-solid fa-gamepad"></i>Gioco Fisico</button>
-    		<button id="button2" onclick="toggleButton(2)"><i class="fa-solid fa-earth-americas"></i>Gioco Digitale</button>
+        <form action="/checkout/${game.id}" method="post"> <!-- bottoni -->
+        
+          	<label class="checkbox-button <c:if test="${game.storage.amountRetail <= 0}">out</c:if>" id="button1">
+    <input type="checkbox" name="formatType" value="retail" 
+           <c:if test="${game.storage.amountRetail <= 0}">disabled</c:if>>
+    <i class="fa-solid fa-gamepad"></i> Gioco Fisico
+</label>
 
+<label class="checkbox-button <c:if test="${game.storage.amountDigital <= 0}">out</c:if>" id="button2">
+    <input type="checkbox" name="formatType" value="digital" 
+           <c:if test="${game.storage.amountDigital <= 0}">disabled</c:if>>
+    <i class="fa-solid fa-earth-americas"></i> Gioco Digitale
+</label>
 			<br>
-			<button id="button3" onclick="toggleButton(3)"><i class="fa fa-shopping-bag"></i>Acquisto</button>
-    		<button id="button4" onclick="toggleButton(4)"><i class="fa-solid fa-handshake"></i>Noleggio</button>
+			<label class="transaction-button" id="button3" style="margin-top: 5px;">
+	            <input type="checkbox" name="transactionType" value="buy">
+	            <i class="fa fa-shopping-bag"></i> Acquisto
+	        </label>
+	        <label class="transaction-button" id="button4" style="margin-top: 5px;">
+	        	<input type="checkbox" name="transactionType" value="rent">
+	            <i class="fa-solid fa-handshake"></i> Noleggio
+	        </label>
 
             <br>
-    		<button id="submit" onclick="handleSubmit()">Submit</button>
+    	<button id="submit">Submit</button>
+        </form>
 
-          <ul>
-            <li><span>Game ID:</span> ${game.id}</li>
-            <li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
-            <li><span>Author:</span> ${game.author}</li>
-          </ul>
+		<ul>
+			<li><span>Game ID:</span> ${game.id}</li>
+			<li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
+			<li><span>Author:</span> ${game.author}</li>
+		</ul>
         </div>
         <div class="col-lg-12">
           <div class="sep"></div>
@@ -232,66 +249,50 @@
   <script src="../home/assets/js/counter.js"></script>
   <script src="../home/assets/js/custom.js"></script>
   <script>
-        // Variabili di stato per controllare i bottoni selezionati
-        let selectedButtons = [];
-
-        // Funzione per gestire la selezione/deselezione dei bottoni
-        function toggleButton(buttonId) {
-            const button = document.getElementById(`button${buttonId}`);
-            
-            if (selectedButtons.includes(buttonId)) {
-                // Se già selezionato, lo deseleziono
-                selectedButtons = selectedButtons.filter(id => id !== buttonId);
-                button.classList.remove("selected");
-            } else {
-                // Se non selezionato, aggiungo il bottone all'array di selezione
-                if (selectedButtons.length < 2) {
-                    selectedButtons.push(buttonId);
-                    button.classList.add("selected");
-                } else {
-                    alert("Puoi selezionare solo due bottoni!");
-                }
+    document.querySelectorAll('.checkbox-button input').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                document.querySelectorAll('.checkbox-button input').forEach((otherCheckbox) => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                        otherCheckbox.parentElement.classList.remove('active');
+                    }
+                });
             }
-        }
+            checkbox.parentElement.classList.toggle('active', checkbox.checked);
+        });
+    });
 
-        // Funzione per gestire il submit e le azioni in base alla selezione
-        function handleSubmit() {
-            if (selectedButtons.length !== 2) {
-                alert("Devi selezionare esattamente due bottoni.");
-                return;
+    document.querySelectorAll('.transaction-button input').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                document.querySelectorAll('.transaction-button input').forEach((otherCheckbox) => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                        otherCheckbox.parentElement.classList.remove('active');
+                    }
+                });
             }
+            checkbox.parentElement.classList.toggle('active', checkbox.checked);
+        });
+    });
 
-            // Ordinare i bottoni per garantire coerenza nelle condizioni
-            selectedButtons.sort();
+    // Gestione del submit del form
+    document.getElementById('submit').addEventListener('click', (event) => {
+        const formatChecked = Array.from(document.querySelectorAll('.checkbox-button input')).some(checkbox => checkbox.checked);
+        const transactionChecked = Array.from(document.querySelectorAll('.transaction-button input')).some(checkbox => checkbox.checked);
 
-            // Logica per eseguire le azioni a seconda dei bottoni selezionati
-            if (selectedButtons.includes(1) && selectedButtons.includes(2)) {
-                alert("Hai selezionato Button 1 e Button 2! Azione 1.");
-                // Azione 1
-            } else if (selectedButtons.includes(1) && selectedButtons.includes(3)) {
-                alert("Hai selezionato Button 1 e Button 3! Azione 2.");
-                // Azione 2
-            } else if (selectedButtons.includes(2) && selectedButtons.includes(4)) {
-                alert("Hai selezionato Button 2 e Button 4! Azione 3.");
-                // Azione 3
-            } else if (selectedButtons.includes(3) && selectedButtons.includes(4)) {
-                alert("Hai selezionato Button 3 e Button 4! Azione 4.");
-                // Azione 4
-            } else {
-                alert("Combinazione non valida.");
-            }
-
-            // Resetto i bottoni dopo il submit
-            resetButtons();
+        if (!formatChecked && !transactionChecked) {
+            event.preventDefault();
+            alert('Per favore, seleziona un formato e un tipo di transazione prima di procedere.');
+        } else if (!formatChecked ) {
+            event.preventDefault();
+        	alert('Per favore, seleziona un tipo di formato.');
+        }else if (!transactionChecked ) {
+        	event.preventDefault();
+        	alert('Per favore, seleziona un tipo di transazione.');
         }
-
-        // Funzione per resettare la selezione dei bottoni
-        function resetButtons() {
-            selectedButtons = [];
-            document.querySelectorAll("button").forEach(button => {
-                button.classList.remove("selected");
-            });
-        }
-    </script>
+    });
+</script>
   </body>
 </html>
