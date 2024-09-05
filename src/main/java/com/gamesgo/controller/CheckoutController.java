@@ -18,12 +18,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class CheckoutController {
 
-	private final String pathCheckoutPage = "";
+	private final String pathCheckoutPage = "/home/checkout.jsp";
 	
 	@Autowired
 	private GameRepository gameRepository;
 	
-	@PostMapping("/checkout/{id}")
+	@GetMapping("/checkout/{id}")
 	public String checkoutForm (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
 		// digital o retail = formatType
 		// buy o rent = transactionType
@@ -46,7 +46,7 @@ public class CheckoutController {
 		}
 		
 		
-		model.addAttribute("checkoutForm", cd);
+		model.addAttribute("check", cd);
 		return pathCheckoutPage;
 	}
 }

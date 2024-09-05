@@ -115,7 +115,7 @@
             <div class="down-content">
               <span class="category">${game.gameGenres.get(0).genre.name}</span>
               <h4>${game.title}</h4>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
+              <a href="/detail/${game.id}"><i class="fa fa-shopping-bag"></i></a>
             </div>
           </div>
         </div>
