@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
     <!-- Web Icon -->
-    <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
+    <link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/yuanql/icon-admin.png">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
@@ -64,7 +64,7 @@
             <div class="icons">
 	            <i class="fa-solid fa-users fa-2xl"></i>
 	         </div>
-	            <h1 class="header-title">Lista di Utenti</h1> 
+	            <h1 class="header-title">Utenti</h1> 
             <a href="/user/insert" class="btn btn-success"><i class="fas fa-plus"></i> Aggiungi</a>
         </div>
         <table class="table table-striped">

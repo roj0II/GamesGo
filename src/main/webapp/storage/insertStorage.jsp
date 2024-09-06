@@ -7,10 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert to storage</title>
-<!-- Web Icon -->
-<link rel="icon" type="image/x-icon"
-	href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
+<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/yuanql/icon-admin.png">
+<title>Storage</title>
 <!-- Bootstrap CSS -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
