@@ -87,22 +87,42 @@
 
 	<div class="single-product section">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="height: 34rem;">
 				<div class="col-lg-6">
 					<div class="left-image">
-                        <img src="${check.gamePhotoUrl}" alt="" style="margin-top: 30px;">
-                    </div>
-                </div>
-
-                <f:form id="contact-form" modelAttribute="check" action="/?"
-                    method="post" class="col-lg-6 align-self-center">
+				
+            <img src="${check.gamePhotoUrl}" alt="" style=" margin-top: 30px;">
+          </div>
+        </div>
+        
+                     <f:form id="contact-form" modelAttribute="check" action="/?"
+                    	method="post" class="col-lg-6 align-self-center">
+                    	
+                    	 <div style="display: flex; justify-content: space-between;">
+                      <fieldset style="display: inline;">
+                        <input value="${check.gameTitle}" disabled style="width: 320px; font-weight: bold;">
+                      </fieldset>
+                      <fieldset style="display: inline;">
+                        <c:if test="${check.rent}"><input value="€${check.gamePrice/30 - 0.20} / giorno" disabled style="width: 180px; font-weight: bold;"></c:if>
+                        <c:if test="${!check.rent}"><input value="€${check.gamePrice/100*70}" disabled style="width: 180px; font-weight: bold;"></c:if>
+                      </fieldset>
+            		</div>
+                    	
 					<div class="carousel">
-
 
 						<c:if test="${check.rent}">
 							<div class="slide active">
-								<h2>Slide Rent</h2>
-								<p>Contenuto per la prima slide.</p>
+								<h2 style="margin-top: 20px;">Numero giorni del fitto</h2>
+								
+								<div style="display: flex; justify-content: space-between;">
+			                      <fieldset style="display: inline;">
+			                        <input type="number" value="1" style="margin-top: 40px; width: 180px; font-weight: bold;">
+			                      </fieldset>
+			                      <fieldset style="display: inline;">
+			                        <input value="€${check.gamePrice/30 - 0.20}" style="margin-top: 40px; width: 180px; font-weight: bold;">
+			                      </fieldset>
+			            		</div>
+								
 								<div style="display: flex; justify-content: end; margin-top: 20px;">
                                 	<a class="btn-next next-prev">Avanti</a>
                             	</div>
@@ -112,8 +132,7 @@
 
 						<div class="slide <c:if test="${!check.rent}">active</c:if>">
 							<div class="row">
-								<h4 style="margin-left: 20px;">Informazioni di spedizione e
-									fatturazione</h4>
+								<h4 style="margin-left: 20px;">Informazioni di spedizione</h4>
 								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Nome</b></span>
 									<fieldset style="margin-bottom: 20px">
@@ -150,7 +169,7 @@
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
 										<input type="text" name="userAddress" id="userAddress"
-											value="${check.userAddress}" required style="width: 630px">
+											value="${check.userAddress}" required style="width: 610px">
 									</fieldset>
 								</div>
 							</div>
@@ -205,7 +224,7 @@
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
 										<input type="text" name="userAddress" id="userAddress"
-											value="${check.userAddress}" required style="width: 630px">
+											value="${check.userAddress}" required style="width: 610px">
 									</fieldset>
 								</div>
                                 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
@@ -230,7 +249,7 @@
 							</div>
 							<div id="carta"
 								style="display: none; justify-content: center; align-items: center;">
-								<h2>Payment Details</h2>
+								<h2 style="margin-top: 20px; margin-bottom: 20px;">Dettagli di Pagamento</h2>
 								<div class="payment" style="display: grid;">
 
 									<div class="card">
@@ -251,7 +270,7 @@
 										<div class="card__number">0000&nbsp;0000&nbsp;0000&nbsp;0000</div>
 										<div class="card__name">
 											<h3>Card Holder</h3>
-											<p id="card-name">Mrs Kate Smith</p>
+											<p id="card-name">${check.userName} ${check.userSurname}</p>
 										</div>
 
 										<div class="card__expiry">
@@ -261,40 +280,17 @@
 											</p>
 										</div>
 									</div>
+									
+									<div></div>
+									
 									<form class="form">
 
 										<div class="form__name form__detail">
 											<label for="name">Nome</label>
 											<ion-icon name="person-outline" role="img"
 												class="md hydrated" aria-label="person outline"></ion-icon>
-											<input type="text" placeholder="Mrs Kate Smith" id="name"
-												maxlength="24">
-											<div class="alert" id="alert-1">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-													xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-														d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z"
-														fill="#FF6A96"></path>
-                </svg>
-												Full name required
-											</div>
-										</div>
-
-										<div class="form__number form__detail">
-											<label for="number">Card Number</label>
-											<ion-icon name="card-outline" role="img" class="md hydrated"
-												aria-label="card outline"></ion-icon>
-											<input type="text" placeholder="0000 0000 0000 0000"
-												id="number" onkeypress="return isNumeric(event)">
-											<div class="alert" id="alert-2">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-													xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-														d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z"
-														fill="#FF6A96"></path>
-                </svg>
-												Invalid card number
-											</div>
+											<input type="text" value="${check.userName} ${check.userSurname}" id="name"
+												maxlength="24" style="width: 400px">
 										</div>
 
 										<div class="form__expiry form__detail">
@@ -302,16 +298,16 @@
 											<ion-icon name="calendar-outline" role="img"
 												class="md hydrated" aria-label="calendar outline"></ion-icon>
 											<input type="text" placeholder="MM/YY" id="date"
-												onkeypress="return isNumeric(event)">
-											<div class="alert" id="alert-3">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-													xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-														d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z"
-														fill="#FF6A96"></path>
-                </svg>
-												Invalid date
-											</div>
+												onkeypress="return isNumeric(event)" style="width: 150px">
+											
+										</div>
+										
+										<div class="form__number form__detail">
+											<label for="number">Card Number</label>
+											<ion-icon name="card-outline" role="img" class="md hydrated"
+												aria-label="card outline"></ion-icon>
+											<input type="text" placeholder="0000 0000 0000 0000"
+												id="number" onkeypress="return isNumeric(event)" style="width: 400px">
 										</div>
 
 										<div class="form__cvv form__detail">
@@ -321,16 +317,8 @@
 											<ion-icon name="lock-closed-outline" role="img"
 												class="md hydrated" aria-label="lock closed outline"></ion-icon>
 											<input type="password" placeholder="0000" id="cvv"
-												maxlength="4" onkeypress="return isNumeric(event)">
-											<div class="alert" id="alert-4">
-												<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-													xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-														d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z"
-														fill="#FF6A96"></path>
-                </svg>
-												Invalid CVV
-											</div>
+												maxlength="4" onkeypress="return isNumeric(event)" style="width: 150px">
+											
 										</div>
 
 										<button type="submit" class="form__btn">Confirm</button>
@@ -344,7 +332,7 @@
 						</div>
 					</div>
 				</f:form>
-
+		</div>
 				<div class="col-lg-12">
 					<div class="sep"></div>
 				</div>
