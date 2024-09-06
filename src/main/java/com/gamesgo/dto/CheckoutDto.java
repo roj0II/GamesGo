@@ -6,7 +6,7 @@ public class CheckoutDto {
 
 	// Dati per sapere se è online o fisico | compra o affitta
 	private boolean online;
-	private boolean buy; 
+	private boolean rent; 
 	
 	// Dati utente, Ottenuti dal loggedUser.
 	private String userAddress;
@@ -100,11 +100,11 @@ public class CheckoutDto {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
-	public boolean isBuy() {
-		return buy;
+	public boolean isRent() {
+		return rent;
 	}
-	public void setBuy(boolean buy) {
-		this.buy = buy;
+	public void setRent(boolean rent) {
+		this.rent = rent;
 	}
 	public String getShippingAddress() {
 		return shippingAddress;

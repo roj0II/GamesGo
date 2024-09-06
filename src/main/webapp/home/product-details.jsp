@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Lugx Gaming - Product Detail</title>
+	<link rel="icon" type="image/x-icon" href="${game.photoUrl}">
+    <title>${game.title}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +23,38 @@
     <link rel="stylesheet" href="../home/assets/css/owl.css">
     <link rel="stylesheet" href="../home/assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 589 lugx gaming
-
-https://templatemo.com/tm-589-lugx-gaming
-
--->
+	<style>
+       button {
+            margin: 10px;
+            padding: 10px;
+        }
+        .selected {
+            background-color: lightgreen;
+        }
+        
+		#logout-btn {
+			background-color: #474a51;
+			margin-top: 10px;
+			display: flex;
+			justify-content: end;
+			padding-left: 20px;
+			padding-right: 20px;
+			border-radius: 20px;
+			font-weight: 300;
+			font-size: 15px;
+			height: 40px;
+			line-height: 40px;
+			text-transform: capitalize;
+			color: #fff;
+			-webkit-transition: all 0.4s ease 0s;
+			-moz-transition: all 0.4s ease 0s;
+			-o-transition: all 0.4s ease 0s;
+			transition: all 0.4s ease 0s;
+			border: transparent;
+			letter-spacing: .25px;
+		}
+	</style>
   </head>
 
 <body>
@@ -60,10 +86,22 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="/">Home</a></li>
-                      <li><a href="/catalog">Our Shop</a></li>
-                      <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="/login">Sign In</a></li>
-                  </ul>   
+                      <li><a href="/catalog" class="active">Catalogo</a></li>
+                      <li><a href="/contact">Contattaci</a></li>
+                      
+                      <c:if test="${loggedUser != null}">
+                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag"><i style="padding-top: 12px;" class="fa-solid fa-user"></i>&nbsp;${loggedUser.username}</a>
+                      		<div style="display: none;" id="flag">
+					        	<button id="logout-btn"><i style="padding-top: 12px;" class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</button>
+					    	</div>
+                      	</li>
+                      	
+                      </c:if>
+                      <c:if test="${loggedUser == null}">
+                      	<li><a href="/login">Sign in</a></li>
+                      </c:if>
+                      
+                  </ul> 
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -97,15 +135,38 @@ https://templatemo.com/tm-589-lugx-gaming
           <h4>${game.title}</h4>
           <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
           <p>${game.description}</p>
-          <form id="qty" action="#">
-            <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-            <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
-          </form>
-          <ul>
-            <li><span>Game ID:</span> ${game.id}</li>
-            <li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
-            <li><span>Author:</span> ${game.author}</li>
-          </ul>
+        <form action="/checkout/${game.id}" method="post"> <!-- bottoni -->
+        
+          	<label class="checkbox-button <c:if test="${game.storage.amountRetail <= 0}">out</c:if>" id="button1">
+    <input type="checkbox" name="formatType" value="retail" 
+           <c:if test="${game.storage.amountRetail <= 0}">disabled</c:if>>
+    <i class="fa-solid fa-gamepad"></i> Gioco Fisico
+</label>
+
+<label class="checkbox-button <c:if test="${game.storage.amountDigital <= 0}">out</c:if>" id="button2">
+    <input type="checkbox" name="formatType" value="digital" 
+           <c:if test="${game.storage.amountDigital <= 0}">disabled</c:if>>
+    <i class="fa-solid fa-earth-americas"></i> Gioco Digitale
+</label>
+			<br>
+			<label class="transaction-button" id="button3" style="margin-top: 5px;">
+	            <input type="checkbox" name="transactionType" value="buy">
+	            <i class="fa fa-shopping-bag"></i> Acquisto
+	        </label>
+	        <label class="transaction-button" id="button4" style="margin-top: 5px;">
+	        	<input type="checkbox" name="transactionType" value="rent">
+	            <i class="fa-solid fa-handshake"></i> Noleggio
+	        </label>
+
+            <br>
+    	<button id="submit">Submit</button>
+        </form>
+
+		<ul>
+			<li><span>Game ID:</span> ${game.id}</li>
+			<li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
+			<li><span>Author:</span> ${game.author}</li>
+		</ul>
         </div>
         <div class="col-lg-12">
           <div class="sep"></div>
@@ -221,6 +282,78 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="../home/assets/js/owl-carousel.js"></script>
   <script src="../home/assets/js/counter.js"></script>
   <script src="../home/assets/js/custom.js"></script>
+  <script>
+    document.querySelectorAll('.checkbox-button input').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                document.querySelectorAll('.checkbox-button input').forEach((otherCheckbox) => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                        otherCheckbox.parentElement.classList.remove('active');
+                    }
+                });
+            }
+            checkbox.parentElement.classList.toggle('active', checkbox.checked);
+        });
+    });
 
+    document.querySelectorAll('.transaction-button input').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                document.querySelectorAll('.transaction-button input').forEach((otherCheckbox) => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.checked = false;
+                        otherCheckbox.parentElement.classList.remove('active');
+                    }
+                });
+            }
+            checkbox.parentElement.classList.toggle('active', checkbox.checked);
+        });
+    });
+
+    // Gestione del submit del form
+    document.getElementById('submit').addEventListener('click', (event) => {
+        const formatChecked = Array.from(document.querySelectorAll('.checkbox-button input')).some(checkbox => checkbox.checked);
+        const transactionChecked = Array.from(document.querySelectorAll('.transaction-button input')).some(checkbox => checkbox.checked);
+
+        if (!formatChecked && !transactionChecked) {
+            event.preventDefault();
+            alert('Per favore, seleziona un formato e un tipo di transazione prima di procedere.');
+        } else if (!formatChecked ) {
+            event.preventDefault();
+        	alert('Per favore, seleziona un tipo di formato.');
+        }else if (!transactionChecked ) {
+        	event.preventDefault();
+        	alert('Per favore, seleziona un tipo di transazione.');
+        }
+    });
+
+	//login/logou
+	  document.getElementById('showFlag').addEventListener('click', function(event) {
+	      var flag = document.getElementById('flag');
+	      if (flag.style.display === 'none' || flag.style.display === '') {
+	          flag.style.display = 'block';
+	      } else {
+	          flag.style.display = 'none';
+	      }
+	      
+	      event.stopPropagation();
+	  });
+	
+	  document.addEventListener('click', function() {
+	      var flag = document.getElementById('flag');
+	      if (flag.style.display === 'block') {
+	          flag.style.display = 'none';
+	      }
+	  });
+	
+	  document.getElementById('logout-btn').addEventListener('click', function() {
+	      window.location.href = '/logout';
+	  });
+	
+	  document.getElementById('flag').addEventListener('click', function(event) {
+	      event.stopPropagation();
+	  });
+</script>
   </body>
 </html>

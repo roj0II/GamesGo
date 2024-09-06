@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/yuanql/icon-admin.png">
 <title>Storage</title>
-<!-- Web Icon -->
-<link rel="icon" type="image/x-icon"
-	href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
 <!-- Bootstrap CSS -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"

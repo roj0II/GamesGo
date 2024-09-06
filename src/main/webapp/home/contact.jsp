@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Catalogo</title>
+    <title>Contattaci</title>
     
     <link rel="icon" href="/home/assets/images/icona.png" type="image/png">
 
@@ -27,12 +27,6 @@
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
 	<style>
-	.thumb a img {
-		width: 336px;
-		height: 235.200px;
-		object-fit: cover;
-	}
-	
 	#logout-btn {
 		background-color: #474a51;
 		margin-top: 10px;
@@ -55,6 +49,7 @@
 		letter-spacing: .25px;
 	}
 	</style>
+
   </head>
 
 <body>
@@ -86,8 +81,8 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="/">Home</a></li>
-                      <li><a href="/catalog" class="active">Catalogo</a></li>
-                      <li><a href="/contact">Contattaci</a></li>
+                      <li><a href="/catalog">Catalogo</a></li>
+                      <li><a href="/contact" class="active">Contattaci</a></li>
                       
                       <c:if test="${loggedUser != null}">
                       	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag"><i style="padding-top: 12px;" class="fa-solid fa-user"></i>&nbsp;${loggedUser.username}</a>
@@ -101,7 +96,7 @@
                       	<li><a href="/login">Sign in</a></li>
                       </c:if>
                       
-                  </ul>  
+                  </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -115,63 +110,87 @@
 
   <div class="page-heading header-text">
     <div class="container">
-          <div class="search-input">
-              <form class="ricerca" id="search" action="/catalog" method="post" style="margin: auto;">
-              <input type="hidden" name="opType" value="titleAndAuthor">
-                <input type="text" placeholder="Cerca gioco per titolo o autore" id='searchText' name="input" onkeypress="handle" value="${input}" />
-                <button role="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-              </form>
-            </div>
-        </div>
-  </div>
-
-  <div class="section trending">
-    <div class="container">
-      <ul class="trending-filter">
-        <li>
-          <a class="is_active" href="#!" data-filter="*">Show All</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".ciao">Ciao</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".porcoddio">Porcoddio</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".FPS">FPS</a>
-        </li>
-      </ul>
-      <div class="row trending-box">
-      <c:forEach var="game" items="${games}">
-        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 ${game.gameGenres.get(0).genre.name}">
-          <div class="item">
-            <div class="thumb">
-              <a href="/detail/${game.id}"><img src="${game.photoUrl}" alt="---"></a>
-              <span class="price">€ ${game.priceDigital}</span>
-              <span class="price">€ ${game.priceDigital}</span>
-            </div>
-            <div class="down-content">
-              <span class="category">${game.gameGenres.get(0).genre.name}</span>
-              <h4>${game.title}</h4>
-              <a href="/detail/${game.id}"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-        </div>
-      </c:forEach>
-      </div>
       <div class="row">
         <div class="col-lg-12">
-          <ul class="pagination">
-          <li><a href="#"> &lt; </a></li>
-            <li><a class="is_active" href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"> &gt; </a></li>
-          </ul>
+          <h3>Contact Us</h3>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="contact-page section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="left-text">
+            <div class="section-heading">
+              <h6>Contact Us</h6>
+              <h2>Say Hello!</h2>
+            </div>
+            <p>Hai bisogno di assistenza o hai qualche domanda? Siamo qui per aiutarti! Che tu abbia bisogno di supporto tecnico, informazioni sui nostri giochi o suggerimenti su come migliorare la tua esperienza di gioco, il team di <a href="/" style="color: blue;">GamesGo</a> è a tua disposizione. Compila il modulo qui sotto o contattaci direttamente via email. Non vediamo l'ora di sentirti e di rendere la tua avventura di gioco ancora più straordinaria. A presto!</p>
+            <ul>
+              <li><span>Indirizzo</span> Via Salvo D'Acquisto, 87042 Altomonte CS, Italy</li>
+              <li><span>Telefono</span> +39 0981 94 88 22</li>
+              <li><span>Email</span> gamesgo@libero.it</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-content">
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="map">
+					<iframe style="border-radius: 25px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d323.776493332698!2d16.1247023!3d39.6984271!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x133f12e3821d4739%3A0x38c8e601b941aa59!2sFarmacia%20D'Agostino%20Giampiero!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					
+				</div>
+              </div>
+              <div class="col-lg-12">
+                <form id="contact-form" action="/contact" method="post">
+                  <div class="row">
+                    <div class="col-lg-6">
+                    <span style="margin-left: 50px"><b>Nome</b></span>
+                      <fieldset>
+                        <input type="name" name="name" id="name" placeholder="Nome" value="${loggedUser.name}" autocomplete="on" required>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                    <span style="margin-left: 50px"><b>Cognome</b></span>
+                      <fieldset>
+                        <input type="surname" name="surname" id="surname" placeholder="Cognome" value="${loggedUser.surname}" autocomplete="on" required>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                    <span style="margin-left: 50px"><b>E-Mail</b></span>
+                      <fieldset>
+                        <input type="text" name="email" id="email" placeholder="E-Mail" pattern="[^ @]*@[^ @]*" value="${loggedUser.email}" required>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                    <span style="margin-left: 50px"><b>Oggetto</b></span>
+                      <fieldset>
+                        <input type="subject" name="subject" id="subject" placeholder="Oggetto" autocomplete="on" required>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                    <span style="margin-left: 50px"><b>Messaggio</b></span>
+                      <fieldset>
+                        <textarea name="message" id="message" placeholder="Messaggio" required></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="orange-button">Inviaci il messaggio</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
 
   <footer>
     <div class="container">

@@ -76,6 +76,17 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
+.single-product form input {
+  width: 80px;
+  height: 50px;
+  background-color: #f7f7f7;
+  border: 1px solid #e7e7e7;
+  border-radius: 25px;
+  text-align: center;
+  float: left;
+  margin-right: 15px;
+}
+
 html, body {
   font-family: 'Poppins', sans-serif;
   -ms-text-size-adjust: 100%;
@@ -691,12 +702,12 @@ Banner Style
   margin-bottom: 70px;
 }
 
-.main-banner .caption form {
+.main-banner .caption form, .ricerca {
   position: relative;
   max-width: 450px;
 }
 
-.main-banner .caption form input {
+.main-banner .caption form input , .ricerca input{
   max-width: 450px;
   width: 100%;
   height: 50px;
@@ -709,7 +720,7 @@ Banner Style
   color: #7a7a7a;
 }
 
-.main-banner .caption form button {
+.main-banner .caption form button, .ricerca button {
   display: inline-block;
   height: 50px;
   line-height: 50px;
@@ -727,7 +738,7 @@ Banner Style
   transition: all .3s;
 }
 
-.main-banner .caption form button:hover {
+.main-banner .caption form button:hover, .ricerca button:hover {
   background-color: #0071f8;
 }
 
@@ -795,18 +806,22 @@ Services Style
   text-transform: uppercase;
 }
 
-.features .item .image {
+.features .item .icon {
+  justify-content: center;
+  align-items: center;
   width: 90px;
   height: 90px;
   display: inline-block;
   text-align: center;
   line-height: 90px;
   background-color: #0071f8;
+  color: #fff;
   border-radius: 50%;
   transition: all .3s;
+  font-size: 34px;
 }
 
-.features .item:hover .image {
+.features .item:hover .icon {
   background-color: #ee626b;
 }
 
@@ -1375,22 +1390,28 @@ Single Page Style
   margin-bottom: 60px;
 }
 
-.single-product form input {
-  width: 80px;
-  height: 50px;
-  background-color: #f7f7f7;
-  border: 1px solid #e7e7e7;
-  border-radius: 25px;
-  text-align: center;
-  float: left;
-  margin-right: 15px;
-}
-
 .single-product form {
   display: inline;
 }
+.checkbox-button input , .transaction-button input{
+    display: none;
+}
 
-.single-product form button {
+.checkbox-button.active , .transaction-button.active{
+    background-color: #0071f8;
+}
+
+.checkbox-button:hover, .transaction-button:hover {
+	background-color: #0071f8;
+}
+
+.out {
+    opacity: 0.5; /* Rende il pulsante trasparente */
+    pointer-events: none; /* Disabilita gli eventi del mouse */
+    color: gray; /* Cambia il colore del testo */
+}
+
+.single-product form button, .checkbox-button, .transaction-button, .single-product form .next-prev{
   display: inline-block;
   height: 50px;
   line-height: 50px;
@@ -1403,6 +1424,7 @@ Single Page Style
   border: none;
   border-radius: 25px;
   transition: all .3s;
+  cursor: pointer;
 }
 
 .single-product form button i {

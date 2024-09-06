@@ -7,8 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/popup.css">
-	<link rel="stylesheet" href="login/loginStyle.css">
+	<link rel="stylesheet" href="/css/popup.css">
+	<link rel="stylesheet" href="/login/loginStyle.css">
 	<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/esgcc-basic-icon-library/1-login.png">
 	<title>Login e Registrazione</title>
 	
@@ -74,8 +74,8 @@
             </div>
         </div>
     </c:if>
-	<script src="login/loginScript.js"></script>
-	<script src="javascript/popup.js"></script>
+	<script src="/login/loginScript.js"></script>
+	<script src="/javascript/popup.js"></script>
 </body>
 
 </html>

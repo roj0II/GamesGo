@@ -9,8 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rent</title>
 <!-- Web Icon -->
-<link rel="icon" type="image/x-icon"
-	href="https://www.svgrepo.com/show/37992/male-and-female-symbol.svg">
+<link rel="icon" type="image/x-icon" href="https://icons.veryicon.com/png/o/miscellaneous/yuanql/icon-admin.png">
 <!-- Bootstrap CSS -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -35,7 +34,7 @@
 			<div class="icons">
 				<i class="fa-solid fa-handshake fa-2x"></i>
 			</div>
-			<h1 class="header-title">Inserisci gioco da noleggiare</h1>
+			<h1 class="header-title">Inserisci noleggio</h1>
 			<a href="/admin" class="btn btn-success"><i class="fas fa-home"></i>
 				Home</a>
 		</div>

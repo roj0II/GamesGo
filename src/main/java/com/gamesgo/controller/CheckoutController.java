@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class CheckoutController {
 
-	private final String pathCheckoutPage = "";
+	private final String pathCheckoutPage = "/home/checkout.jsp";
 	
 	@Autowired
 	private GameRepository gameRepository;
@@ -30,6 +30,15 @@ public class CheckoutController {
 		Game game = gameRepository.findById(id).orElse(new Game());
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
+		if (loggedUser == null) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Effettua prima l'accesso.");
+			model.addAttribute("color", "yellow");
+			model.addAttribute("title", "Alert!");
+			
+			return "/login/loginPage.jsp";
+		}
+		
 		CheckoutDto cd = new CheckoutDto();
 		cd.setUserAddress(loggedUser.getAddress());
 		cd.setUserEmail(loggedUser.getEmail());
@@ -44,9 +53,12 @@ public class CheckoutController {
 		} else {
 			cd.setGamePrice(game.getPriceRetail());
 		}
+		cd.setOnline(formatType.equals("online"));
+		cd.setRent(transactionType.equals("rent"));
 		
 		
-		model.addAttribute("checkoutForm", cd);
+		
+		model.addAttribute("check", cd);
 		return pathCheckoutPage;
 	}
 }
