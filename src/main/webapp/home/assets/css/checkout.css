@@ -3,8 +3,8 @@
     position: relative;
     width: 100%;
     max-width: 100%;
-    margin: auto;
     overflow: hidden;
+    height: 100%;
 }
 
 .slide {
@@ -14,8 +14,11 @@
 }
 
 .slide.active {
-    display: block;
-}
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    }
 
 button {
     margin: 10px;

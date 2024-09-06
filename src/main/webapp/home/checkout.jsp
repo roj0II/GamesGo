@@ -87,45 +87,57 @@
 
 	<div class="single-product section">
 		<div class="container">
-			<div class="row" style="height: 34rem;">
+			<div class="row" style="height: 40rem;">
 				<div class="col-lg-6">
-					<div class="left-image">
-				
-            <img src="${check.gamePhotoUrl}" alt="" style=" margin-top: 30px;">
-          </div>
-        </div>
-        
-                     <f:form id="contact-form" modelAttribute="check" action="/?"
-                    	method="post" class="col-lg-6 align-self-center">
-                    	
-                    	 <div style="display: flex; justify-content: space-between;">
-                      <fieldset style="display: inline;">
-                        <input value="${check.gameTitle}" disabled style="width: 320px; font-weight: bold;">
-                      </fieldset>
-                      <fieldset style="display: inline;">
-                        <c:if test="${check.rent}"><input value="€${check.gamePrice/30 - 0.20} / giorno" disabled style="width: 180px; font-weight: bold;"></c:if>
-                        <c:if test="${!check.rent}"><input value="€${check.gamePrice/100*70}" disabled style="width: 180px; font-weight: bold;"></c:if>
-                      </fieldset>
-            		</div>
-                    	
+
+					<img src="${check.gamePhotoUrl}" alt=""
+						style="background-size: cover; border-radius: 25px; height: 100%;">
+				</div>
+
+				<f:form id="contact-form" modelAttribute="check" action="/?"
+					method="post" class="col-lg-6 align-self-center"
+					style="height: 100%; display: flex; flex-direction: column;">
+
+					<div style="display: flex; justify-content: space-between;">
+						<fieldset style="display: inline;">
+							<input value="${check.gameTitle}" disabled
+								style="width: 320px; font-weight: bold;">
+						</fieldset>
+						<fieldset style="display:flex; margin:auto;">
+						TOTALE:						
+						</fieldset>
+						<fieldset style="display: inline;">
+							<c:if test="${check.rent}">
+								<input value="€${check.gamePrice/30 - 0.20} / giorno" disabled
+									style="width: 180px; font-weight: bold;">
+							</c:if>
+							<c:if test="${!check.rent}">
+								<input value="€${check.gamePrice/100*70}" disabled
+									style="width: 180px; font-weight: bold;">
+							</c:if>
+						</fieldset>
+					</div>
+
 					<div class="carousel">
 
 						<c:if test="${check.rent}">
 							<div class="slide active">
 								<h2 style="margin-top: 20px;">Numero giorni del fitto</h2>
-								
+
 								<div style="display: flex; justify-content: space-between;">
-			                      <fieldset style="display: inline;">
-			                        <input type="number" value="1" style="margin-top: 40px; width: 180px; font-weight: bold;">
-			                      </fieldset>
-			                      <fieldset style="display: inline;">
-			                        <input value="€${check.gamePrice/30 - 0.20}" style="margin-top: 40px; width: 180px; font-weight: bold;">
-			                      </fieldset>
-			            		</div>
-								
-								<div style="display: flex; justify-content: end; margin-top: 20px;">
-                                	<a class="btn-next next-prev">Avanti</a>
-                            	</div>
+									<fieldset style="display: inline;">
+										<input type="number" value="1"
+											style="margin-top: 40px; width: 180px; font-weight: bold;">
+									</fieldset>
+									<fieldset style="display: inline;">
+										<input value="€${check.gamePrice/30 - 0.20}"
+											style="margin-top: 40px; width: 180px; font-weight: bold;">
+									</fieldset>
+								</div>
+								<div
+									style="display: flex; justify-content: end; margin-top: 20px;">
+									<a class="btn-next next-prev">Avanti</a>
+								</div>
 							</div>
 						</c:if>
 
@@ -133,7 +145,7 @@
 						<div class="slide <c:if test="${!check.rent}">active</c:if>">
 							<div class="row">
 								<h4 style="margin-left: 20px;">Informazioni di spedizione</h4>
-								<div class="col-lg-6">
+								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
 									<span style="margin-left: 50px"><b>Nome</b></span>
 									<fieldset style="margin-bottom: 20px">
 										<input type="text" name="userName" id="userName"
@@ -141,7 +153,7 @@
 											style="width: 300px">
 									</fieldset>
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
 									<span style="margin-left: 50px"><b>Cognome</b></span>
 									<fieldset>
 										<input type="text" name="userSurname" id="userSurname"
@@ -149,7 +161,7 @@
 											style="width: 300px">
 									</fieldset>
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-6" >
 									<span style="margin-left: 50px"><b>Email</b></span>
 									<fieldset style="margin-bottom: 20px">
 										<input type="text" name="userEmail" id="userEmail"
@@ -165,7 +177,8 @@
 											style="width: 200px; margin-left: 100px;">
 									</fieldset>
 								</div>
-								<div class="col-lg-6">
+								<div>${check.online}</div> <div>${!check.online}</div>
+								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
 										<input type="text" name="userAddress" id="userAddress"
@@ -173,15 +186,26 @@
 									</fieldset>
 								</div>
 							</div>
-							<% String justif = ""; %>
-                            <c:if test="${check.rent}"><% justif = "space-between"; %></c:if>
-                            <c:if test="${!check.rent}"><% justif = "end"; %></c:if>
-                            <div style="display: flex; justify-content: <%= justif%>; margin-top: 20px;">
-                            <c:if test="${check.rent}">
-                                <a class="btn-prev next-prev">Indietro</a>
-                            </c:if>
-                                <a class="btn-next next-prev">Avanti</a>
-                            </div>
+							<%
+							String justif = "";
+							%>
+							<c:if test="${check.rent}">
+								<%
+								justif = "space-between";
+								%>
+							</c:if>
+							<c:if test="${!check.rent}">
+								<%
+								justif = "end";
+								%>
+							</c:if>
+							<div
+								style="display: flex; justify-content: <%=justif%>; margin-top: 20px;">
+								<c:if test="${check.rent}">
+									<a class="btn-prev next-prev">Indietro</a>
+								</c:if>
+								<a class="btn-next next-prev">Avanti</a>
+							</div>
 						</div>
 
 
@@ -227,29 +251,22 @@
 											value="${check.userAddress}" required style="width: 610px">
 									</fieldset>
 								</div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-	                                <a class="btn-prev next-prev">Indietro</a>
-	                                <a class="btn-next next-prev">Avanti</a>
-                            	</div>
-                           	</div>
-                        </div>
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; margin-top: 20px;">
+								<a class="btn-prev next-prev">Indietro</a> <a
+									class="btn-next next-prev">Avanti</a>
+							</div>
+						</div>
 
 
 						<div class="slide">
-							<div style="align-items: center;">
-								<label class="transaction-button" id="button3"
-									style="margin-top: 5px;"> <input type="checkbox"
-									name="transactionType" value="paypal"> <i
-									class="fa fa-shopping-bag"></i> PayPal
-								</label> <label class="transaction-button" id="button4"
-									style="margin-top: 5px; margin-left: 40px;"> <input
-									type="checkbox" name="transactionType" value="card"> <i
-									class="fa-solid fa-handshake"></i> Carta
-								</label>
-							</div>
+
 							<div id="carta"
 								style="display: none; justify-content: center; align-items: center;">
-								<h2 style="margin-top: 20px; margin-bottom: 20px;">Dettagli di Pagamento</h2>
+								<h2
+									style="margin-top: 20px; margin-bottom: 20px; align-items: end; display: flex;">Dettagli
+									di Pagamento</h2>
 								<div class="payment" style="display: grid;">
 
 									<div class="card">
@@ -270,7 +287,7 @@
 										<div class="card__number">0000&nbsp;0000&nbsp;0000&nbsp;0000</div>
 										<div class="card__name">
 											<h3>Card Holder</h3>
-											<p id="card-name">${check.userName} ${check.userSurname}</p>
+											<p id="card-name">${check.userName}${check.userSurname}</p>
 										</div>
 
 										<div class="card__expiry">
@@ -280,16 +297,17 @@
 											</p>
 										</div>
 									</div>
-									
+
 									<div></div>
-									
+
 									<form class="form">
 
 										<div class="form__name form__detail">
 											<label for="name">Nome</label>
 											<ion-icon name="person-outline" role="img"
 												class="md hydrated" aria-label="person outline"></ion-icon>
-											<input type="text" value="${check.userName} ${check.userSurname}" id="name"
+											<input type="text"
+												value="${check.userName} ${check.userSurname}" id="name"
 												maxlength="24" style="width: 400px">
 										</div>
 
@@ -299,15 +317,16 @@
 												class="md hydrated" aria-label="calendar outline"></ion-icon>
 											<input type="text" placeholder="MM/YY" id="date"
 												onkeypress="return isNumeric(event)" style="width: 150px">
-											
+
 										</div>
-										
+
 										<div class="form__number form__detail">
 											<label for="number">Card Number</label>
 											<ion-icon name="card-outline" role="img" class="md hydrated"
 												aria-label="card outline"></ion-icon>
 											<input type="text" placeholder="0000 0000 0000 0000"
-												id="number" onkeypress="return isNumeric(event)" style="width: 400px">
+												id="number" onkeypress="return isNumeric(event)"
+												style="width: 400px">
 										</div>
 
 										<div class="form__cvv form__detail">
@@ -317,47 +336,90 @@
 											<ion-icon name="lock-closed-outline" role="img"
 												class="md hydrated" aria-label="lock closed outline"></ion-icon>
 											<input type="password" placeholder="0000" id="cvv"
-												maxlength="4" onkeypress="return isNumeric(event)" style="width: 150px">
-											
+												maxlength="4" onkeypress="return isNumeric(event)"
+												style="width: 150px">
+
 										</div>
 
-										<button type="submit" class="form__btn">Confirm</button>
+										<div class="form__btn"
+											style="display: flex; justify-content: space-between; margin-top: 20px;">
+										</div>
+
 
 									</form>
 								</div>
 							</div>
-							<div style="display: none" id="paypal"></div>
-							<a class="btn-prev">Indietro</a>
-							<button type="submit">Invia</button>
+							
+							<div style="display: none; margin:auto;" id="paypal">
+								<a href="https://paypal.me/rojetti?country.x=IT&locale.x=it_IT" target="_blank" class="checkbox-button">Premi quì per pagare con paypall <i class="fa-brands fa-paypal"></i>.</a>
+								<div> Pagamenti sicuri al 100% <i class="fa-solid fa-shield-halved"></i></div>
+							</div>
+							
+							<div></div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: baseline;">
+								<a class="btn-prev next-prev">Indietro</a> <label
+									class="transaction-button" id="button3"
+									style="margin-top: 5px;"> <input type="checkbox"
+									name="transactionType" value="paypal"> <i
+									class="fa fa-shopping-bag"></i> PayPal
+								</label> <label class="transaction-button" id="button4"
+									style="margin-top: 5px; margin-left: 40px;"> <input
+									type="checkbox" name="transactionType" value="card"> <i
+									class="fa-solid fa-handshake"></i> Carta
+								</label> <a class="btn-next next-prev">Avanti</a>
+							</div>
 						</div>
 					</div>
 				</f:form>
-		</div>
-				<div class="col-lg-12">
-					<div class="sep"></div>
-				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="sep"></div>
+			</div>
 
-				<footer>
-					<div class="container">
-						<div class="col-lg-12">
-							<p>Copyright © 2024 GamesGo Gaming Company. All rights
-								reserved.</p>
-						</div>
+			<footer>
+				<div class="container">
+					<div class="col-lg-12">
+						<p>Copyright © 2024 GamesGo Gaming Company. All rights
+							reserved.</p>
 					</div>
-				</footer>
+				</div>
+			</footer>
 
-				<!-- Scripts -->
-				<!-- Bootstrap core JavaScript -->
-				<script src="../home/vendor/jquery/jquery.min.js"></script>
-				<script src="../home/vendor/bootstrap/js/bootstrap.min.js"></script>
-				<script src="../home/assets/js/isotope.min.js"></script>
-				<script src="../home/assets/js/owl-carousel.js"></script>
-				<script src="../home/assets/js/counter.js"></script>
-				<script src="../home/assets/js/custom.js"></script>
-				<script src="/transact/transactScript.js"></script>
+			<!-- Scripts -->
+			<!-- Bootstrap core JavaScript -->
+			<script src="../home/vendor/jquery/jquery.min.js"></script>
+			<script src="../home/vendor/bootstrap/js/bootstrap.min.js"></script>
+			<script src="../home/assets/js/isotope.min.js"></script>
+			<script src="../home/assets/js/owl-carousel.js"></script>
+			<script src="../home/assets/js/counter.js"></script>
+			<script src="../home/assets/js/custom.js"></script>
+			<script src="/transact/transactScript.js"></script>
 
 
-				<script>
+			<script>
+			
+			// Funzione per aggiornare il contenuto della carta
+			  function updateCard() {
+			    // Otteniamo i valori dai campi di input
+			    const cardName = document.getElementById('name').value;
+			    const cardDate = document.getElementById('date').value;
+			    const cardNumber = document.getElementById('number').value;
+			    const cardCvv = document.getElementById('cvv').value;
+
+			    // Aggiorniamo il contenuto della card
+			    document.getElementById('card-name').textContent = cardName;
+			    document.getElementById('month').textContent = cardDate.split('/')[0] || 'MM';
+			    document.getElementById('year').textContent = cardDate.split('/')[1] || 'YY';
+			    document.querySelector('.card__number').textContent = cardNumber || '0000 0000 0000 0000';
+			  }
+
+			  // Aggiungiamo gli eventi agli input
+			  document.getElementById('name').addEventListener('input', updateCard);
+			  document.getElementById('date').addEventListener('input', updateCard);
+			  document.getElementById('number').addEventListener('input', updateCard);
+			  document.getElementById('cvv').addEventListener('input', updateCard);
+			  
 				document.addEventListener('DOMContentLoaded', () => {
 			        const paypalCheckbox = document.querySelector('input[value="paypal"]');
 			        const cardCheckbox = document.querySelector('input[value="card"]');
