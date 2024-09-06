@@ -160,7 +160,7 @@
                     <div class="col-lg-6">
                     <span style="margin-left: 50px"><b>E-Mail</b></span>
                       <fieldset>
-                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" value="${loggedUser.email}" required>
+                        <input type="text" name="email" id="email" placeholder="E-Mail" pattern="[^ @]*@[^ @]*" value="${loggedUser.email}" required>
                       </fieldset>
                     </div>
                     <div class="col-lg-6">
