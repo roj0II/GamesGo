@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>GamesGo: Home</title>
 
     <!-- Bootstrap core CSS -->
@@ -109,18 +109,18 @@
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="home/assets/images/featured-01.png" alt="" style="max-width: 44px;">
-              </div>
-              <h4>Free Storage</h4>
+            	<div class="icon">
+   				 	<i class="fa-solid fa-shield"></i>
+				</div>
+              <h4>Pagamenti Sicuri</h4>
             </div>
           </a>
         </div>
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="home/assets/images/featured-02.png" alt="" style="max-width: 44px;">
+              <div class="icon">
+                <i class="fa-solid fa-truck-fast"></i>
               </div>
               <h4>Consegna Rapida</h4>
             </div>
@@ -129,8 +129,8 @@
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="home/assets/images/featured-03.png" alt="" style="max-width: 44px;">
+              <div class="icon">
+               <i class="fa-solid fa-hand-holding-dollar"></i>
               </div>
               <h4>I Migliori Prezzi</h4>
             </div>
@@ -139,10 +139,10 @@
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="home/assets/images/featured-04.png" alt="" style="max-width: 44px;">
+              <div class="icon">
+                <i class="fa-solid fa-arrow-up-wide-short"></i>
               </div>
-              <h4>Easy Layout</h4>
+              <h4>Ampia Selezione</h4>
             </div>
           </a>
         </div>
