@@ -81,12 +81,16 @@
             const games = Array.from(document.querySelectorAll("#gameList option")).map(option => option.value);
             const genres = Array.from(document.querySelectorAll("#genreList option")).map(option => option.value);
             
-            if (!games.includes(gameInput)) {
+            var gameIncludesed = games.includes(gameInput);
+            var genreIncludesed = genres.includes(genreInput);
+            
+            if (!gameIncludesed && !genreIncludesed) {
+            	alert("Il gioco e il genere inseriti non sono validi.");
+                event.preventDefault();
+            } else if (!gameIncludesed) {
                 alert("Il gioco inserito non è valido.");
                 event.preventDefault();
-            }
-            
-            if (!genres.includes(genreInput)) {
+            } else if (!genreIncludesed) {
                 alert("Il genere inserito non è valido.");
                 event.preventDefault();
             }
