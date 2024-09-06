@@ -806,18 +806,22 @@ Services Style
   text-transform: uppercase;
 }
 
-.features .item .image {
+.features .item .icon {
+  justify-content: center;
+  align-items: center;
   width: 90px;
   height: 90px;
   display: inline-block;
   text-align: center;
   line-height: 90px;
   background-color: #0071f8;
+  color: #fff;
   border-radius: 50%;
   transition: all .3s;
+  font-size: 34px;
 }
 
-.features .item:hover .image {
+.features .item:hover .icon {
   background-color: #ee626b;
 }
 
