@@ -55,8 +55,8 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="/" class="active">Home</a></li>
-                      <li><a href="/catalog">Our Shop</a></li>
-                      <li><a href="/contact">Contact Us</a></li>
+                      <li><a href="/catalog">Catalogo</a></li>
+                      <li><a href="/contact">Contattaci</a></li>
                       <c:if test="${loggedUser != null}">
                       	<li><a href="/user">${loggedUser.username}</a></li>
                       	<li><a href="/logout">Log out</a></li>
@@ -225,7 +225,7 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="section-heading">
-            <h6>TOP GAMES</h6>
+            <h6>IN TENDENZA</h6>
             <h2>Most Played</h2>
           </div>
         </div>
