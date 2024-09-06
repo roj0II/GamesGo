@@ -1,11 +1,15 @@
 package com.gamesgo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.gamesgo.model.Game;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.GenreRepository;
 
@@ -26,6 +30,7 @@ public class CatalogController {
 
 	@PostMapping("/catalog")
 	public String catalogFilter(@RequestParam String opType, @RequestParam String input, Model model) {
+		
 		if (opType == null) {
 			model.addAttribute("show", "show");
 			model.addAttribute("message", "Operazione nulla");
@@ -47,11 +52,19 @@ public class CatalogController {
 		}
 
 		switch (opType) {
-		case "":
-			break;
-		case "ciao":
-			break;
-		case "ciaone":
+		case "titleAndAuthor":
+			List<Game> games = gameRep.findByAuthorOrName(input);
+			if (games==null) {
+				model.addAttribute("show", "show");
+				model.addAttribute("message", "Non abbiamo trovato nulla per "+input+".");
+				model.addAttribute("color", "yellow");
+				model.addAttribute("title", "Warning!");
+			}
+			
+			model.addAttribute("input",input);
+			model.addAttribute("games", games);
+			getGenres(model);
+
 			break;
 		default:
 			model.addAttribute("show", "show");
@@ -68,6 +81,10 @@ public class CatalogController {
 
 	public void getDefaultCatalog(Model model) {
 		model.addAttribute("games", gameRep.findAll());
+		getGenres(model);
+	}
+	
+	public void getGenres(Model model) {
 		model.addAttribute("genres", genRep.findAll());
 	}
 }

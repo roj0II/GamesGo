@@ -118,8 +118,9 @@
             <h2>BEST GAMING SITE EVER!</h2>
             <p>LUGX Gaming is free Bootstrap 5 HTML CSS website template for your gaming websites. You can download and use this layout for commercial purposes. Please tell your friends about TemplateMo.</p>
             <div class="search-input">
-              <form id="search" action="#">
-                <input type="text" placeholder="Cerca gioco per titolo o autore" id='searchText' name="searchKeyword" onkeypress="handle" />
+              <form id="search" action="/catalog" method="post">
+              <input type="hidden" name="opType" value="titleAndAuthor">
+                <input type="text" placeholder="Cerca gioco per titolo o autore" id='searchText' name="input" onkeypress="handle" />
                 <button role="button"><i class="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>

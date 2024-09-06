@@ -115,12 +115,14 @@
 
   <div class="page-heading header-text">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Our Shop</h3>
+          <div class="search-input">
+              <form class="ricerca" id="search" action="/catalog" method="post" style="margin: auto;">
+              <input type="hidden" name="opType" value="titleAndAuthor">
+                <input type="text" placeholder="Cerca gioco per titolo o autore" id='searchText' name="input" onkeypress="handle" value="${input}" />
+                <button role="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </form>
+            </div>
         </div>
-      </div>
-    </div>
   </div>
 
   <div class="section trending">
