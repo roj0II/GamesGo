@@ -30,6 +30,7 @@ public class CatalogController {
 
 	@PostMapping("/catalog")
 	public String catalogFilter(@RequestParam String opType, @RequestParam String input, Model model) {
+		
 		if (opType == null) {
 			model.addAttribute("show", "show");
 			model.addAttribute("message", "Operazione nulla");
@@ -59,6 +60,8 @@ public class CatalogController {
 				model.addAttribute("color", "yellow");
 				model.addAttribute("title", "Warning!");
 			}
+			
+			model.addAttribute("input",input);
 			model.addAttribute("games", games);
 			getGenres(model);
 
