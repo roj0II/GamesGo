@@ -79,13 +79,13 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="/">Home</a></li>
-                      <li><a href="/catalog">Our Shop</a></li>
-                      <li><a href="/contact" class="active">Contact Us</a></li>
+                      <li><a href="/catalog">Catalogo</a></li>
+                      <li><a href="/contact" class="active">Contattaci</a></li>
                       
                       <c:if test="${loggedUser != null}">
-                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag">${loggedUser.username}</a>
+                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag"><i style="padding-top: 12px;" class="fa-solid fa-user"></i>&nbsp;${loggedUser.username}</a>
                       		<div style="display: none;" id="flag">
-					        	<button id="logout-btn">Logout</button>
+					        	<button id="logout-btn"><i style="padding-top: 12px;" class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</button>
 					    	</div>
                       	</li>
                       	

@@ -24,6 +24,30 @@
     <link rel="stylesheet" href="home/assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
+	<style>
+	#logout-btn {
+		background-color: #474a51;
+		margin-top: 10px;
+		display: flex;
+		justify-content: end;
+		padding-left: 20px;
+		padding-right: 20px;
+		border-radius: 20px;
+		font-weight: 300;
+		font-size: 15px;
+		height: 40px;
+		line-height: 40px;
+		text-transform: capitalize;
+		color: #fff;
+		-webkit-transition: all 0.4s ease 0s;
+		-moz-transition: all 0.4s ease 0s;
+		-o-transition: all 0.4s ease 0s;
+		transition: all 0.4s ease 0s;
+		border: transparent;
+		letter-spacing: .25px;
+	}
+	</style>
+
   </head>
 
 <body>
@@ -57,14 +81,20 @@
                       <li><a href="/" class="active">Home</a></li>
                       <li><a href="/catalog">Catalogo</a></li>
                       <li><a href="/contact">Contattaci</a></li>
+                      
                       <c:if test="${loggedUser != null}">
-                      	<li><a href="/user">${loggedUser.username}</a></li>
-                      	<li><a href="/logout">Log out</a></li>
+                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag"><i style="padding-top: 12px;" class="fa-solid fa-user"></i>&nbsp;${loggedUser.username}</a>
+                      		<div style="display: none;" id="flag">
+					        	<button id="logout-btn"><i style="padding-top: 12px;" class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</button>
+					    	</div>
+                      	</li>
+                      	
                       </c:if>
                       <c:if test="${loggedUser == null}">
                       	<li><a href="/login">Sign in</a></li>
                       </c:if>
-                  </ul>   
+                      
+                  </ul> 
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -420,6 +450,33 @@
   <script src="home/assets/js/owl-carousel.js"></script>
   <script src="home/assets/js/counter.js"></script>
   <script src="home/assets/js/custom.js"></script>
+  <script>
+	  document.getElementById('showFlag').addEventListener('click', function(event) {
+	      var flag = document.getElementById('flag');
+	      if (flag.style.display === 'none' || flag.style.display === '') {
+	          flag.style.display = 'block';
+	      } else {
+	          flag.style.display = 'none';
+	      }
+	      
+	      event.stopPropagation();
+	  });
+	
+	  document.addEventListener('click', function() {
+	      var flag = document.getElementById('flag');
+	      if (flag.style.display === 'block') {
+	          flag.style.display = 'none';
+	      }
+	  });
+	
+	  document.getElementById('logout-btn').addEventListener('click', function() {
+	      window.location.href = '/logout';
+	  });
+	
+	  document.getElementById('flag').addEventListener('click', function(event) {
+	      event.stopPropagation();
+	  });
+  </script>
 
   </body>
 </html>
