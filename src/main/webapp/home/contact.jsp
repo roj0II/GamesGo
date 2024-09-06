@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Lugx Gaming Template - Contact Page</title>
+    <title>Contattaci</title>
 
     <!-- Bootstrap core CSS -->
     <link href="home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -79,13 +79,13 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="/">Home</a></li>
-                      <li><a href="/catalog">Our Shop</a></li>
-                      <li><a href="/contact" class="active">Contact Us</a></li>
+                      <li><a href="/catalog">Catalogo</a></li>
+                      <li><a href="/contact" class="active">Contattaci</a></li>
                       
                       <c:if test="${loggedUser != null}">
-                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag">${loggedUser.username}</a>
+                      	<li><a style="cursor: pointer; text-decoration: underline; display: flex;" id="showFlag"><i style="padding-top: 12px;" class="fa-solid fa-user"></i>&nbsp;${loggedUser.username}</a>
                       		<div style="display: none;" id="flag">
-					        	<button id="logout-btn">Logout</button>
+					        	<button id="logout-btn"><i style="padding-top: 12px;" class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</button>
 					    	</div>
                       	</li>
                       	
@@ -160,7 +160,7 @@
                     <div class="col-lg-6">
                     <span style="margin-left: 50px"><b>E-Mail</b></span>
                       <fieldset>
-                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" value="${loggedUser.email}" required>
+                        <input type="text" name="email" id="email" placeholder="E-Mail" pattern="[^ @]*@[^ @]*" value="${loggedUser.email}" required>
                       </fieldset>
                     </div>
                     <div class="col-lg-6">
