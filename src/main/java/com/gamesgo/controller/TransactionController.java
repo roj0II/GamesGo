@@ -1,6 +1,7 @@
 package com.gamesgo.controller;
 
 import java.util.Comparator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gamesgo.dto.GameSalesDTO;
 import com.gamesgo.dto.TransactionDto;
 import com.gamesgo.dto.builder.TransactionDtoBuilder;
 import com.gamesgo.interfaces.CrudControllerI;
@@ -19,12 +22,15 @@ import com.gamesgo.model.User;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
 import com.gamesgo.repository.UserRepository;
+import com.gamesgo.service.GameSalesService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("transaction")
 public class TransactionController implements CrudControllerI<TransactionDto> {
+	@Autowired
+	private GameSalesService gameSalesService;
 	@Autowired
 	private TransactionRepository transRep;
 	@Autowired
@@ -99,5 +105,13 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 		transRep.deleteById(id);
 		return "redirect:/transaction/";
 	}
-
+	@GetMapping("/ottieniGiochi")
+	public void getLista(Model model) {
+		List<GameSalesDTO> lista=gameSalesService.getGameSales();
+		//model.addAttribute("lista",lista);
+		//return "transactionList.jsp";
+		for(GameSalesDTO t: lista) {
+			System.out.println(lista.toString());
+		}
+	}
 }
