@@ -15,6 +15,9 @@
 </head>
 
 <body>
+<div style="position: absolute; top: 0; left: 0; margin: 20px;">
+ <img src="home/assets/images/logo.png" alt="" style="width: 180px;" >
+</div >
 	<div class="container ${registerForm}">
 		<div class="form-container sign-up-container">
 			<form action="/register" method="POST">
