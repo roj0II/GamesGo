@@ -162,7 +162,7 @@
 
 								<div style="display: flex; justify-content: space-between;">
 									<fieldset style="display: inline;">
-										<input type="number" value="1"
+										<input type="date"
 											style="margin-top: 40px; width: 180px; font-weight: bold;">
 									</fieldset>
 									<fieldset style="display: inline;">
@@ -323,7 +323,7 @@
 										<div class="card__number">0000&nbsp;0000&nbsp;0000&nbsp;0000</div>
 										<div class="card__name">
 											<h3>Card Holder</h3>
-											<p id="card-name">${check.userName}${check.userSurname}</p>
+											<p id="card-name">${check.userName} ${check.userSurname}</p>
 										</div>
 
 										<div class="card__expiry">
