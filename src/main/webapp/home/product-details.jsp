@@ -134,38 +134,60 @@
         <div class="col-lg-6 align-self-center">
           <h4>${game.title}</h4>
           <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
-          <p>${game.description}</p>
+          <br>
         <form action="/checkout/${game.id}" method="post"> <!-- bottoni -->
         
-          	<label class="checkbox-button <c:if test="${game.storage.amountRetail <= 0}">out</c:if>" id="button1">
-    <input type="checkbox" name="formatType" value="retail" 
-           <c:if test="${game.storage.amountRetail <= 0}">disabled</c:if>>
-    <i class="fa-solid fa-gamepad"></i> Gioco Fisico
-</label>
+          	<label class="checkbox-button <c:if test="${game.storage.amountRetail <= 0}">out</c:if>" id="button1" style="margin-top: 20px; margin-right: 15px; width: 190px;">
+			    <input type="checkbox" name="formatType" value="retail" 
+			           <c:if test="${game.storage.amountRetail <= 0}">disabled</c:if>>
+			    <i class="fa-solid fa-gamepad"></i> Gioco Fisico
+			</label>
 
-<label class="checkbox-button <c:if test="${game.storage.amountDigital <= 0}">out</c:if>" id="button2">
-    <input type="checkbox" name="formatType" value="digital" 
-           <c:if test="${game.storage.amountDigital <= 0}">disabled</c:if>>
-    <i class="fa-solid fa-earth-americas"></i> Gioco Digitale
-</label>
+			<label class="checkbox-button <c:if test="${game.storage.amountDigital <= 0}">out</c:if>" id="button2" style="margin-top: 20px; margin-right: 15px; width: 190px;">
+			    <input type="checkbox" name="formatType" value="digital" 
+			           <c:if test="${game.storage.amountDigital <= 0}">disabled</c:if>>
+			    <i class="fa-solid fa-key"></i> Gioco Digitale
+			</label>
 			<br>
-			<label class="transaction-button" id="button3" style="margin-top: 5px;">
-	            <input type="checkbox" name="transactionType" value="buy">
-	            <i class="fa fa-shopping-bag"></i> Acquisto
-	        </label>
-	        <label class="transaction-button" id="button4" style="margin-top: 5px;">
-	        	<input type="checkbox" name="transactionType" value="rent">
-	            <i class="fa-solid fa-handshake"></i> Noleggio
-	        </label>
-
+			<div style="display: flex;">
+				<label class="transaction-button" id="button3" style="
+				    margin-top: 20px; 
+				    margin-right: 18px; 
+				    width: 190px; 
+				    display: flex; 
+				    align-items: center; 
+				    justify-content: center; 
+				    text-align: center;">
+				    <input type="checkbox" name="transactionType" value="buy">
+				    <i class="fa fa-shopping-bag"></i>&nbsp;Acquisto
+				</label>
+		        <label class="transaction-button" id="button4" style="
+				    margin-top: 20px; 
+				    margin-right: 10px; 
+				    width: 190px; 
+				    display: flex; 
+				    align-items: center; 
+				    justify-content: center; 
+				    text-align: center;">
+				    <input type="checkbox" name="transactionType" value="rent" style="margin-right: 5px;">
+				    <i class="fa-solid fa-handshake"></i>&nbsp;Noleggio
+				</label>
+			</div>
             <br>
-    	<button id="submit">Submit</button>
-        </form>
+	    	<button id="submit"  style="margin-top: 20px; width: 380px;">Procedi</button>
+	     </form>
 
 		<ul>
-			<li><span>Game ID:</span> ${game.id}</li>
-			<li><span>Genre:</span> ${game.gameGenres.get(0).genre.name}</li>
-			<li><span>Author:</span> ${game.author}</li>
+			<li><span>Data rilascio:</span> ${game.releaseDate}</li>
+			<li><span>Generi:</span> 
+				<c:forEach var="gameGenre" items="${game.gameGenres}" varStatus="status">
+					${gameGenre.genre.name}
+				<c:if test="${!status.last}">
+        			,&nbsp;
+    			</c:if>
+				</c:forEach>
+			</li>
+			<li><span>Autore:</span> ${game.author}</li>
 		</ul>
         </div>
         <div class="col-lg-12">
@@ -187,78 +209,22 @@
                     <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews (3)</button>
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews (0)</button>
                   </li>
                 </ul>
               </div>              
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                  <p>You can search for more templates on Google Search using keywords such as "templatemo digital marketing", "templatemo one-page", "templatemo gallery", etc. Please tell your friends about our website. If you need a variety of HTML templates, you may visit Tooplate and Too CSS websites.</p>
-                  <br>
-                  <p>Coloring book air plant shabby chic, crucifix normcore raclette cred swag artisan activated charcoal. PBR&B fanny pack pok pok gentrify truffaut kitsch helvetica jean shorts edison bulb poutine next level humblebrag la croix adaptogen. Hashtag poke literally locavore, beard marfa kogi bruh artisan succulents seitan tonx waistcoat chambray taxidermy. Same cred meggings 3 wolf moon lomo irony cray hell of bitters asymmetrical gluten-free art party raw denim chillwave tousled try-hard succulents street art.</p>
-                </div>
+                  	<p>
+                  		${game.description}
+                  	</p>
+                  </div>
                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                  <p>Coloring book air plant shabby chic, crucifix normcore raclette cred swag artisan activated charcoal. PBR&B fanny pack pok pok gentrify truffaut kitsch helvetica jean shorts edison bulb poutine next level humblebrag la croix adaptogen. <br><br>Hashtag poke literally locavore, beard marfa kogi bruh artisan succulents seitan tonx waistcoat chambray taxidermy. Same cred meggings 3 wolf moon lomo irony cray hell of bitters asymmetrical gluten-free art party raw denim chillwave tousled try-hard succulents street art.</p>
+                	<p>
+                		Al momento non ci sono recensioni per questo gioco.
+                	</p>  
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section categories related-games">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h6>Action</h6>
-            <h2>Related Games</h2>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="main-button">
-            <a href="shop.html">View All</a>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="../home/assets/images/categories-01.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="../home/assets/images/categories-05.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="../home/assets/images/categories-03.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="../home/assets/images/categories-04.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="../home/assets/images/categories-05.jpg" alt=""></a>
             </div>
           </div>
         </div>
@@ -269,7 +235,7 @@
   <footer>
     <div class="container">
       <div class="col-lg-12">
-        <p>Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp; <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a></p>
+        <p>Copyright © 2024 GamesGo Gaming Company. All rights reserved.</p>
       </div>
     </div>
   </footer>
