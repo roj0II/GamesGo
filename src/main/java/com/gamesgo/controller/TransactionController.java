@@ -105,5 +105,15 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 		transRep.deleteById(id);
 		return "redirect:/transaction/";
 	}
+	
+	@GetMapping("/ottieniGiochi")
+	public void getLista(Model model) {
+		List<GameSalesDTO> lista=gameSalesService.getGameSales();
+		//model.addAttribute("lista",lista);
+		//return "transactionList.jsp";
+		for(GameSalesDTO t: lista) {
+			System.out.println(lista.toString());
+		}
+	}
 
 }
