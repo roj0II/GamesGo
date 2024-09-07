@@ -13,7 +13,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 			@Query(value = "SELECT t.id_game, COUNT(*) as sales " +
 	                   "FROM transaction t " +
 	                   "GROUP BY t.id_game " +
-	                   "ORDER BY sales DESC", 
+	                   "ORDER BY sales DESC " +
+	                   "LIMIT 4", 
 	           nativeQuery = true)
 	public List<Object[]> getList();
 }
