@@ -216,10 +216,10 @@
 									</fieldset>
 								</div>
 								<div class="col-lg-6"></div>
-								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
-								    <label for="shippingMethod" style="margin-left: 50px"><b>Metodo di Spedizione</b></label>
+								<div class="col-lg-6" style="margin-top:20px;" <c:if test="${check.online}">style="display:none;"</c:if>>
+								    <label for="shippingMethod"><b>Spedizione</b></label>
 									<fieldset style="margin-bottom: 20px">
-									    <f:select path="shippingMethod" class="input-label" id="shippingMethod">
+									    <f:select path="shippingMethod" class="input-label" id="shippingMethod" style="margin-top:20px;">
 									        <f:option value="normale">Normale (€4)</f:option>
 									        <f:option value="veloce">Veloce (€6)</f:option>
 									        <f:option value="due_giorni">Due giorni (€12)</f:option>
@@ -228,8 +228,8 @@
 								
 								
 								</div>
-								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
-								    <span style="margin-left: 50px; margin-top:10px;"><b>Note per il corriere</b></span>
+								<div class="col-lg-6" style="margin-top:20px;" <c:if test="${check.online}">style="display:none;"</c:if>>
+								    <span style="margin-left: 5px;"><b>Note per il corriere</b></span>
 								    <fieldset>
 								        <f:textarea path="shippingNotes" required="false" style="width: auto; height: 100px;"></f:textarea>
 								    </fieldset>
