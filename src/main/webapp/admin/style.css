@@ -214,7 +214,7 @@ body {
 
 .Logout {
 	position: absolute;
-	top: 40px;
+	top: 34px;
 	right: 40px;
 	font-size: 24px;
 	color: #FFFFFF;
@@ -224,7 +224,7 @@ body {
 }
 
 .Logout:link, .Logout:visited, .Logout:hover, .Logout:active {
-	color: #FFFFFF;
+	color: #777777;
 	/* Mantiene l'icona bianca in tutti gli stati del link */
 	transform: scale(1.2); /* Aumenta la dimensione */
 }
