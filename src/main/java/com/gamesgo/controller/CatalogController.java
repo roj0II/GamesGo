@@ -49,16 +49,6 @@ public class CatalogController {
 
 			return catalogPath;
 		}
-		
-		if(input == null) {
-			model.addAttribute("show", "show");
-			model.addAttribute("message", "Input nullo");
-			model.addAttribute("color", "red");
-			model.addAttribute("title", "Errore!");
-			getDefaultCatalog(model);
-
-			return catalogPath;
-		}
 
 		switch (opType) {
 		case "titleAndAuthor":
