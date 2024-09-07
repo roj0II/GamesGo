@@ -130,30 +130,28 @@
 						style="background-size: cover; border-radius: 25px; height: 100%;">
 				</div>
 
-				<f:form id="contact-form" modelAttribute="check" action="/?"
+				<f:form id="contact-form" modelAttribute="check" action="/final"
 					method="post" class="col-lg-6 align-self-center"
 					style="height: 100%; display: flex; flex-direction: column;">
 
 					<div style="display: flex; justify-content: space-between;">
 						<fieldset style="display: inline;">
-							<input value="${check.gameTitle}" disabled
-								style="width: 320px; font-weight: bold;">
+							<f:input path="gameTitle" disabled="true"
+								style="width: 320px; font-weight: bold;"/>
 						</fieldset>
 						<fieldset style="display:flex; margin:auto;">
 						TOTALE:						
 						</fieldset>
 						<fieldset style="display: inline;">
 							<c:if test="${check.rent}">
-								<input value="€${check.gamePrice/30 - 0.20} / giorno" disabled
-									style="width: 180px; font-weight: bold;">
+								<f:input path="gamePrice" disabled="true" style="width: 180px; font-weight: bold;"/>
 							</c:if>
 							<c:if test="${!check.rent}">
-								<input value="€${check.gamePrice/100*70}" disabled
-									style="width: 180px; font-weight: bold;">
+								<f:input path="gamePrice"  disabled="true"
+									style="width: 180px; font-weight: bold;"/>
 							</c:if>
 						</fieldset>
 					</div>
-
 					<div class="carousel">
 
 						<c:if test="${check.rent}">
@@ -162,11 +160,15 @@
 
 								<div style="display: flex; justify-content: space-between;">
 									<fieldset style="display: inline;">
-										<input type="date"
-											style="margin-top: 40px; width: 180px; font-weight: bold;">
+										<f:input type="date" path="rentFinishDate"
+											style="margin-top: 40px; width: 180px; font-weight: bold;"/>
 									</fieldset>
 									<fieldset style="display: inline;">
-										<input value="€${check.gamePrice/30 - 0.20}"
+										<f:input type="number" path="rentDays" disabled="true"
+											style="margin-top: 40px; width: 180px; font-weight: bold;"/>
+									</fieldset>
+									<fieldset style="display: inline;">
+										<input value="€${check.gamePrice/30 - 0.20}" disabled
 											style="margin-top: 40px; width: 180px; font-weight: bold;">
 									</fieldset>
 								</div>
@@ -181,45 +183,56 @@
 						<div class="slide <c:if test="${!check.rent}">active</c:if>">
 							<div class="row">
 								<h4 style="margin-left: 20px;">Informazioni di spedizione</h4>
-								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
-									<span style="margin-left: 50px"><b>Nome</b></span>
-									<fieldset style="margin-bottom: 20px">
-										<input type="text" name="userName" id="userName"
-											value="${check.userName}" autocomplete="on" required
-											style="width: 300px">
-									</fieldset>
+								<div class="col-lg-6">
+								    <span style="margin-left: 50px"><b>Nome</b></span>
+								    <fieldset style="margin-bottom: 20px">
+								        <f:input class="input-label" path="shippingName" required="true" style="width: 300px"/>
+								    </fieldset>
 								</div>
 								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
 									<span style="margin-left: 50px"><b>Cognome</b></span>
 									<fieldset>
-										<input type="text" name="userSurname" id="userSurname"
-											value="${check.userSurname}" autocomplete="on" required
-											style="width: 300px">
+									<f:input class="input-label" path="shippingSurname" required="true" style="width: 300px"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6" >
 									<span style="margin-left: 50px"><b>Email</b></span>
 									<fieldset style="margin-bottom: 20px">
-										<input type="text" name="userEmail" id="userEmail"
-											pattern="[^ @]*@[^ @]*" value="${check.userEmail}"
-											autocomplete="on" required style="width: 400px">
+										<f:input type="email" path="shippingEmail" required="true" style="width: 400px"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6">
 									<span style="margin-left: 150px"><b>Telefono</b></span>
 									<fieldset>
-										<input type="text" name="userPhone" id="userPhone"
-											value="${check.userPhone}" autocomplete="on" required
-											style="width: 200px; margin-left: 100px;">
+										<f:input type="text" path="shippingPhone"
+											required="true"
+											style="width: 200px; margin-left: 100px;"/>
 									</fieldset>
 								</div>
-								<div>${check.online}</div> <div>${!check.online}</div>
 								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
-										<input type="text" name="userAddress" id="userAddress"
-											value="${check.userAddress}" required style="width: 610px">
+										<f:input type="text" path="shippingAddress" required="true" style="width: 610px"/>
 									</fieldset>
+								</div>
+								<div class="col-lg-6"></div>
+								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
+								    <label for="shippingMethod" style="margin-left: 50px"><b>Metodo di Spedizione</b></label>
+									<fieldset style="margin-bottom: 20px">
+									    <f:select path="shippingMethod" class="input-label" id="shippingMethod">
+									        <f:option value="normale">Normale (€4)</f:option>
+									        <f:option value="veloce">Veloce (€6)</f:option>
+									        <f:option value="due_giorni">Due giorni (€12)</f:option>
+									    </f:select>
+									</fieldset>
+								
+								
+								</div>
+								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
+								    <span style="margin-left: 50px; margin-top:10px;"><b>Note per il corriere</b></span>
+								    <fieldset>
+								        <f:textarea path="shippingNotes" required="false" style="width: auto; height: 100px;"></f:textarea>
+								    </fieldset>
 								</div>
 							</div>
 							<%
@@ -251,40 +264,34 @@
 								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Nome</b></span>
 									<fieldset style="margin-bottom: 20px">
-										<input type="text" name="userName" id="userName"
-											value="${check.userName}" autocomplete="on" required
-											style="width: 300px">
+										<f:input type="text" path="transactionName" required="true"
+											style="width: 300px"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Cognome</b></span>
 									<fieldset>
-										<input type="text" name="userSurname" id="userSurname"
-											value="${check.userSurname}" autocomplete="on" required
-											style="width: 300px">
+										<f:input type="text" path="transactionSurname" required="true"
+											style="width: 300px"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Email</b></span>
 									<fieldset style="margin-bottom: 20px">
-										<input type="text" name="userEmail" id="userEmail"
-											pattern="[^ @]*@[^ @]*" value="${check.userEmail}"
-											autocomplete="on" required style="width: 400px">
+										<f:input type="email" path="transactionEmail" required="true" style="width: 400px"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6">
 									<span style="margin-left: 150px"><b>Telefono</b></span>
 									<fieldset>
-										<input type="text" name="userPhone" id="userPhone"
-											value="${check.userPhone}" autocomplete="on" required
-											style="width: 200px; margin-left: 100px;">
+										<f:input type="text" path="transactionPhone" required="true"
+											style="width: 200px; margin-left: 100px;"/>
 									</fieldset>
 								</div>
 								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
-										<input type="text" name="userAddress" id="userAddress"
-											value="${check.userAddress}" required style="width: 610px">
+										<f:input type="text" path="transactionAddress" required="true" style="width: 610px"/>
 									</fieldset>
 								</div>
 							</div>
@@ -342,17 +349,15 @@
 											<label for="name">Nome</label>
 											<ion-icon name="person-outline" role="img"
 												class="md hydrated" aria-label="person outline"></ion-icon>
-											<input type="text"
-												value="${check.userName} ${check.userSurname}" id="name"
-												maxlength="24" style="width: 400px">
+											<f:input type="text" path="paymentNameAndSurname" id="name"
+												maxlength="24" style="width: 400px"/>
 										</div>
 
 										<div class="form__expiry form__detail">
 											<label for="date">Exp Date</label>
 											<ion-icon name="calendar-outline" role="img"
 												class="md hydrated" aria-label="calendar outline"></ion-icon>
-											<input type="text" placeholder="MM/YY" id="date"
-												onkeypress="return isNumeric(event)" style="width: 150px">
+											<f:input type="text" path="paymentCardExpiration" placeholder="MM/YY" id="date" onkeypress="return isNumeric(event)" style="width: 150px"/>
 
 										</div>
 
@@ -360,9 +365,7 @@
 											<label for="number">Card Number</label>
 											<ion-icon name="card-outline" role="img" class="md hydrated"
 												aria-label="card outline"></ion-icon>
-											<input type="text" placeholder="0000 0000 0000 0000"
-												id="number" onkeypress="return isNumeric(event)"
-												style="width: 400px">
+											<f:input type="text" path="paymentCardCode" placeholder="0000 0000 0000 0000" id="number" onkeypress="return isNumeric(event)" style="width: 400px"/>
 										</div>
 
 										<div class="form__cvv form__detail">
@@ -371,9 +374,9 @@
 													role="img" aria-label="information circle"></ion-icon></label>
 											<ion-icon name="lock-closed-outline" role="img"
 												class="md hydrated" aria-label="lock closed outline"></ion-icon>
-											<input type="password" placeholder="0000" id="cvv"
+											<f:input type="password" placeholder="0000" path="paymentCvv" id="cvv"
 												maxlength="4" onkeypress="return isNumeric(event)"
-												style="width: 150px">
+												style="width: 150px"/>
 
 										</div>
 
@@ -387,7 +390,7 @@
 							</div>
 							
 							<div style="display: none; margin:auto;" id="paypal">
-								<a href="https://paypal.me/rojetti?country.x=IT&locale.x=it_IT" target="_blank" class="checkbox-button pp-btn">Premi quì per pagare con paypall <i class="fa-brands fa-paypal"></i>.</a>
+								<a href="https://paypal.me/rojetti?country.x=IT&locale.x=it_IT" target="_blank" class="checkbox-button pp-btn">Premi quì per pagare con paypal <i class="fa-brands fa-paypal"></i>.</a>
 								<div> Pagamenti sicuri al 100% <i class="fa-solid fa-shield-halved"></i></div>
 							</div>
 							
