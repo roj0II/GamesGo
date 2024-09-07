@@ -131,15 +131,11 @@
         <li>
           <a class="is_active" href="#!" data-filter="*">Show All</a>
         </li>
+        <c:forEach var="genre" items="${genres}">
         <li>
-          <a href="#!" data-filter=".ciao">Ciao</a>
+          <a href="#!" data-filter=".${genre.name}">${genre.name}</a>
         </li>
-        <li>
-          <a href="#!" data-filter=".porcoddio">Porcoddio</a>
-        </li>
-        <li>
-          <a href="#!" data-filter=".FPS">FPS</a>
-        </li>
+      </c:forEach>
       </ul>
       <div class="row trending-box">
       <c:forEach var="game" items="${games}">
