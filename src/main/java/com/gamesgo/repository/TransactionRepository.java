@@ -14,7 +14,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	                   "FROM transaction t " +
 	                   "GROUP BY t.id_game " +
 	                   "ORDER BY sales DESC " +
-	                   "LIMIT 4", 
+	                   "LIMIT 6", 
 	           nativeQuery = true)
 	public List<Object[]> getList();
 }
