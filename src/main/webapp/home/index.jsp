@@ -115,7 +115,7 @@
         <div class="col-lg-6 align-self-center">
           <div class="caption header-text">
             <h6>Benvenuto in GamesGo</h6>
-            <h2>BEST GAMING SITE EVER!</h2>
+            <h2>INIZIA LA TUA NUOVA ESPERIENZA GAMING!</h2>
             <p>GamesGo è il tuo punto di riferimento per i giochi che contano: dai grandi classici ai nuovi successi, scopri un mondo di intrattenimento e sfide emozionanti, tutto a portata di click!</p>
             <div class="search-input">
               <form id="search" action="/catalog" method="post">
@@ -130,7 +130,7 @@
           <div class="right-image">
             <a href="/detail/${randomGame.id}"><img src="${randomGame.photoUrl}" alt="${randomGame.title}"></a>
             <span class="price">€ ${randomGame.priceRetail}</span>
-            <span class="offer">-40%</span>
+            <span class="offer">-20%</span>
           </div>
         </div>
       </div>
@@ -243,12 +243,12 @@
         <div class="col-lg-6">
           <div class="section-heading">
             <h6>IN TENDENZA</h6>
-            <h2>Most Played</h2>
+            <h2>I Più Venduti</h2>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">View All</a>
+            <a href="/catalog">View All</a>
           </div>
         </div>
         <div class="col-lg-2 col-md-6 col-sm-6">
