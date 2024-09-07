@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gamesgo.model.User;
+import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
 import com.gamesgo.util.WebhookManager;
 
@@ -15,12 +16,17 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private GameRepository gameRep;
+	
 	@Autowired
 	private TransactionRepository transRep;
 
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("bestSellers", transRep.getList());
+		model.addAttribute("randomGame",gameRep.findRandomGame());
 		return "home/index.jsp";
 	}
 
