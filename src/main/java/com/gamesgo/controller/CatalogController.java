@@ -33,13 +33,12 @@ public class CatalogController {
 
 	@PostMapping("/catalog")
 	public String catalogFilter(@RequestParam String opType, @RequestParam String input, Model model, HttpSession session) {
-		
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		
-		if(input.equals(loggedUser.getUsername())) {
-			return "redirect:/menja/index.html";
+		if (loggedUser!=null) {
+			if(input.equals(loggedUser.getUsername())) {
+				return "redirect:/menja/index.html";
+			}
 		}
-		
 		if (opType == null) {
 			model.addAttribute("show", "show");
 			model.addAttribute("message", "Operazione nulla");
