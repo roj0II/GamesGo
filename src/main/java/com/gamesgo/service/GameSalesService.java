@@ -7,28 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gamesgo.dto.GameSalesDTO;
+import com.gamesgo.model.Game;
+import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
 
 @Service
 public class GameSalesService {
 	
-
+	@Autowired
+	private GameRepository gameRepository;
 		
-	    @Autowired
-	    private TransactionRepository transactionRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
-	    public List<GameSalesDTO> getGameSales() {
-	        List<Object[]> results = transactionRepository.getList();
-	        List<GameSalesDTO> gameSalesList = new ArrayList<>();
-
-	        for (Object[] result : results) {
-	            Long gameId = ((Number) result[0]).longValue(); 
-	            Long sales = ((Number) result[1]).longValue();   
-
-	            gameSalesList.add(new GameSalesDTO(gameId, sales));
-	        }
-
-	        return gameSalesList;
-	    }
-	}
+    public List<Game> getGameSales() {
+        List<Object[]> results = transactionRepository.getList();
+        List<Game> gameList = new ArrayList<>();
+        for (Object[] result : results) {
+        	System.out.println(((Number) result[1]).longValue());
+        	gameList.add(gameRepository.findById(((Number) result[0]).intValue()).orElse(new Game()));
+        }
+        return gameList;
+    }
+}
 
