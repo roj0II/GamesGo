@@ -1,5 +1,7 @@
 package com.gamesgo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,15 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gamesgo.dto.GameSalesDTO;
 import com.gamesgo.model.User;
 import com.gamesgo.repository.GameRepository;
 import com.gamesgo.repository.TransactionRepository;
+import com.gamesgo.service.GameSalesService;
 import com.gamesgo.util.WebhookManager;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private GameSalesService gameSalesService;
 	
 	@Autowired
 	private GameRepository gameRep;
@@ -26,7 +32,8 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("bestSellers", transRep.getList());
-		model.addAttribute("randomGame",gameRep.findRandomGame());
+		model.addAttribute("randomGame", gameRep.findRandomGame());
+		model.addAttribute("topGames", gameSalesService.getGameSales());
 		return "home/index.jsp";
 	}
 

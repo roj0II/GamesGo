@@ -17,4 +17,5 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 	    List<Game> findByAuthorOrName(@Param("input") String input);	 
 	 @Query(value = "SELECT * FROM game ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	 public Game findRandomGame();
+	 
 }
