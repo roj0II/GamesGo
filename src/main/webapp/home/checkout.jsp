@@ -387,7 +387,7 @@
 							</div>
 							
 							<div style="display: none; margin:auto;" id="paypal">
-								<a href="https://paypal.me/rojetti?country.x=IT&locale.x=it_IT" target="_blank" class="checkbox-button">Premi quì per pagare con paypall <i class="fa-brands fa-paypal"></i>.</a>
+								<a href="https://paypal.me/rojetti?country.x=IT&locale.x=it_IT" target="_blank" class="checkbox-button pp-btn">Premi quì per pagare con paypall <i class="fa-brands fa-paypal"></i>.</a>
 								<div> Pagamenti sicuri al 100% <i class="fa-solid fa-shield-halved"></i></div>
 							</div>
 							
@@ -403,7 +403,7 @@
 									style="margin-top: 5px; margin-left: 40px;"> <input
 									type="checkbox" name="transactionType" value="card"> <i
 									class="fa-solid fa-handshake"></i> Carta
-								</label> <a class="btn-next next-prev">Avanti</a>
+								</label> <button id="concludi" class="btn-next next-prev out" disabled>Submit</button>
 							</div>
 						</div>
 					</div>
@@ -434,6 +434,54 @@
 
 
 			<script>
+			
+			// Ormai non sò cosa sto facendo, aiutatemi
+			document.addEventListener('DOMContentLoaded', () => {
+    const submitButton = document.getElementById('concludi');
+    const paypalLink = document.querySelector('.pp-btn');
+    const nameInput = document.getElementById('name');
+    const dateInput = document.getElementById('date');
+    const numberInput = document.getElementById('number');
+    const cvvInput = document.getElementById('cvv');
+
+    // Function to enable the submit button
+    function enableSubmitButton() {
+        if (submitButton) {
+            submitButton.classList.remove('out');
+
+            submitButton.disabled = false;
+        }
+    }
+
+    // Function to check if all card fields are filled
+    function checkCardFields() {
+        if (nameInput && dateInput && numberInput && cvvInput) {
+            if (nameInput.value.trim() !== '' &&
+                dateInput.value.trim() !== '' &&
+                numberInput.value.trim() !== '' &&
+                cvvInput.value.trim() !== '') {
+                enableSubmitButton();
+            }
+        }
+    }
+
+    // Add event listener to the PayPal link
+    if (paypalLink) {
+        paypalLink.addEventListener('click', (event) => {
+            // Prevent the link from navigating immediately
+            event.preventDefault();
+            enableSubmitButton();
+            // Optionally, navigate to the PayPal link
+            window.open(paypalLink.href, '_blank');
+        });
+    }
+
+    // Add input event listeners to the card fields
+    if (nameInput) nameInput.addEventListener('input', checkCardFields);
+    if (dateInput) dateInput.addEventListener('input', checkCardFields);
+    if (numberInput) numberInput.addEventListener('input', checkCardFields);
+    if (cvvInput) cvvInput.addEventListener('input', checkCardFields);
+});
 			
 			// Funzione per aggiornare il contenuto della carta
 			  function updateCard() {
