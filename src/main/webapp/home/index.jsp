@@ -130,7 +130,7 @@
           <div class="right-image">
             <a href="/detail/${randomGame.id}"><img src="${randomGame.photoUrl}" alt="${randomGame.title}"></a>
             <span class="price">€ ${randomGame.priceRetail}</span>
-            <span class="offer">-40%</span>
+            <span class="offer">-20%</span>
           </div>
         </div>
       </div>

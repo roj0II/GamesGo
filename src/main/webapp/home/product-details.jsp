@@ -133,7 +133,7 @@
         </div>
         <div class="col-lg-6 align-self-center">
           <h4>${game.title}</h4>
-          <span class="price"><em>€ ${game.priceRetail}</em>€ ${game.priceDigital}</span>
+          <span class="price"><em>€ ${game.priceRetail + game.priceRetail/100*20}</em>€ ${game.priceRetail}</span>
           <br>
         <form action="/checkout/${game.id}" method="post"> <!-- bottoni -->
         
