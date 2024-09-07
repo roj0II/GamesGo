@@ -105,6 +105,7 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 		transRep.deleteById(id);
 		return "redirect:/transaction/";
 	}
+	
 	@GetMapping("/ottieniGiochi")
 	public void getLista(Model model) {
 		List<GameSalesDTO> lista=gameSalesService.getGameSales();
@@ -114,4 +115,5 @@ public class TransactionController implements CrudControllerI<TransactionDto> {
 			System.out.println(lista.toString());
 		}
 	}
+
 }

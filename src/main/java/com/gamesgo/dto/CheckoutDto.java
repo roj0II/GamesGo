@@ -22,25 +22,28 @@ public class CheckoutDto {
 	private String gamePhotoUrl;
 	
 	// Dati consegna - fisico
-	private String shippingAddress; // se compriamo fisicamente, servirà anche questo campo.
-	// Dati consegna - fisico / online
+	private String shippingName;
+	private String shippingSurname;
 	private String shippingEmail;
 	private String shippingPhone;
+	private String shippingAddress; // se compriamo fisicamente, servirà anche questo campo.
+	private String shippingMethod; // picklist che aumenterà il prezzo in base alla scelta.
+	private String shippingNotes; // le classiche note da dare a chi consegna. (piano n21)
 	
 	// Dati affitto
 	private int rentDays;
+	private Date rentFinishDate;
 	
 	// Dati pagamento con carta:
 	private String paymentCardCode;
 	private String paymentCvv;
-	private String paymentName;
-	private String paymentSurname;
-	private Date paymentCardExpiration;
+	private String paymentNameAndSurname;
+	private String paymentCardExpiration;
 	
-	// Dati pagamento paypal:
-	private String paymentEmail;
 	
 	// Dati fatturazione:
+	private String transactionName;
+	private String transactionSurname;
 	private String transactionAddress;
 	private String transactionPhone;
 	private String transactionEmail;
@@ -142,29 +145,53 @@ public class CheckoutDto {
 	public void setPaymentCvv(String paymentCvv) {
 		this.paymentCvv = paymentCvv;
 	}
-	public String getPaymentName() {
-		return paymentName;
-	}
-	public void setPaymentName(String paymentName) {
-		this.paymentName = paymentName;
-	}
-	public String getPaymentSurname() {
-		return paymentSurname;
-	}
-	public void setPaymentSurname(String paymentSurname) {
-		this.paymentSurname = paymentSurname;
-	}
-	public Date getPaymentCardExpiration() {
+	public String getPaymentCardExpiration() {
 		return paymentCardExpiration;
 	}
-	public void setPaymentCardExpiration(Date paymentCardExpiration) {
+	public void setPaymentCardExpiration(String paymentCardExpiration) {
 		this.paymentCardExpiration = paymentCardExpiration;
 	}
-	public String getPaymentEmail() {
-		return paymentEmail;
+	public String getShippingName() {
+		return shippingName;
 	}
-	public void setPaymentEmail(String paymentEmail) {
-		this.paymentEmail = paymentEmail;
+	public void setShippingName(String shippingName) {
+		this.shippingName = shippingName;
+	}
+	public String getShippingSurname() {
+		return shippingSurname;
+	}
+	public void setShippingSurname(String shippingSurname) {
+		this.shippingSurname = shippingSurname;
+	}
+	public String getShippingNotes() {
+		return shippingNotes;
+	}
+	public void setShippingNotes(String shippingNotes) {
+		this.shippingNotes = shippingNotes;
+	}
+	public String getShippingMethod() {
+		return shippingMethod;
+	}
+	public void setShippingMethod(String shippingMethod) {
+		this.shippingMethod = shippingMethod;
+	}
+	public Date getRentFinishDate() {
+		return rentFinishDate;
+	}
+	public void setRentFinishDate(Date rentFinishDate) {
+		this.rentFinishDate = rentFinishDate;
+	}
+	public String getTransactionName() {
+		return transactionName;
+	}
+	public void setTransactionName(String transactionName) {
+		this.transactionName = transactionName;
+	}
+	public String getTransactionSurname() {
+		return transactionSurname;
+	}
+	public void setTransactionSurname(String transactionSurname) {
+		this.transactionSurname = transactionSurname;
 	}
 	public String getTransactionAddress() {
 		return transactionAddress;
@@ -183,6 +210,12 @@ public class CheckoutDto {
 	}
 	public void setTransactionEmail(String transactionEmail) {
 		this.transactionEmail = transactionEmail;
+	}
+	public String getPaymentNameAndSurname() {
+		return paymentNameAndSurname;
+	}
+	public void setPaymentNameAndSurname(String paymentNameAndSurname) {
+		this.paymentNameAndSurname = paymentNameAndSurname;
 	}
 
 }

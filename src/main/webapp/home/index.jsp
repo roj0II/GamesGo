@@ -115,8 +115,8 @@
         <div class="col-lg-6 align-self-center">
           <div class="caption header-text">
             <h6>Benvenuto in GamesGo</h6>
-            <h2>BEST GAMING SITE EVER!</h2>
-            <p>LUGX Gaming is free Bootstrap 5 HTML CSS website template for your gaming websites. You can download and use this layout for commercial purposes. Please tell your friends about TemplateMo.</p>
+            <h2>INIZIA LA TUA NUOVA ESPERIENZA GAMING!</h2>
+            <p>GamesGo è il tuo punto di riferimento per i giochi che contano: dai grandi classici ai nuovi successi, scopri un mondo di intrattenimento e sfide emozionanti, tutto a portata di click!</p>
             <div class="search-input">
               <form id="search" action="/catalog" method="post">
               <input type="hidden" name="opType" value="titleAndAuthor">
@@ -128,9 +128,9 @@
         </div>
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
-            <img src="home/assets/images/banner-image.jpg" alt="">
-            <span class="price">$22</span>
-            <span class="offer">-40%</span>
+            <a href="/detail/${randomGame.id}"><img src="${randomGame.photoUrl}" alt="${randomGame.title}"></a>
+            <span class="price">€ ${randomGame.priceRetail}</span>
+            <span class="offer">-20%</span>
           </div>
         </div>
       </div>
@@ -243,152 +243,96 @@
         <div class="col-lg-6">
           <div class="section-heading">
             <h6>IN TENDENZA</h6>
-            <h2>Most Played</h2>
+            <h2>I Più Venduti</h2>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">View All</a>
+            <a href="/catalog">Vedi tutti</a>
           </div>
         </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-01.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-02.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-03.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-04.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-05.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/top-game-06.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>
+        <c:forEach var="game" items="${topGames}">
+	        <div class="col-lg-2 col-md-6 col-sm-6">
+	          <div class="item">
+	            <div class="thumb">
+	              <a href="/detail/${game.id}"><img src="${game.photoUrl}" alt=""></a>
+	            </div>
+	            <div class="down-content">
+	                <span class="category">${game.gameGenres.get(0).genre.name}</span>
+	                <h4>${game.title}</h4>
+	                <a href="/detail/${game.id}">Esplora</a>
+	            </div>
+	          </div>
+	        </div>
+	    </c:forEach>
       </div>
     </div>
   </div>
 
+
 <div class="section trending">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h6>CHI SIAMO?</h6>
-            <h2>IL NOSTRO TEAM</h2>
-          </div>
-        </div>
-        <div></div>
-        <div class="col-lg-3 col-md-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/trending-01.jpg" alt=""></a>
-              <span class="price"><em>$28</em>$20</span>
-            </div>
-            <div class="down-content">
-              <span class="category">Action</span>
-              <h4>Assasin Creed</h4>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/trending-02.jpg" alt=""></a>
-              <span class="price">$44</span>
-            </div>
-            <div class="down-content">
-              <span class="category">Action</span>
-              <h4>Assasin Creed</h4>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/trending-03.jpg" alt=""></a>
-              <span class="price"><em>$64</em>$44</span>
-            </div>
-            <div class="down-content">
-              <span class="category">Action</span>
-              <h4>Assasin Creed</h4>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="home/assets/images/trending-04.jpg" alt=""></a>
-              <span class="price">$32</span>
-            </div>
-            <div class="down-content">
-              <span class="category">Action</span>
-              <h4>Assasin Creed</h4>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
-            </div>
-          </div>
-        </div>
+        <div class="container">
+	      <div class="row">
+	        <div class="col-lg-6">
+	          <div class="section-heading">
+	            <h6>CHI SIAMO?</h6>
+	            <h2>IL NOSTRO TEAM</h2>
+	          </div>
+	        </div>
+	       <div>
+	      </div>
+	        <div class="col-lg-3 col-md-6">
+	          <div class="item">
+	            <div class="thumb">
+	              <img src="/home/assets/images/alessio.jpg" alt="">
+	            </div>
+	            <div class="down-content">
+	              <span class="category">ALE</span>
+	              <h4>Alessio Marino</h4>
+	              <a href="https://www.linkedin.com/in/marino-alessio/"><i class="fa-brands fa-linkedin"></i></a>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-lg-3 col-md-6">
+	          <div class="item">
+	            <div class="thumb">
+	              <img src="/home/assets/images/michele.jpg" alt="">
+	            </div>
+	            <div class="down-content">
+	              <span class="category">MIKE</span>
+	              <h4>Michele Di Mezza Cutillo</h4>
+	              <a href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/"><i class="fa-brands fa-linkedin"></i></a>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-lg-3 col-md-6">
+	          <div class="item">
+	            <div class="thumb">
+	              <img src="/home/assets/images/andrea.jpg" alt="">
+	            </div>
+	            <div class="down-content">
+	              <span class="category">ANDRE</span>
+	              <h4>Andrea Sessa</h4>
+	              <a href="https://www.linkedin.com/in/andrse/"><i class="fa-brands fa-linkedin"></i></a>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-lg-3 col-md-6">
+	          <div class="item">
+	            <div class="thumb">
+	              <img src="/home/assets/images/rocco.jpg" alt="">
+	            </div>
+	            <div class="down-content">
+	              <span class="category">IO</span>
+	              <h4>Rocco Santorsa</h4>
+	              <a href="https://www.linkedin.com/in/roccosantorsa/"><i class="fa-brands fa-linkedin"></i></a>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
       </div>
     </div>
   </div>

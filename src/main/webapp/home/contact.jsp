@@ -125,7 +125,7 @@
           <div class="left-text">
             <div class="section-heading">
               <h6>Contact Us</h6>
-              <h2>Say Hello!</h2>
+              <h2>Bisogno di aiuto?</h2>
             </div>
             <p>Hai bisogno di assistenza o hai qualche domanda? Siamo qui per aiutarti! Che tu abbia bisogno di supporto tecnico, informazioni sui nostri giochi o suggerimenti su come migliorare la tua esperienza di gioco, il team di <a href="/" style="color: blue;">GamesGo</a> è a tua disposizione. Compila il modulo qui sotto o contattaci direttamente via email. Non vediamo l'ora di sentirti e di rendere la tua avventura di gioco ancora più straordinaria. A presto!</p>
             <ul>
