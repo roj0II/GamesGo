@@ -128,8 +128,8 @@
         </div>
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
-            <img src="home/assets/images/banner-image.jpg" alt="">
-            <span class="price">$22</span>
+            <img src="${randomGame.photoUrl}" alt="${randomGame.title}">
+            <span class="price">${randomGame.priceRetail}</span>
             <span class="offer">-40%</span>
           </div>
         </div>
