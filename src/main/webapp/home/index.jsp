@@ -207,9 +207,10 @@
 						<h2>Top Categories</h2>
 					</div>
 				</div>
-				<c:forEach var="genre" items="${top5Genres-genre}"
+				<c:if test="${not empty top5GenresGenre}">
+				<c:forEach var="genre" items="${top5GenresGenre}"
 					varStatus="status">
-					<c:set var="game" value="${top5Genres-game[status.index]}" />
+					<c:set var="game" value="${top5GenresGame[status.index]}" />
 					<div class="col-lg col-sm-6 col-xs-12">
 						<div class="item">
 							<h4>${genre.name}</h4>
@@ -220,6 +221,7 @@
 						</div>
 					</div>
 				</c:forEach>
+				</c:if>
 			</div>
 		</div>
 	</div>
