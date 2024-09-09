@@ -1,6 +1,7 @@
 package com.gamesgo.dto;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import com.gamesgo.model.Transaction;
 import com.gamesgo.model.User;

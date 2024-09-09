@@ -17,6 +17,7 @@ public class CheckoutDto {
 	// private boolean admin; se vogliamo, facciamo che all'admin si applica 20% di sconto automaticamente.EXTRA
 	
 	// Dati gioco, Ottenuti dal gioco selezionato per l'acquisto/affitto.
+	private int gameId;
 	private String gameTitle;
 	private float gamePrice; // in base alla scelta dell'utente verrà usato quello retail o digital.
 	private String gamePhotoUrl;
@@ -216,6 +217,12 @@ public class CheckoutDto {
 	}
 	public void setPaymentNameAndSurname(String paymentNameAndSurname) {
 		this.paymentNameAndSurname = paymentNameAndSurname;
+	}
+	public int getGameId() {
+		return gameId;
+	}
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
 	}
 
 }

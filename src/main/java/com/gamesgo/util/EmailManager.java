@@ -1,6 +1,8 @@
 package com.gamesgo.util;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Properties;
 
@@ -45,6 +47,29 @@ public class EmailManager {
         msg.setSentDate(new Date()); // Imposto la data d'invio		
 		
 		return msg;
+	}
+	
+	public static String loadHtmlTemplate(String filePath) throws IOException {
+	    return new String(Files.readAllBytes(Paths.get(filePath)));
+	}
+	
+	public static Message mailConfirm(Message msg, String ricevente, String otpCode) throws AddressException, MessagingException, IOException {
+	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
+	    
+	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(ricevente));
+	    msg.setSubject("Your OTP Code");
+
+	    // Carica il contenuto HTML dal file
+	    String htmlTemplate = loadHtmlTemplate("/fragments/templateMail.html");
+
+	    // Personalizza il template con il codice OTP
+	    String htmlContent = htmlTemplate.replace("{otpCode}", otpCode);
+
+	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
+
+	    msg.setSentDate(new Date()); // Imposto la data d'invio
+	    
+	    return msg;
 	}
 	
 	public static Properties propertiesSettate() {
