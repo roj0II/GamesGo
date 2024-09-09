@@ -133,7 +133,7 @@
 				<f:form id="contact-form" modelAttribute="check" action="/final"
 					method="post" class="col-lg-6 align-self-center"
 					style="height: 100%; display: flex; flex-direction: column;">
-
+					<f:input type="hidden" path="gameId"/>
 					<div style="display: flex; justify-content: space-between;">
 						<fieldset style="display: inline;">
 							<f:input path="gameTitle" disabled="true"
