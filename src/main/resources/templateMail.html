@@ -63,15 +63,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <!-- Immagine logo a sinistra -->
-            <img src="logoMail.png" alt="GamesGo Logo" class="logo">
-            <!-- Immagine prodotto a destra -->
-            <img src="https://i.scdn.co/image/ab67616d0000b27319009e0c87d46699ef21efd3" alt="" class="product-image">
+            <div>
+	            <img src="logoMail.png" alt="GamesGo Logo" class="logo">
+	            <!-- Immagine prodotto a destra -->
+		        <h1>Conferma Ordine</h1>
+		        <p>Gentile {nomeCliente},</p>
+		        <p>Grazie per il tuo acquisto! Questo è un riepilogo del tuo ordine:</p>
+	        </div>
+	        
+	        <img src="{productImageUrl}" alt="" class="product-image">
+            
         </div>
 
-        <h1>Conferma Ordine</h1>
-        <p>Gentile {nomeCliente},</p>
-        <p>Grazie per il tuo acquisto! Questo è un riepilogo del tuo ordine:</p>
 
         <div class="order-details">
             <h2>Dettagli Ordine</h2>
