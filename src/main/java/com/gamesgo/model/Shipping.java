@@ -1,7 +1,7 @@
 package com.gamesgo.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,8 +59,8 @@ public class Shipping implements Serializable {
 		return shippingDate;
 	}
 
-	public void setShippingDate(Date shippingDate) {
-		this.shippingDate = shippingDate;
+	public void setShippingDate(Date date) {
+		this.shippingDate = date;
 	}
 
 	public Date getScheduleDeliveryDate() {
