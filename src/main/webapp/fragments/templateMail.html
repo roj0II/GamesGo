@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Ordine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        .order-details {
+            margin-top: 20px;
+        }
+        .order-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-details th, .order-details td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .order-details th {
+            background-color: #f8f9fa;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conferma Ordine</h1>
+        <p>Gentile {nomeCliente},</p>
+        <p>Grazie per il tuo acquisto! Questo è un riepilogo del tuo ordine:</p>
+
+        <div class="order-details">
+            <h2>Dettagli Ordine</h2>
+            <table>
+                <tr>
+                    <th>Nome Gioco</th>
+                    <td>{{nomeGioco}}</td>
+                </tr>
+                <tr>
+                    <th>Quantità</th>
+                    <td>{quantità}</td>
+                </tr>
+                <tr>
+                    <th>Prezzo</th>
+                    <td>{prezzo} €</td>
+                </tr>
+                <tr>
+                    <th>Data Ordine</th>
+                    <td>{dataOrdine}</td>
+                </tr>
+            </table>
+        </div>
+
+        <p>Se hai bisogno di ulteriore assistenza, non esitare a contattarci.</p>
+
+        <div class="footer">
+            <p>Grazie per aver scelto GamesGo!</p>
+            <p>Team GamesGo</p>
+        </div>
+    </div>
+</body>
+</html>
