@@ -144,10 +144,10 @@
 						</fieldset>
 						<fieldset style="display: inline;">
 							<c:if test="${check.rent}">
-								<f:input path="gamePrice" disabled="true" style="width: 180px; font-weight: bold;"/>
+								<f:input path="gamePrice" id="gamePrice" value="€${check.gamePrice}" disabled="true" style="width: 180px; font-weight: bold;"/>
 							</c:if>
 							<c:if test="${!check.rent}">
-								<f:input path="gamePrice"  disabled="true"
+								<f:input path="gamePrice" id="gamePrice" value="€${check.gamePrice}" disabled="true"
 									style="width: 180px; font-weight: bold;"/>
 							</c:if>
 						</fieldset>
@@ -160,15 +160,11 @@
 
 								<div style="display: flex; justify-content: space-between;">
 									<fieldset style="display: inline;">
-										<f:input type="date" path="rentFinishDate"
-											style="margin-top: 40px; width: 180px; font-weight: bold;"/>
+										<f:input type="number" id="rentDays" path="rentDays" value="1"
+											style="margin-top: 40px; width: 180px; font-weight: bold;" onchange="daysChange()"/>
 									</fieldset>
 									<fieldset style="display: inline;">
-										<f:input type="number" path="rentDays" disabled="true"
-											style="margin-top: 40px; width: 180px; font-weight: bold;"/>
-									</fieldset>
-									<fieldset style="display: inline;">
-										<input value="€${check.gamePrice/30 - 0.20}" disabled
+										<input value="€${check.gamePrice}/giorno" id="pricePerDay" disabled
 											style="margin-top: 40px; width: 180px; font-weight: bold;">
 									</fieldset>
 								</div>
@@ -219,8 +215,8 @@
 								<div class="col-lg-6" style="margin-top:50px;" <c:if test="${check.online}">style="display:none;"</c:if>>
 								    <label for="shippingMethod"><b>Spedizione</b></label>
 									<fieldset style="margin-bottom: 20px">
-									    <f:select path="shippingMethod" class="input-label" id="shippingMethod" style="margin-top: 10px;">
-									        <f:option value="" disabled="true" selected="true">Seleziona</f:option>
+									    <f:select path="shippingMethod" class="input-label" id="shippingMethod" style="margin-top: 10px;" onchange="deliveryChange()">
+									        <f:option value="def" disabled="true" selected="true">Seleziona</f:option>
 									        <f:option value="normale">Normale (€4)</f:option>
 									        <f:option value="veloce">Veloce (€6)</f:option>
 									        <f:option value="due_giorni">Due giorni (€12)</f:option>
@@ -407,7 +403,7 @@
 									style="margin-top: 5px; margin-left: 40px;"> <input
 									type="checkbox" name="transactionType" value="card"> <i
 									class="fa-solid fa-handshake"></i> Carta
-								</label> <button id="concludi" class="btn-next next-prev out" disabled>Submit</button>
+								</label> <button type="submit" id="concludi" class="next-prev out" onclick="submitForm()" disabled>Conferma</button>
 							</div>
 						</div>
 					</div>
@@ -438,15 +434,17 @@
 
 
 			<script>
-			
+			let basePrice = 0;
+			let currentDeliveryPrice = 0;
 			// Ormai non sò cosa sto facendo, aiutatemi
 			document.addEventListener('DOMContentLoaded', () => {
-    const submitButton = document.getElementById('concludi');
-    const paypalLink = document.querySelector('.pp-btn');
-    const nameInput = document.getElementById('name');
-    const dateInput = document.getElementById('date');
-    const numberInput = document.getElementById('number');
-    const cvvInput = document.getElementById('cvv');
+	    const submitButton = document.getElementById('concludi');
+	    const paypalLink = document.querySelector('.pp-btn');
+	    const nameInput = document.getElementById('name');
+	    const dateInput = document.getElementById('date');
+	    const numberInput = document.getElementById('number');
+	    const cvvInput = document.getElementById('cvv');
+    
 
     // Function to enable the submit button
     function enableSubmitButton() {
@@ -615,6 +613,67 @@
 	  document.getElementById('flag').addEventListener('click', function(event) {
 	      event.stopPropagation();
 	  });
+	  
+	  function daysChange() {
+		    const rentDaysInput = document.getElementById('rentDays');
+		    const gamePriceInput = document.getElementById('gamePrice');
+		    const pricePerDayInput = document.getElementById('pricePerDay');
+		    const shippingMethodSelect = document.getElementById('shippingMethod');
+		    
+		    shippingMethodSelect.value = 'def';
+		    
+		    const rentDays = parseInt(rentDaysInput.value, 10);
+		    let pricePerDay = parseFloat(pricePerDayInput.value.replace('€', '').replace('/giorno', '').trim());
+		    basePrice = 0;
+		    
+		    if (isNaN(rentDays) || rentDays < 1) {
+		        alert('Inserisci un numero di giorni valido.');
+		        rentDaysInput.value = 1;
+		        gamePriceInput.value = '€0.00';
+		        return;
+		    }
+		    
+		    const gamePrice = parseFloat(rentDays * (pricePerDay));
+		    gamePriceInput.value = '€' + gamePrice.toFixed(2);
+		}
+
+	  function deliveryChange() {
+	      const shippingMethodSelect = document.getElementById('shippingMethod');
+	      const gamePriceInput = document.getElementById('gamePrice');
+	      const selectedValue = shippingMethodSelect.value;
+	      
+	      if (basePrice === 0) {
+	          basePrice = parseFloat(gamePriceInput.value.replace('€', '').trim());
+	      }
+
+	      let priceDelivery;
+	      
+	      switch (selectedValue) {
+	          case 'normale':
+	              priceDelivery = 4;
+	              break;
+	          case 'veloce':
+	              priceDelivery = 6;
+	              break;
+	          case 'due_giorni':
+	              priceDelivery = 12;
+	              break;
+	          default:
+	              alert('Seleziona una spedizione.');
+	              return;
+	      }
+	      
+	      const gamePrice = basePrice + priceDelivery;
+	      
+	      gamePriceInput.value = '€' + gamePrice.toFixed(2);
+
+	      currentDeliveryPrice = priceDelivery;
+	  }
+	  
+		function submitForm() {
+			var form = document.getElementById('contact-form');
+			form.submit();
+		}
 </script>
 </body>
 </html>
