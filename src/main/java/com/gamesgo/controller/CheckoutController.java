@@ -236,8 +236,10 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					default:
+						isNull(null,model,"Errore!","Metodo di spedizione non selezionato o non valido.");
+						model.addAttribute("check", checkoutDto);
+						return pathCheckoutPage;
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
-						break;
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
 				transaction = transactionRepository.save(transaction);
