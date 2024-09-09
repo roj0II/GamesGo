@@ -24,7 +24,6 @@ public class GameSalesService {
         List<Object[]> results = transactionRepository.getList();
         List<Game> gameList = new ArrayList<>();
         for (Object[] result : results) {
-        	System.out.println(((Number) result[1]).longValue());
         	gameList.add(gameRepository.findById(((Number) result[0]).intValue()).orElse(new Game()));
         }
         return gameList;
