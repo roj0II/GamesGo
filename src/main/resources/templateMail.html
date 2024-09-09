@@ -20,6 +20,22 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header img.logo {
+            width: 100px;
+            height: auto;
+        }
+        .header img.product-image {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         h1 {
             color: #007bff;
         }
@@ -46,6 +62,13 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <!-- Immagine logo a sinistra -->
+            <img src="{logoUrl}" alt="" class="logo">
+            <!-- Immagine prodotto a destra -->
+            <img src="{productImageUrl}" alt="" class="product-image">
+        </div>
+
         <h1>Conferma Ordine</h1>
         <p>Gentile {nomeCliente},</p>
         <p>Grazie per il tuo acquisto! Questo è un riepilogo del tuo ordine:</p>
@@ -54,20 +77,20 @@
             <h2>Dettagli Ordine</h2>
             <table>
                 <tr>
-                    <th>Nome Gioco</th>
-                    <td>{{nomeGioco}}</td>
+                    <th>Gioco</th>
+                    <td>{nomeGioco}</td>
                 </tr>
                 <tr>
-                    <th>Quantità</th>
-                    <td>{quantità}</td>
-                </tr>
-                <tr>
-                    <th>Prezzo</th>
-                    <td>{prezzo} €</td>
+                    <th>Totale</th>
+                    <td>€ {prezzo}</td>
                 </tr>
                 <tr>
                     <th>Data Ordine</th>
                     <td>{dataOrdine}</td>
+                </tr>
+                <tr>
+                    <th>Arrivo Previsto</th>
+                    <td>{dataArrivo}</td>
                 </tr>
             </table>
         </div>

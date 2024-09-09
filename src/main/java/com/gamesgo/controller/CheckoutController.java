@@ -1,9 +1,12 @@
 package com.gamesgo.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.mail.MessagingException;
 
 import org.slf4j.helpers.Reporter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ import com.gamesgo.repository.RentRepository;
 import com.gamesgo.repository.ShippingRepository;
 import com.gamesgo.repository.StorageRepository;
 import com.gamesgo.repository.TransactionRepository;
+import com.gamesgo.util.EmailManager;
 import com.gamesgo.util.KeyGenerator;
 
 import jakarta.servlet.http.HttpSession;
@@ -112,7 +116,7 @@ public class CheckoutController {
 	
 	
 	@PostMapping("/final")
-	public String checkout(Model model, HttpSession session, @ModelAttribute("check") CheckoutDto checkoutDto){
+	public String checkout(Model model, HttpSession session, @ModelAttribute("check") CheckoutDto checkoutDto) throws MessagingException, IOException{
 		// digital o retail = formatType
 		// buy o rent = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
@@ -235,13 +239,22 @@ public class CheckoutController {
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 						break;
 				}
+				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
+				transaction = transactionRepository.save(transaction);
 				shippingRepository.save(shipping);
-
+				
 			}
 		}
-		
+
 		transaction.setCheckoutPayment((float)totalPrice);
 		transactionRepository.save(transaction);
+		
+		checkoutDto.setGamePrice((float)totalPrice);
+		
+		checkoutDto.setShippingOrderDate(new Date());
+		
+		
+		EmailManager.sendMailCheckout(checkoutDto);
 
 		return "";
 	}

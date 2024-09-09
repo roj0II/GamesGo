@@ -1,6 +1,9 @@
 package com.gamesgo.util;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -13,6 +16,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.gamesgo.dto.CheckoutDto;
 
 public class EmailManager {
 	final static String mailUsername = "gamesgo@libero.it";
@@ -49,27 +54,57 @@ public class EmailManager {
 		return msg;
 	}
 	
-	public static String loadHtmlTemplate(String filePath) throws IOException {
-	    return new String(Files.readAllBytes(Paths.get(filePath)));
-	}
+	public static void sendMailCheckout (CheckoutDto checkout) throws MessagingException, IOException {
+			
+			Properties props = propertiesSettate();
 	
-	public static Message mailConfirm(Message msg, String ricevente, String otpCode) throws AddressException, MessagingException, IOException {
+	        Session mailSession = Session.getInstance(props, null); // Creo la sessione
+	
+	        Message msg = new MimeMessage( mailSession ); // Creo il messaggio.
+	        
+	        mailConfirm(msg, checkout);
+	        
+	        Transport transport = mailSession.getTransport("smtps"); // Imposto l'oggetto Transport con protocollo SMTPS (SMTP su SSL).
+	        
+	        transport.connect("smtp.libero.it", mailUsername, mailPassword); // Mi connetto al server SMTP con l'autenticatore.
+	        
+	        transport.sendMessage(msg, msg.getAllRecipients()); // Invia il mesaggio al server SMTP.
+	        transport.close(); // Chiudo la connessione al server SMTP.
+			
+		}
+	
+	public static Message mailConfirm(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
 	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
 	    
-	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(ricevente));
-	    msg.setSubject("Your OTP Code");
+	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(checkout.getTransactionEmail()));
+	    msg.setSubject("Ordine Confermato");
 
 	    // Carica il contenuto HTML dal file
-	    String htmlTemplate = loadHtmlTemplate("/fragments/templateMail.html");
-
-	    // Personalizza il template con il codice OTP
-	    String htmlContent = htmlTemplate.replace("{otpCode}", otpCode);
+	    String htmlTemplate = loadHtmlTemplate("templateMail.html");
+	    
+	    String htmlContent = htmlTemplate.replace("{nomeCliente}", "ciao")
+//	    							.replace("{nomeGioco}", checkout.getGameTitle())
+//	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
+//	    							.replace("{dataOrdine}", String.valueOf(checkout.getShippingOrderDate()))
+//	    							.replace("{dataArrivo}", String.valueOf(checkout.getShippingScheduleDate()))
+	    							.replace("{logoUrl}", "/home/assets/images/logo.png");
+//	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
 	    msg.setSentDate(new Date()); // Imposto la data d'invio
 	    
 	    return msg;
+	}
+	
+	public static String loadHtmlTemplate(String fileName) throws IOException {
+	    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	    try (InputStream inputStream = classLoader.getResourceAsStream(fileName)) {
+	        if (inputStream == null) {
+	            throw new FileNotFoundException("File not found: " + fileName);
+	        }
+	        return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+	    }
 	}
 	
 	public static Properties propertiesSettate() {

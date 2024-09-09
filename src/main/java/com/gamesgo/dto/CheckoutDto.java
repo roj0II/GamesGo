@@ -30,6 +30,8 @@ public class CheckoutDto {
 	private String shippingAddress; // se compriamo fisicamente, servirà anche questo campo.
 	private String shippingMethod; // picklist che aumenterà il prezzo in base alla scelta.
 	private String shippingNotes; // le classiche note da dare a chi consegna. (piano n21)
+	private Date shippingOrderDate;
+	private Date shippingScheduleDate;
 	
 	// Dati affitto
 	private int rentDays;
@@ -223,6 +225,18 @@ public class CheckoutDto {
 	}
 	public void setGameId(int gameId) {
 		this.gameId = gameId;
+	}
+	public Date getShippingOrderDate() {
+		return shippingOrderDate;
+	}
+	public void setShippingOrderDate(Date shippingOrderDate) {
+		this.shippingOrderDate = shippingOrderDate;
+	}
+	public Date getShippingScheduleDate() {
+		return shippingScheduleDate;
+	}
+	public void setShippingScheduleDate(Date shippingScheduleDate) {
+		this.shippingScheduleDate = shippingScheduleDate;
 	}
 
 }
