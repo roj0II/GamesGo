@@ -1,5 +1,6 @@
 package com.gamesgo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gamesgo.dto.GameSalesDTO;
+import com.gamesgo.model.Game;
+import com.gamesgo.model.Gamegenre;
+import com.gamesgo.model.Genre;
 import com.gamesgo.model.User;
+import com.gamesgo.repository.GameGenreRepository;
 import com.gamesgo.repository.GameRepository;
+import com.gamesgo.repository.GenreRepository;
 import com.gamesgo.repository.TransactionRepository;
 import com.gamesgo.service.GameSalesService;
 import com.gamesgo.util.WebhookManager;
@@ -27,13 +33,32 @@ public class HomeController {
 	private GameRepository gameRep;
 	
 	@Autowired
+	private GenreRepository genreRep;
+	
+	@Autowired
 	private TransactionRepository transRep;
+	
+	@Autowired
+	private GameGenreRepository gameGenreRep;
 
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("bestSellers", transRep.getList());
 		model.addAttribute("randomGame", gameRep.findRandomGame());
 		model.addAttribute("topGames", gameSalesService.getGameSales());
+		
+		List<Integer> genreIds = gameGenreRep.findTopGenreIds();
+		
+		List<Genre> genreList = genreRep.findAllById(genreIds);
+		List<Game> gameList = new ArrayList<>();
+		
+		for (int i : genreIds) {
+			gameList.add(gameGenreRep.findFirstByGenreId(i).getGame());
+		}
+		
+		model.addAttribute("top5Genres-genre", genreList);		
+		model.addAttribute("top5Genres-game", gameList);
+
 		return "home/index.jsp";
 	}
 
