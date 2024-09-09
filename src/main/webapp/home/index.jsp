@@ -209,7 +209,7 @@
 				</div>
 				<c:forEach var="genre" items="${top5Genres-genre}"
 					varStatus="status">
-					<c:set var="game" value="${top5Genres-genre[status.index]}" />
+					<c:set var="game" value="${top5Genres-game[status.index]}" />
 					<div class="col-lg col-sm-6 col-xs-12">
 						<div class="item">
 							<h4>${genre.name}</h4>
