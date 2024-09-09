@@ -189,7 +189,7 @@
 								        <f:input class="input-label" path="shippingName" required="true" style="width: 300px"/>
 								    </fieldset>
 								</div>
-								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
+								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Cognome</b></span>
 									<fieldset>
 									<f:input class="input-label" path="shippingSurname" required="true" style="width: 300px"/>
@@ -209,7 +209,7 @@
 											style="width: 200px; margin-left: 100px;"/>
 									</fieldset>
 								</div>
-								<div class="col-lg-6" <c:if test="${check.online}">style="display:none;"</c:if>>
+								<div class="col-lg-6">
 									<span style="margin-left: 50px"><b>Indirizzo</b></span>
 									<fieldset>
 										<f:input type="text" path="shippingAddress" required="true" style="width: 610px"/>
