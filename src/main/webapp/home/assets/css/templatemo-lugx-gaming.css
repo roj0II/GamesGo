@@ -1015,17 +1015,34 @@ Categories Style
 }
 
 .categories .item  {
-  background-color: #0071f8;
+  background-color: #0071f8; /* Mantiene il colore di sfondo originale */
   position: relative;
   border-radius: 25px;
   text-align: center;
   margin-bottom: 30px;
+  width: 100%; /* Può essere adattato, imposta una larghezza massima se necessario */
+  max-width: 300px; /* Larghezza massima del riquadro per uniformare le dimensioni */
+  height: 350px; /* Altezza fissa per uniformare tutti i riquadri */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .categories .item .thumb {
   position: relative;
-  border-radius: 25px;
+  border-radius: 15px; /* Mantenuto con un raggio più piccolo per le immagini */
   overflow: hidden;
+  width: 100%;
+  height: 300px; /* Altezza fissa per garantire che tutte le immagini abbiano la stessa dimensione */
+}
+
+.categories .item .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assicura che l'immagine riempia il contenitore senza deformarsi */
+  object-position: center; /* Centra l'immagine nel contenitore */
+  display: block;
 }
 
 .categories .item h4 {
