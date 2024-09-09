@@ -83,12 +83,11 @@ public class EmailManager {
 	    String htmlTemplate = loadHtmlTemplate("templateMail.html");
 	    
 	    String htmlContent = htmlTemplate.replace("{nomeCliente}", "ciao")
-//	    							.replace("{nomeGioco}", checkout.getGameTitle())
-//	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
-//	    							.replace("{dataOrdine}", String.valueOf(checkout.getShippingOrderDate()))
-//	    							.replace("{dataArrivo}", String.valueOf(checkout.getShippingScheduleDate()))
-	    							.replace("{logoUrl}", "/home/assets/images/logo.png");
-//	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+	    							.replace("{nomeGioco}", checkout.getGameTitle())
+	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
+	    							.replace("{dataOrdine}", String.valueOf(checkout.getShippingOrderDate()))
+	    							.replace("{dataArrivo}", String.valueOf(checkout.getShippingScheduleDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
