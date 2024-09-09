@@ -87,7 +87,7 @@ public class LoginController {
 
 				// Inviamo l'email all'utente con il codice.
 				// Tolto per fare i test.
-				//EmailManager.sendMail(user.getEmail(), otpCode);
+				EmailManager.sendMail(user.getEmail(), otpCode);
 
 				return "login/loginPage.jsp";
 				// ritorniamo la pagina che verrà modificata per l'otp.
