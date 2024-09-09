@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.MessagingException;
 
@@ -132,7 +133,8 @@ public class CheckoutController {
 		Transaction transaction = new Transaction();
 		transaction.setGame(game);
 		transaction.setUser(loggedUser);
-		
+		transaction = transactionRepository.save(transaction);
+
 		LocalDate localDate= LocalDate.now();
 
 
@@ -202,7 +204,11 @@ public class CheckoutController {
 			rent.setType(checkoutDto.isOnline() ? "digital": "retail");
 			rent.setProductKey(KeyGenerator.generateProductKey());
 			rent.setTransaction(transaction);
-			rentRepository.save(rent);
+			rent = rentRepository.save(rent);
+			
+			List<Rent> rentList = transaction.getRents();
+			rentList.add(rent);
+			transaction.setRents(rentList);
 			
 		} else { // buy.
 			
@@ -242,7 +248,6 @@ public class CheckoutController {
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
-				transaction = transactionRepository.save(transaction);
 				shippingRepository.save(shipping);
 				
 			}
