@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.gamesgo.model.Game;
+import com.gamesgo.model.Genre;
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
 	public Game findByTitle(String title);

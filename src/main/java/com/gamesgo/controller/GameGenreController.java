@@ -51,20 +51,34 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
 		GameGenreDto gameGenreDto = new GameGenreDto();
-		model.addAttribute("games",gameRep.findAll().stream()
-	            .sorted(Comparator.comparing(Game::getTitle))
-	            .toList()); // Lista Giochi
-		model.addAttribute("genres",genreRep.findAll().stream()
-	            .sorted(Comparator.comparing(Genre::getName))
-	            .toList()); // Lista Genre
+		setGameGenre(model);
 		model.addAttribute("gameGenreForm", gameGenreDto);
         return AdminManager.checkAdmin(loggedUser,"insertGameGenre.jsp");
 
 	}
 
 	@PostMapping("insert")
-	public String insert(Model model, HttpSession session, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
-
+	public String insert(Model model, HttpSession session, @ModelAttribute("gameGenreForm") GameGenreDto dto) {		
+		// Controllo sui dati inseriti
+		Game game = new Game();
+		game.setId(dto.getIdGame());
+		Genre genre = new Genre();
+		genre.setId(dto.getIdGenre());
+		Gamegenre gG = gameGenreRep.findByGameAndGenre(game, genre);
+		if(gG != null) {
+			model.addAttribute("gameGenreForm", dto);
+			
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Associazione già presente nel DB");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Error!");
+			
+			setGameGenre(model);
+			
+			return "insertGameGenre.jsp";
+		}
+		
+		// Tentativo di salvataggio sul database
 		try {
 			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
 		} catch (DataIntegrityViolationException e) {
@@ -91,7 +105,26 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 
 	@PostMapping("update")
 	public String update(Model model, HttpSession session, @ModelAttribute("gameGenreForm") GameGenreDto dto) {
+		// Controllo sui dati inseriti
+		Game game = new Game();
+		game.setId(dto.getIdGame());
+		Genre genre = new Genre();
+		genre.setId(dto.getIdGenre());
+		Gamegenre gG = gameGenreRep.findByGameAndGenre(game, genre);
+		if(gG != null) {
+			model.addAttribute("gameGenreForm", dto);
+					
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Associazione già presente nel DB");
+			model.addAttribute("color", "red");
+			model.addAttribute("title", "Error!");
+					
+			setGameGenre(model);
+					
+			return "/gamegenre/editGameGenre.jsp";
+		}
 		
+		// Tentativo di aggiornamento nel database		
 		try {
 			gameGenreRep.save(GameGenreDtoBuilder.fromDtoToEntity(dto));
 		} catch (JpaObjectRetrievalFailureException e) {
@@ -105,5 +138,14 @@ public class GameGenreController implements CrudControllerI<GameGenreDto> {
 	public String delete(Model model, HttpSession session, @PathVariable int id) {
 		gameGenreRep.deleteById(id);
 		return "redirect:/gamegenre/";
+	}
+	
+	public void setGameGenre(Model model) {
+		model.addAttribute("games",gameRep.findAll().stream()
+	            .sorted(Comparator.comparing(Game::getTitle))
+	            .toList()); // Lista di giochi
+		model.addAttribute("genres",genreRep.findAll().stream()
+	            .sorted(Comparator.comparing(Genre::getName))
+	            .toList()); // Lista di Generi
 	}
 }

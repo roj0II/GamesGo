@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-
 public class Genre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
