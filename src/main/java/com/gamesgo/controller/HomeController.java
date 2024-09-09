@@ -56,8 +56,8 @@ public class HomeController {
 			gameList.add(gameGenreRep.findFirstByGenreId(i).getGame());
 		}
 		
-		model.addAttribute("top5Genres-genre", genreList);		
-		model.addAttribute("top5Genres-game", gameList);
+		model.addAttribute("top5GenresGenre", genreList);		
+		model.addAttribute("top5GenresGame", gameList);
 
 		return "home/index.jsp";
 	}
