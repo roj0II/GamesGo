@@ -118,6 +118,11 @@ public class CheckoutController {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		System.out.println(checkoutDto.getGameId());
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
+		if (isNull(game, model, "Errore!","L'id del gioco non è corrente o è errato.")) {
+			model.addAttribute("check", checkoutDto);
+			return pathCheckoutPage;
+		}
+		
 		double totalPrice = 0;
 		
 		Transaction transaction = new Transaction();
@@ -130,6 +135,12 @@ public class CheckoutController {
 		// controlliamo se è un buy o rent.
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
+			
+			if (isNull(checkoutDto.getRentDays(), model, "Errore!","Non hai selezionato il numero di giorni.")) {
+				model.addAttribute("check", checkoutDto);
+				return pathCheckoutPage;
+			}
+			
 			// rimuoviamo il gioco dal db:
 			if (checkoutDto.isOnline()) { // online.
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceDigital()/30 - 0.20);
@@ -233,5 +244,16 @@ public class CheckoutController {
 		transactionRepository.save(transaction);
 
 		return "";
+	}
+	
+	private boolean isNull (Object o, Model model, String title, String message) {
+		if (o!=null) {
+			return false;
+		}
+		model.addAttribute("error", true);
+        model.addAttribute("message", message);
+        model.addAttribute("color", "red");
+        model.addAttribute("title", title);
+		return true;
 	}
 }
