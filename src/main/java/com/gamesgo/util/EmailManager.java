@@ -82,7 +82,7 @@ public class EmailManager {
 	    // Carica il contenuto HTML dal file
 	    String htmlTemplate = loadHtmlTemplate("templateMail.html");
 	    
-	    String htmlContent = htmlTemplate.replace("{nomeCliente}", "ciao")
+	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", String.valueOf(checkout.getShippingOrderDate()))
