@@ -196,6 +196,7 @@ public class EmailManager {
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
 	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
+	    							.replace("{spedizione}", checkout.getShippingMethod())
 	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
 	    							.replace("{numeroOrdine}", checkout.getOrderNumber());
 
