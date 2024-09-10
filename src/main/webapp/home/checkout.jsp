@@ -78,7 +78,7 @@
 				<div class="col-12">
 					<nav class="main-nav">
 						<!-- ***** Logo Start ***** -->
-						<a href="index.html" class="logo"> <img
+						<a href="/" class="logo"> <img
 							src="../home/assets/images/logo.png" alt="" style="width: 158px;">
 						</a>
 						<!-- ***** Logo End ***** -->
@@ -127,7 +127,7 @@
 				<div class="col-lg-6">
 
 					<img src="${check.gamePhotoUrl}" alt=""
-						style="background-size: cover; border-radius: 25px; height: 100%;">
+						style="background-size: cover; border-radius: 25px; height: 100%; max-height: 700px;">
 				</div>
 
 				<f:form id="contact-form" modelAttribute="check" action="/final"
