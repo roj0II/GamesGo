@@ -324,6 +324,7 @@ public class CheckoutController {
 				shippingList.add(shipping);
 				transaction.setShipments(shippingList);
 				rent.setStartDate(shipping.getScheduleDeliveryDate());
+				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
 			}
 			
 			// otteniamo  il numero di giorni dal checkoutDto.
