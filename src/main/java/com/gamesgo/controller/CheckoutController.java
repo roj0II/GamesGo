@@ -278,7 +278,7 @@ public class CheckoutController {
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
 
-		return "home/catalog.jsp";
+		return "/";
 	}
 	
 	private boolean isNull (Object o, Model model, String title, String message) {
