@@ -75,6 +75,11 @@ public class CheckoutController {
 			model.addAttribute("message", (String) session.getAttribute("message"));
 			model.addAttribute("color", (String) session.getAttribute("color"));
 			model.addAttribute("title", (String) session.getAttribute("title"));
+			
+			session.removeAttribute("error");
+			session.removeAttribute("message");
+			session.removeAttribute("title");
+			session.removeAttribute("color");
 		}
 		
 		if (loggedUser == null) {
@@ -155,6 +160,8 @@ public class CheckoutController {
 		transaction = transactionRepository.save(transaction);
 		LocalDate localDate= LocalDate.now();
 		
+		System.out.println("test cod 0110");
+		
 		// controlliamo se è un buy o rent.
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
@@ -167,6 +174,13 @@ public class CheckoutController {
 			if (checkoutDto.isOnline()) { // online.
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceDigital()/30 - 0.20);
 				Storage storage = game.getStorage();
+				
+				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
+					return redirectCheckout+game.getId();
+				}
+				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
+					return redirectCheckout+game.getId();
+				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
 				storageRepository.save(storage);
 				
@@ -175,6 +189,12 @@ public class CheckoutController {
 			} else { // fisico.
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceRetail()/30 - 0.20);
 				Storage storage = game.getStorage();
+				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
+					return redirectCheckout+game.getId();
+				}
+				if (isNull(session, storage.getAmountRetail()>0, "Errore!","Questo gioco è terminato.")) {
+					return redirectCheckout+game.getId();
+				}
 				storage.setAmountRetail(storage.getAmountRetail()-1);
 				storageRepository.save(storage);
 
@@ -240,13 +260,26 @@ public class CheckoutController {
 			if (checkoutDto.isOnline()) { // online.
 				totalPrice += game.getPriceDigital();
 				Storage storage = game.getStorage();
+				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
+					return redirectCheckout+game.getId();
+				}
+				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
+					return redirectCheckout+game.getId();
+				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
 				storageRepository.save(storage);
 				checkoutDto.setProductKey(KeyGenerator.generateProductKey());
 			} else { // fisico.
 				totalPrice += game.getPriceRetail();
 				Storage storage = game.getStorage();
+				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
+					return redirectCheckout+game.getId();
+				}
+				if (isNull(session, storage.getAmountRetail()>0, "Errore!","Questo gioco è terminato.")) {
+					return redirectCheckout+game.getId();
+				}
 				storage.setAmountRetail(storage.getAmountRetail()-1);
+				
 				storageRepository.save(storage);
 				
 				Shipping shipping = new Shipping();
@@ -284,6 +317,9 @@ public class CheckoutController {
 			}
 		}
 
+		System.out.println("test cod 0220");
+
+		
 		transaction.setCheckoutPayment((float)totalPrice);
 		transactionRepository.save(transaction);
 		
@@ -296,7 +332,9 @@ public class CheckoutController {
 
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
-
+		
+		System.out.println("test cod 0222");
+		
 		return "home/catalog.jsp";
 	}
 	
@@ -309,5 +347,14 @@ public class CheckoutController {
         session.setAttribute("title", title);
 		return true;
 	}
-	
+
+	private boolean isNull (HttpSession session, boolean bool, String title, String message) {
+		if (bool) {
+			session.setAttribute("message", message);
+			session.setAttribute("color", "red");
+			session.setAttribute("title", title);
+			return true;
+		}
+		return false;
+	}
 }
