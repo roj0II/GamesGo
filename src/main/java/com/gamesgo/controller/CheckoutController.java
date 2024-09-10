@@ -69,6 +69,14 @@ public class CheckoutController {
 		Game game = gameRepository.findById(id).orElse(new Game());
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
+		String message = (String) session.getAttribute("message");
+		if (message!=null) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", (String) session.getAttribute("message"));
+			model.addAttribute("color", (String) session.getAttribute("color"));
+			model.addAttribute("title", (String) session.getAttribute("title"));
+		}
+		
 		if (loggedUser == null) {
 			model.addAttribute("error", true);
 			model.addAttribute("message", "Effettua prima l'accesso.");
@@ -82,8 +90,9 @@ public class CheckoutController {
 
 		// Info dell'acquisto.
 		cd.setOnline(formatType.equals("digital"));
+		System.out.println("formatType: " + formatType + " " + cd.isOnline());
 		cd.setRent(transactionType.equals("rent"));
-		
+		System.out.println("transactionType: " + transactionType + " " + cd.isRent());
 		// Dati del gioco.
 		cd.setGameId(game.getId());
 		cd.setGameTitle(game.getTitle());
@@ -120,6 +129,7 @@ public class CheckoutController {
 		return pathCheckoutPage;
 	}
 	
+	private String redirectCheckout = "redirect:/checkout/";
 	
 	@PostMapping("/final")
 	public String checkout(Model model, HttpSession session, @ModelAttribute("check") CheckoutDto checkoutDto) throws MessagingException, IOException{
@@ -128,9 +138,13 @@ public class CheckoutController {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
 		
-		if (isNull(game, model, "Errore!","L'id del gioco non è corrente o è errato.")) {
-			model.addAttribute("check", checkoutDto);
-			return pathCheckoutPage;
+		if (isNull(game, session, "Errore!","L'id del gioco non è corrente o è errato.")) {
+			session.setAttribute("error", true);
+			session.setAttribute("message", "Il gioco che hai premuto non esiste. Riprovare.");
+			session.setAttribute("color", "yellow");
+			session.setAttribute("title", "Alert!");
+			
+			return redirectCheckout+game.getId();
 		}
 		
 		double totalPrice = 0;
@@ -145,9 +159,8 @@ public class CheckoutController {
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
 			
-			if (isNull(checkoutDto.getRentDays(), model, "Errore!","Non hai selezionato il numero di giorni. Ricompila i campi.")) {
-				model.addAttribute("check", checkoutDto);
-				return pathCheckoutPage;
+			if (isNull(checkoutDto.getRentDays(), session, "Errore!","Non hai selezionato il numero di giorni. Ricompila i campi.")) {
+				return redirectCheckout+game.getId();
 			}
 			
 			// rimuoviamo il gioco dal db:
@@ -171,9 +184,8 @@ public class CheckoutController {
 				shipping.setStatus("In spedizione");
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
-				if (isNull(checkoutDto.getShippingMethod(),model, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
-					model.addAttribute("check", checkoutDto);
-					return pathCheckoutPage;
+				if (isNull(checkoutDto.getShippingMethod(),session, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
+					return redirectCheckout+game.getId();
 				}
 				
 				switch (checkoutDto.getShippingMethod()) {
@@ -243,9 +255,8 @@ public class CheckoutController {
 				shipping.setStatus("In spedizione");
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
-				if (isNull(checkoutDto.getShippingMethod(),model, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
-					model.addAttribute("check", checkoutDto);
-					return pathCheckoutPage;
+				if (isNull(checkoutDto.getShippingMethod(),session, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
+					return redirectCheckout+game.getId();
 				}
 				switch (checkoutDto.getShippingMethod()) {
 				case "normale": //4 7 giorni
@@ -261,9 +272,8 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					default:
-						isNull(null,model,"Errore!","Metodo di spedizione non selezionato o non valido.");
-						model.addAttribute("check", checkoutDto);
-						return pathCheckoutPage;
+						isNull(null,session,"Errore!","Metodo di spedizione non selezionato o non valido.");
+						return redirectCheckout+game.getId();
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
@@ -290,14 +300,13 @@ public class CheckoutController {
 		return "home/catalog.jsp";
 	}
 	
-	private boolean isNull (Object o, Model model, String title, String message) {
+	private boolean isNull (Object o, HttpSession session, String title, String message) {
 		if (o!=null) {
 			return false;
 		}
-		model.addAttribute("error", true);
-        model.addAttribute("message", message);
-        model.addAttribute("color", "red");
-        model.addAttribute("title", title);
+		session.setAttribute("message", message);
+		session.setAttribute("color", "red");
+        session.setAttribute("title", title);
 		return true;
 	}
 	
