@@ -215,6 +215,11 @@ public class CheckoutController {
 		// buy o rent = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
+		
+		System.out.println("è digital "+checkoutDto.isOnline());
+		System.out.println("è retail "+!checkoutDto.isOnline());
+		System.out.println("è rent "+checkoutDto.isRent());
+		System.out.println("è buy "+!checkoutDto.isRent());
 
 		String formatType = (checkoutDto.isOnline()) ? "digital": "retail";
 		String transactionType = (checkoutDto.isRent()) ? "rent": "buy";
@@ -237,9 +242,7 @@ public class CheckoutController {
 		transaction.setUser(loggedUser);
 		transaction = transactionRepository.save(transaction);
 		LocalDate localDate= LocalDate.now();
-		
-		System.out.println("test cod 0110");
-		
+				
 		// controlliamo se è un buy o rent.
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
@@ -345,7 +348,6 @@ public class CheckoutController {
 				}
 				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
 					 
-
 					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
@@ -403,8 +405,6 @@ public class CheckoutController {
 				transaction.setShipments(shippingList);
 			}
 		}
-
-		System.out.println("test cod 0220");
 
 		
 		transaction.setCheckoutPayment((float)totalPrice);

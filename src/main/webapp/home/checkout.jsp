@@ -136,7 +136,8 @@
 					<f:input type="hidden" path="gameId"/>
 					<f:input type="hidden" path="gameTitle"/>
 					<f:input type="hidden" path="gamePhotoUrl"/>
-					<f:input type="hidden" path=""/>
+					<f:input type="hidden" path="online"/>
+					<f:input type="hidden" path="rent"/>
 					
 					<div style="display: flex; justify-content: space-between;">
 						<fieldset style="display: inline;">
