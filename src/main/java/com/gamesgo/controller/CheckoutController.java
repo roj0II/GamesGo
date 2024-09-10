@@ -267,6 +267,17 @@ public class CheckoutController {
 				
 				rent.setStartDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
+				int rentDays = checkoutDto.getRentDays();
+
+		        Calendar calendar = Calendar.getInstance();
+		        calendar.setTime(rent.getStartDate());
+		        // aggiungiamo i giorni del rent.
+		        calendar.add(Calendar.DAY_OF_MONTH, rentDays);
+
+		        // Ottieni la nuova data
+		        Date endDate = calendar.getTime();
+		        checkoutDto.setRentFinishDate(endDate);
+				
 			} else { // fisico.
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceRetail()/30 - 0.20);
 				Storage storage = game.getStorage();
@@ -325,7 +336,9 @@ public class CheckoutController {
 
 	        // Ottieni la nuova data
 	        Date endDate = calendar.getTime();
-	        rent.setEndDate(endDate);		        
+	        rent.setEndDate(endDate);		     
+	        checkoutDto.setRentFinishDate(endDate);
+
 			rent.setType(checkoutDto.isOnline() ? "digital": "retail");
 			String productKey = KeyGenerator.generateProductKey();
 			rent.setProductKey(productKey);
