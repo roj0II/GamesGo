@@ -61,28 +61,36 @@ public class EmailManager {
 	        Session mailSession = Session.getInstance(props, null); // Creo la sessione
 	
 	        Message msg = new MimeMessage( mailSession ); // Creo il messaggio.
-	        
-	        
-	     // nome gioco
+	        checkout.setOrderNumber(RandomSegmentGenerator.generateRandomNumber(5));
+	        // nome gioco
 			// soldi spesi
 			// data ordine
 			// productImageUrl
 			if (checkout.isRent()) { // rent.
-				// inzio rent, fine rent
+				// inzio rent
+				// fine rent (giorni)
 				if (checkout.isOnline()) { // online.
 					// chiave auto generata.
+					
+					// RentDigital
 				} else {
 					// data arrivo ordine
 					// tipo di consegna (normale, rapida, due_giorni)
+					
+					// RentRetail
 				}
 			} else { // buy
 				
 				if (checkout.isOnline()) { // online.
 					// chiave auto generata.
+					
+					// BuyDigital
 				} else {
 					mailConfirm(msg, checkout);
 					// data arrivo ordine
 					// tipo di consegna (normale, rapida, due_giorni)
+					
+					// BuyRetail
 				}
 			}
 	        
