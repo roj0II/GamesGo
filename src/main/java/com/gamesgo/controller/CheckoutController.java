@@ -16,6 +16,7 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,77 @@ public class CheckoutController {
 	@Autowired
 	private GenreRepository genreRepository;
 	
+	@GetMapping("/checkout/{id}")
+	public String checkoutForm2 (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
+		// digital o retail = formatType
+		// buy o rent = transactionType
+		Game game = gameRepository.findById(id).orElse(new Game());
+		User loggedUser = (User) session.getAttribute("loggedUser");
+
+		String message = (String) session.getAttribute("message");
+		if (message!=null) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", (String) session.getAttribute("message"));
+			model.addAttribute("color", (String) session.getAttribute("color"));
+			model.addAttribute("title", (String) session.getAttribute("title"));
+			
+			session.removeAttribute("error");
+			session.removeAttribute("message");
+			session.removeAttribute("title");
+			session.removeAttribute("color");
+		}
+		
+		if (loggedUser == null) {
+			model.addAttribute("error", true);
+			model.addAttribute("message", "Effettua prima l'accesso.");
+			model.addAttribute("color", "yellow");
+			model.addAttribute("title", "Alert!");
+			
+			return "/login/loginPage.jsp";
+		}
+		
+		CheckoutDto cd = new CheckoutDto();
+
+		// Info dell'acquisto.
+		cd.setOnline(formatType.equals("digital"));
+		System.out.println("formatType: " + formatType + " " + cd.isOnline());
+		cd.setRent(transactionType.equals("rent"));
+		System.out.println("transactionType: " + transactionType + " " + cd.isRent());
+		// Dati del gioco.
+		cd.setGameId(game.getId());
+		cd.setGameTitle(game.getTitle());
+		cd.setGamePhotoUrl(game.getPhotoUrl());
+		if (formatType.equals("digital")) {
+			cd.setGamePrice(game.getPriceDigital());
+		} else {
+			cd.setGamePrice(game.getPriceRetail());
+		}
+		
+		// Dati di fatturazione.
+		cd.setTransactionAddress(loggedUser.getAddress());
+		cd.setTransactionEmail(loggedUser.getEmail());
+		cd.setTransactionName(loggedUser.getName());
+		cd.setTransactionPhone(loggedUser.getPhone());
+		cd.setTransactionSurname(loggedUser.getSurname());
+		
+		// Dati per la spedizione.
+		cd.setShippingAddress(loggedUser.getAddress());
+		cd.setShippingEmail(loggedUser.getEmail());
+		cd.setShippingName(loggedUser.getName());
+		cd.setShippingPhone(loggedUser.getPhone());
+		cd.setShippingSurname(loggedUser.getSurname());
+		
+		// Dati per il pagamento con carta.
+		cd.setPaymentNameAndSurname(loggedUser.getName()+ " "+loggedUser.getSurname());
+		
+		
+		if (transactionType.equals("rent")) {
+			cd.setGamePrice((float) (cd.getGamePrice()/30 - 0.20));
+		}
+		
+		model.addAttribute("check", cd);
+		return pathCheckoutPage;
+	}
 	@PostMapping("/checkout/{id}")
 	public String checkoutForm (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
 		// digital o retail = formatType
@@ -142,6 +214,9 @@ public class CheckoutController {
 		// buy o rent = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
+
+		String formatType = (checkoutDto.isOnline()) ? "digital": "retail";
+		String transactionType = (checkoutDto.isRent()) ? "rent": "buy";
 		
 		if (isNull(game, session, "Errore!","L'id del gioco non è corrente o è errato.")) {
 			session.setAttribute("error", true);
@@ -149,8 +224,10 @@ public class CheckoutController {
 			session.setAttribute("color", "yellow");
 			session.setAttribute("title", "Alert!");
 			
-			return redirectCheckout+game.getId();
+			return "login/loginPage.jsp";
 		}
+		
+
 		
 		double totalPrice = 0;
 		
@@ -167,7 +244,7 @@ public class CheckoutController {
 			Rent rent = new Rent();
 			
 			if (isNull(checkoutDto.getRentDays(), session, "Errore!","Non hai selezionato il numero di giorni. Ricompila i campi.")) {
-				return redirectCheckout+game.getId();
+				return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 			}
 			
 			// rimuoviamo il gioco dal db:
@@ -176,10 +253,10 @@ public class CheckoutController {
 				Storage storage = game.getStorage();
 				
 				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
 				storageRepository.save(storage);
@@ -190,10 +267,10 @@ public class CheckoutController {
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceRetail()/30 - 0.20);
 				Storage storage = game.getStorage();
 				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				if (isNull(session, storage.getAmountRetail()>0, "Errore!","Questo gioco è terminato.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountRetail(storage.getAmountRetail()-1);
 				storageRepository.save(storage);
@@ -205,7 +282,7 @@ public class CheckoutController {
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
 				if (isNull(checkoutDto.getShippingMethod(),session, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				
 				switch (checkoutDto.getShippingMethod()) {
@@ -223,8 +300,9 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					default:
-						// todo ERRORE metodo di spedizione non selezionato o non valido.
-						break;
+						 
+						isNull(null,session,"Errore!","Metodo di spedizione non selezionato o non valido.");
+						return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				shipping = shippingRepository.save(shipping);
 				List<Shipping> shippingList = new ArrayList<>();
@@ -261,10 +339,13 @@ public class CheckoutController {
 				totalPrice += game.getPriceDigital();
 				Storage storage = game.getStorage();
 				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
-					return redirectCheckout+game.getId();
+
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
-					return redirectCheckout+game.getId();
+					 
+
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
 				storageRepository.save(storage);
@@ -273,10 +354,13 @@ public class CheckoutController {
 				totalPrice += game.getPriceRetail();
 				Storage storage = game.getStorage();
 				if (isNull(storage, session, "Errore!","Questo gioco non è presente nel magazzino.")) {
-					return redirectCheckout+game.getId();
+					 
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				if (isNull(session, storage.getAmountRetail()>0, "Errore!","Questo gioco è terminato.")) {
-					return redirectCheckout+game.getId();
+					 
+
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountRetail(storage.getAmountRetail()-1);
 				
@@ -289,7 +373,8 @@ public class CheckoutController {
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
 				if (isNull(checkoutDto.getShippingMethod(),session, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
-					return redirectCheckout+game.getId();
+					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
+
 				}
 				switch (checkoutDto.getShippingMethod()) {
 				case "normale": //4 7 giorni
@@ -305,8 +390,9 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					default:
+						
 						isNull(null,session,"Errore!","Metodo di spedizione non selezionato o non valido.");
-						return redirectCheckout+game.getId();
+						return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
@@ -333,8 +419,6 @@ public class CheckoutController {
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
 		
-		System.out.println("test cod 0222");
-		
 		return "home/catalog.jsp";
 	}
 	
@@ -350,11 +434,11 @@ public class CheckoutController {
 
 	private boolean isNull (HttpSession session, boolean bool, String title, String message) {
 		if (bool) {
-			session.setAttribute("message", message);
-			session.setAttribute("color", "red");
-			session.setAttribute("title", title);
-			return true;
+			return false;
 		}
-		return false;
+		session.setAttribute("message", message);
+		session.setAttribute("color", "red");
+		session.setAttribute("title", title);
+		return true;
 	}
 }
