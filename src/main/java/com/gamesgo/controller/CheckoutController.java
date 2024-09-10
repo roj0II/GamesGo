@@ -145,6 +145,7 @@ public class CheckoutController {
 		String message = (String) session.getAttribute("message");
 		if (message!=null) {
 			model.addAttribute("error", true);
+			model.addAttribute("show", "show");
 			model.addAttribute("message", (String) session.getAttribute("message"));
 			model.addAttribute("color", (String) session.getAttribute("color"));
 			model.addAttribute("title", (String) session.getAttribute("title"));
@@ -434,6 +435,11 @@ public class CheckoutController {
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
 		
+		model.addAttribute("error", true);
+		model.addAttribute("show", "show");
+		model.addAttribute("message", "Grazie di aver acquistato nel nostro store, ti abbiamo inviato un email con il recap dell'acquisto.");
+		model.addAttribute("color", "green");
+		model.addAttribute("title", "Acquisto effettuato!");
 		return "home/catalog.jsp";
 	}
 	
