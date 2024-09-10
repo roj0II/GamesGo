@@ -62,7 +62,30 @@ public class EmailManager {
 	
 	        Message msg = new MimeMessage( mailSession ); // Creo il messaggio.
 	        
-	        mailConfirm(msg, checkout);
+	        
+	     // nome gioco
+			// soldi spesi
+			// data ordine
+			// productImageUrl
+			if (checkout.isRent()) { // rent.
+				// inzio rent, fine rent
+				if (checkout.isOnline()) { // online.
+					// chiave auto generata.
+				} else {
+					// data arrivo ordine
+					// tipo di consegna (normale, rapida, due_giorni)
+				}
+			} else { // buy
+				
+				if (checkout.isOnline()) { // online.
+					// chiave auto generata.
+				} else {
+					mailConfirm(msg, checkout);
+					// data arrivo ordine
+					// tipo di consegna (normale, rapida, due_giorni)
+				}
+			}
+	        
 	        
 	        Transport transport = mailSession.getTransport("smtps"); // Imposto l'oggetto Transport con protocollo SMTPS (SMTP su SSL).
 	        
