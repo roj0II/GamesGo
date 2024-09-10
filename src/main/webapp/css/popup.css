@@ -22,9 +22,9 @@
 	transition: all 0.5s ease 0s;
 	position: fixed;
 	animation: show-popup 1s ease 0s;
-	z-index: 104;
+	z-index: 1104;
 	opacity: 0;
-	display: flex;
+	display: none;
 	bottom: 1em;
 	right: 2em;
 }
