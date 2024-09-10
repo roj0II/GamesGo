@@ -125,8 +125,9 @@ public class CheckoutController {
 		// digital o retail = formatType
 		// buy o rent = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		System.out.println(checkoutDto.getGameId());
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
+		
+		System.out.println("final");
 		if (isNull(game, model, "Errore!","L'id del gioco non è corrente o è errato.")) {
 			model.addAttribute("check", checkoutDto);
 			return pathCheckoutPage;
@@ -274,28 +275,6 @@ public class CheckoutController {
 		
 		EmailManager.sendMailCheckout(checkoutDto);
 
-		
-		// nome gioco
-		// soldi spesi
-		// data ordine
-		// productImageUrl
-		if (checkoutDto.isRent()) { // rent.
-			// inzio rent, fine rent
-			if (checkoutDto.isOnline()) { // online.
-				// chiave auto generata.
-			} else {
-				// data arrivo ordine
-				// tipo di consegna (normale, rapida, due_giorni)
-			}
-		} else { // buy
-			
-			if (checkoutDto.isOnline()) { // online.
-				// chiave auto generata.
-			} else {
-				// data arrivo ordine
-				// tipo di consegna (normale, rapida, due_giorni)
-			}
-		}
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
 

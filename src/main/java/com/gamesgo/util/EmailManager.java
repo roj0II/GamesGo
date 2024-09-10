@@ -72,11 +72,13 @@ public class EmailManager {
 				if (checkout.isOnline()) { // online.
 					// chiave auto generata.
 					
+					mailRentDigital(msg, checkout);
 					// RentDigital
 				} else {
 					// data arrivo ordine
 					// tipo di consegna (normale, rapida, due_giorni)
 					
+					mailRentRetail(msg, checkout);
 					// RentRetail
 				}
 			} else { // buy
@@ -84,12 +86,14 @@ public class EmailManager {
 				if (checkout.isOnline()) { // online.
 					// chiave auto generata.
 					
+					mailBuyDigital(msg, checkout);
+
 					// BuyDigital
 				} else {
-					mailConfirm(msg, checkout);
 					// data arrivo ordine
 					// tipo di consegna (normale, rapida, due_giorni)
 					
+					mailBuyRetail(msg, checkout);
 					// BuyRetail
 				}
 			}
@@ -104,7 +108,73 @@ public class EmailManager {
 			
 		}
 	
-	public static Message mailConfirm(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
+	public static Message mailRentDigital(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
+	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
+	    
+	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(checkout.getTransactionEmail()));
+	    msg.setSubject("Ordine Confermato");
+
+	    // Carica il contenuto HTML dal file
+	    String htmlTemplate = loadHtmlTemplate("templateMailRentDigital.html");
+	    
+	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
+	    							.replace("{nomeGioco}", checkout.getGameTitle())
+	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
+	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
+	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+
+	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
+
+	    msg.setSentDate(new Date()); // Imposto la data d'invio
+	    
+	    return msg;
+	}
+	public static Message mailRentRetail(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
+	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
+	    
+	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(checkout.getTransactionEmail()));
+	    msg.setSubject("Ordine Confermato");
+
+	    // Carica il contenuto HTML dal file
+	    String htmlTemplate = loadHtmlTemplate("templateMailRentRetail.html");
+	    
+	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
+	    							.replace("{nomeGioco}", checkout.getGameTitle())
+	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
+	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
+	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+
+	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
+
+	    msg.setSentDate(new Date()); // Imposto la data d'invio
+	    
+	    return msg;
+	}
+	public static Message mailBuyDigital(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
+	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
+	    
+	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(checkout.getTransactionEmail()));
+	    msg.setSubject("Ordine Confermato");
+
+	    // Carica il contenuto HTML dal file
+	    String htmlTemplate = loadHtmlTemplate("templateMailSellDigital.html");
+	    
+	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
+	    							.replace("{nomeGioco}", checkout.getGameTitle())
+	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
+	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
+	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+
+	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
+
+	    msg.setSentDate(new Date()); // Imposto la data d'invio
+	    
+	    return msg;
+	}
+	public static Message mailBuyRetail(Message msg, CheckoutDto checkout) throws AddressException, MessagingException, IOException {
 	    msg.setFrom(new InternetAddress(mailUsername)); // Imposto il mittente del messaggio.
 	    
 	    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(checkout.getTransactionEmail()));
