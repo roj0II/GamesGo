@@ -55,6 +55,14 @@
 	border: transparent;
 	letter-spacing: .25px;
 }
+
+.avatar{
+	filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+.avatar:hover{
+   	filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.7));
+}
 </style>
 
 </head>
@@ -275,7 +283,9 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="item">
 								<div class="thumb">
-									<img src="/home/assets/images/alessio.jpg" alt="">
+								<a href="https://www.linkedin.com/in/marino-alessio/">
+									<img class="avatar" src="/home/assets/images/alessio.png" alt="">
+								</a>
 								</div>
 								<div class="down-content">
 									<span class="category">ALE</span>
@@ -288,13 +298,14 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="item">
 								<div class="thumb">
-									<img src="/home/assets/images/michele.jpg" alt="">
+								<a href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/">
+									<img class="avatar" src="/home/assets/images/michele.png" alt="">
+								</a>
 								</div>
 								<div class="down-content">
 									<span class="category">MIKE</span>
 									<h4>Michele Di Mezza Cutillo</h4>
-									<a
-										href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/"><i
+									<a href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/"><i
 										class="fa-brands fa-linkedin"></i></a>
 								</div>
 							</div>
@@ -302,7 +313,9 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="item">
 								<div class="thumb">
-									<img src="/home/assets/images/andrea.jpg" alt="">
+								<a href="https://www.linkedin.com/in/andrse/">
+									<img class="avatar" src="/home/assets/images/andrea.png" alt="">
+								</a>
 								</div>
 								<div class="down-content">
 									<span class="category">ANDRE</span>
@@ -315,7 +328,9 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="item">
 								<div class="thumb">
-									<img src="/home/assets/images/rocco.jpg" alt="">
+								<a href="https://www.linkedin.com/in/roccosantorsa/">
+									<img class="avatar" src="/home/assets/images/rocco.png" alt="">
+								</a>
 								</div>
 								<div class="down-content">
 									<span class="category">IO</span>
