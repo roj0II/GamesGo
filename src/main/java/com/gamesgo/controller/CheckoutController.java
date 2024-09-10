@@ -73,6 +73,7 @@ public class CheckoutController {
 		String message = (String) session.getAttribute("message");
 		if (message!=null) {
 			model.addAttribute("error", true);
+			model.addAttribute("show", "show");
 			model.addAttribute("message", (String) session.getAttribute("message"));
 			model.addAttribute("color", (String) session.getAttribute("color"));
 			model.addAttribute("title", (String) session.getAttribute("title"));
@@ -214,6 +215,11 @@ public class CheckoutController {
 		// buy o rent = transactionType
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
+		
+		System.out.println("è digital "+checkoutDto.isOnline());
+		System.out.println("è retail "+!checkoutDto.isOnline());
+		System.out.println("è rent "+checkoutDto.isRent());
+		System.out.println("è buy "+!checkoutDto.isRent());
 
 		String formatType = (checkoutDto.isOnline()) ? "digital": "retail";
 		String transactionType = (checkoutDto.isRent()) ? "rent": "buy";
@@ -236,9 +242,7 @@ public class CheckoutController {
 		transaction.setUser(loggedUser);
 		transaction = transactionRepository.save(transaction);
 		LocalDate localDate= LocalDate.now();
-		
-		System.out.println("test cod 0110");
-		
+				
 		// controlliamo se è un buy o rent.
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
@@ -262,6 +266,17 @@ public class CheckoutController {
 				storageRepository.save(storage);
 				
 				rent.setStartDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				
+				int rentDays = checkoutDto.getRentDays();
+
+		        Calendar calendar = Calendar.getInstance();
+		        calendar.setTime(rent.getStartDate());
+		        // aggiungiamo i giorni del rent.
+		        calendar.add(Calendar.DAY_OF_MONTH, rentDays);
+
+		        // Ottieni la nuova data
+		        Date endDate = calendar.getTime();
+		        checkoutDto.setRentFinishDate(endDate);
 				
 			} else { // fisico.
 				totalPrice = checkoutDto.getRentDays()*(game.getPriceRetail()/30 - 0.20);
@@ -295,7 +310,7 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					
-				case "due giorni": //12 2giorni
+				case "due_giorni": //12 2giorni
 					totalPrice += 12;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
@@ -321,7 +336,9 @@ public class CheckoutController {
 
 	        // Ottieni la nuova data
 	        Date endDate = calendar.getTime();
-	        rent.setEndDate(endDate);		        
+	        rent.setEndDate(endDate);		     
+	        checkoutDto.setRentFinishDate(endDate);
+
 			rent.setType(checkoutDto.isOnline() ? "digital": "retail");
 			String productKey = KeyGenerator.generateProductKey();
 			rent.setProductKey(productKey);
@@ -329,7 +346,7 @@ public class CheckoutController {
 			rent.setTransaction(transaction);
 			rent = rentRepository.save(rent);
 			
-			List<Rent> rentList = transaction.getRents();
+			List<Rent> rentList = new ArrayList<Rent>();
 			rentList.add(rent);
 			transaction.setRents(rentList);
 			
@@ -344,7 +361,6 @@ public class CheckoutController {
 				}
 				if (isNull(session, storage.getAmountDigital()>0, "Errore!","Questo gioco è terminato.")) {
 					 
-
 					return redirectCheckout+game.getId()+"?formatType="+formatType+"&transactionType="+transactionType;
 				}
 				storage.setAmountDigital(storage.getAmountDigital()-1);
@@ -385,7 +401,7 @@ public class CheckoutController {
 					totalPrice += 6;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
-				case "due giorni": //12 2giorni
+				case "due_giorni": //12 2giorni
 					totalPrice += 12;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
@@ -402,8 +418,6 @@ public class CheckoutController {
 				transaction.setShipments(shippingList);
 			}
 		}
-
-		System.out.println("test cod 0220");
 
 		
 		transaction.setCheckoutPayment((float)totalPrice);

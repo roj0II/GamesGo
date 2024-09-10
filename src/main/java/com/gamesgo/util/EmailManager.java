@@ -121,8 +121,11 @@ public class EmailManager {
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
-	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
-	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+	    							.replace("{chiave}", checkout.getProductKey())
+									.replace("{dataRestituzione}",DateManager.dateToString(checkout.getRentFinishDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
+	    							.replace("{numeroOrdine}", checkout.getOrderNumber())
+	    							.replace("{giorni}", String.valueOf(checkout.getRentDays()));
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
@@ -144,7 +147,11 @@ public class EmailManager {
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
 	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
-	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+	    							.replace("{spedizione}", checkout.getShippingMethod())
+	    							.replace("{dataRestituzione", DateManager.dateToString(checkout.getRentFinishDate()))
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
+	    							.replace("{giorni}", String.valueOf(checkout.getRentDays()))
+	    							.replace("{numeroOrdine}", checkout.getOrderNumber());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
@@ -165,8 +172,9 @@ public class EmailManager {
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
-	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
-	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+	    							.replace("{chiave}", checkout.getProductKey())
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
+	    							.replace("{numeroOrdine}", checkout.getOrderNumber());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
@@ -188,7 +196,8 @@ public class EmailManager {
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
 	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
-	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
+	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
+	    							.replace("{numeroOrdine}", checkout.getOrderNumber());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
 
