@@ -121,7 +121,6 @@ public class EmailManager {
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
 	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
-	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
 	    							.replace("{chiave}", checkout.getProductKey())
 									.replace("{dataRestituzione}",DateManager.dateToString(checkout.getRentFinishDate()))
 	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl())
