@@ -310,7 +310,7 @@ public class CheckoutController {
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
 					
-				case "due giorni": //12 2giorni
+				case "due_giorni": //12 2giorni
 					totalPrice += 12;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
@@ -401,7 +401,7 @@ public class CheckoutController {
 					totalPrice += 6;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
-				case "due giorni": //12 2giorni
+				case "due_giorni": //12 2giorni
 					totalPrice += 12;
 					shipping.setScheduleDeliveryDate(Date.from(localDate.plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 					break;
