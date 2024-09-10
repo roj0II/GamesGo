@@ -436,6 +436,7 @@
 			<script src="../home/assets/js/custom.js"></script>
 			<script src="/transact/transactScript.js"></script>
 
+    <jsp:include page="../fragments/popup.jsp" />
 
 			<script>
 			let basePrice = 0;

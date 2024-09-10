@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (popupItem) {
         setTimeout(() => {
             popupItem.classList.remove('show');
-        }, 5000);
+        }, 15000);
     }
     
     // Hide popup when close button is clicked

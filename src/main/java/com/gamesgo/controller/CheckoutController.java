@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -127,7 +128,6 @@ public class CheckoutController {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		Game game = gameRepository.findById(checkoutDto.getGameId()).orElse(new Game());
 		
-		System.out.println("final");
 		if (isNull(game, model, "Errore!","L'id del gioco non è corrente o è errato.")) {
 			model.addAttribute("check", checkoutDto);
 			return pathCheckoutPage;
@@ -140,8 +140,7 @@ public class CheckoutController {
 		transaction.setUser(loggedUser);
 		transaction = transactionRepository.save(transaction);
 		LocalDate localDate= LocalDate.now();
-
-
+		
 		// controlliamo se è un buy o rent.
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
@@ -172,6 +171,11 @@ public class CheckoutController {
 				shipping.setStatus("In spedizione");
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 				
+				if (isNull(checkoutDto.getShippingMethod(),model, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
+					model.addAttribute("check", checkoutDto);
+					return pathCheckoutPage;
+				}
+				
 				switch (checkoutDto.getShippingMethod()) {
 				case "normale": //4 7 giorni
 					totalPrice += 4;
@@ -191,7 +195,7 @@ public class CheckoutController {
 						break;
 				}
 				shipping = shippingRepository.save(shipping);
-				List<Shipping> shippingList = transaction.getShipments();
+				List<Shipping> shippingList = new ArrayList<>();
 				shippingList.add(shipping);
 				transaction.setShipments(shippingList);
 				rent.setStartDate(shipping.getScheduleDeliveryDate());
@@ -238,6 +242,11 @@ public class CheckoutController {
 				shipping.setUser(loggedUser);
 				shipping.setStatus("In spedizione");
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				
+				if (isNull(checkoutDto.getShippingMethod(),model, "Errore","Seleziona un metodo di consegna. Ricompila i campi per proseguire.")) {
+					model.addAttribute("check", checkoutDto);
+					return pathCheckoutPage;
+				}
 				switch (checkoutDto.getShippingMethod()) {
 				case "normale": //4 7 giorni
 					totalPrice += 4;
@@ -259,7 +268,7 @@ public class CheckoutController {
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
 				shipping = shippingRepository.save(shipping);
-				List<Shipping> shippingList = transaction.getShipments();
+				List<Shipping> shippingList = new ArrayList<>();
 				shippingList.add(shipping);
 				transaction.setShipments(shippingList);
 			}
@@ -278,7 +287,7 @@ public class CheckoutController {
 		model.addAttribute("games", gameRepository.findAll());
 		model.addAttribute("genres", genreRepository.findAll());
 
-		return "/";
+		return "home/catalog.jsp";
 	}
 	
 	private boolean isNull (Object o, Model model, String title, String message) {
