@@ -25,6 +25,7 @@ import com.gamesgo.model.Storage;
 import com.gamesgo.model.Transaction;
 import com.gamesgo.model.User;
 import com.gamesgo.repository.GameRepository;
+import com.gamesgo.repository.GenreRepository;
 import com.gamesgo.repository.RentRepository;
 import com.gamesgo.repository.ShippingRepository;
 import com.gamesgo.repository.StorageRepository;
@@ -53,6 +54,9 @@ public class CheckoutController {
 	
 	@Autowired
 	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private GenreRepository genreRepository;
 	
 	@PostMapping("/checkout/{id}")
 	public String checkoutForm (Model model, HttpSession session, @PathVariable int id, @RequestParam String formatType, @RequestParam String transactionType){
@@ -138,7 +142,7 @@ public class CheckoutController {
 		if (checkoutDto.isRent()) { // rent.
 			Rent rent = new Rent();
 			
-			if (isNull(checkoutDto.getRentDays(), model, "Errore!","Non hai selezionato il numero di giorni.")) {
+			if (isNull(checkoutDto.getRentDays(), model, "Errore!","Non hai selezionato il numero di giorni. Ricompila i campi.")) {
 				model.addAttribute("check", checkoutDto);
 				return pathCheckoutPage;
 			}
@@ -286,8 +290,10 @@ public class CheckoutController {
 				// tipo di consegna (normale, rapida, due_giorni)
 			}
 		}
-		
-		return "";
+		model.addAttribute("games", gameRepository.findAll());
+		model.addAttribute("genres", genreRepository.findAll());
+
+		return "home/catalog.jsp";
 	}
 	
 	private boolean isNull (Object o, Model model, String title, String message) {
