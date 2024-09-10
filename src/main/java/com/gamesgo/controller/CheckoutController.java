@@ -134,7 +134,6 @@ public class CheckoutController {
 		transaction.setGame(game);
 		transaction.setUser(loggedUser);
 		transaction = transactionRepository.save(transaction);
-
 		LocalDate localDate= LocalDate.now();
 
 
@@ -167,6 +166,7 @@ public class CheckoutController {
 				shipping.setUser(loggedUser);
 				shipping.setStatus("In spedizione");
 				shipping.setShippingDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				
 				switch (checkoutDto.getShippingMethod()) {
 				case "normale": //4 7 giorni
 					totalPrice += 4;
@@ -185,8 +185,10 @@ public class CheckoutController {
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 						break;
 				}
-				shippingRepository.save(shipping);
-
+				shipping = shippingRepository.save(shipping);
+				List<Shipping> shippingList = transaction.getShipments();
+				shippingList.add(shipping);
+				transaction.setShipments(shippingList);
 				rent.setStartDate(shipping.getScheduleDeliveryDate());
 			}
 			
@@ -248,8 +250,10 @@ public class CheckoutController {
 						// todo ERRORE metodo di spedizione non selezionato o non valido.
 				}
 				checkoutDto.setShippingScheduleDate(shipping.getScheduleDeliveryDate());
-				shippingRepository.save(shipping);
-				
+				shipping = shippingRepository.save(shipping);
+				List<Shipping> shippingList = transaction.getShipments();
+				shippingList.add(shipping);
+				transaction.setShipments(shippingList);
 			}
 		}
 
@@ -263,6 +267,29 @@ public class CheckoutController {
 		
 		EmailManager.sendMailCheckout(checkoutDto);
 
+		
+		// nome gioco
+		// soldi spesi
+		// data ordine
+		// productImageUrl
+		if (checkoutDto.isRent()) { // rent.
+			// inzio rent, fine rent
+			if (checkoutDto.isOnline()) { // online.
+				// chiave auto generata.
+			} else {
+				// data arrivo ordine
+				// tipo di consegna (normale, rapida, due_giorni)
+			}
+		} else { // buy
+			
+			if (checkoutDto.isOnline()) { // online.
+				// chiave auto generata.
+			} else {
+				// data arrivo ordine
+				// tipo di consegna (normale, rapida, due_giorni)
+			}
+		}
+		
 		return "";
 	}
 	
