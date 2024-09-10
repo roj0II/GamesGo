@@ -7,6 +7,8 @@ public class CheckoutDto {
 	// Dati per sapere se è online o fisico | compra o affitta
 	private boolean online;
 	private boolean rent; 
+	private String orderNumber;
+	private String productKey;
 	
 	// Dati utente, Ottenuti dal loggedUser.
 	private String userAddress;
@@ -237,6 +239,18 @@ public class CheckoutDto {
 	}
 	public void setShippingScheduleDate(Date shippingScheduleDate) {
 		this.shippingScheduleDate = shippingScheduleDate;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public String getProductKey() {
+		return productKey;
+	}
+	public void setProductKey(String productKey) {
+		this.productKey = productKey;
 	}
 
 }
