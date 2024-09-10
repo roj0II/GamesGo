@@ -333,7 +333,7 @@ public class CheckoutController {
 			rent.setTransaction(transaction);
 			rent = rentRepository.save(rent);
 			
-			List<Rent> rentList = transaction.getRents();
+			List<Rent> rentList = new ArrayList<Rent>();
 			rentList.add(rent);
 			transaction.setRents(rentList);
 			
