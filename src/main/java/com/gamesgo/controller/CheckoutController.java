@@ -208,7 +208,9 @@ public class CheckoutController {
 	        Date endDate = calendar.getTime();
 	        rent.setEndDate(endDate);		        
 			rent.setType(checkoutDto.isOnline() ? "digital": "retail");
-			rent.setProductKey(KeyGenerator.generateProductKey());
+			String productKey = KeyGenerator.generateProductKey();
+			rent.setProductKey(productKey);
+			checkoutDto.setProductKey(productKey);
 			rent.setTransaction(transaction);
 			rent = rentRepository.save(rent);
 			
@@ -223,6 +225,7 @@ public class CheckoutController {
 				Storage storage = game.getStorage();
 				storage.setAmountDigital(storage.getAmountDigital()-1);
 				storageRepository.save(storage);
+				checkoutDto.setProductKey(KeyGenerator.generateProductKey());
 			} else { // fisico.
 				totalPrice += game.getPriceRetail();
 				Storage storage = game.getStorage();
