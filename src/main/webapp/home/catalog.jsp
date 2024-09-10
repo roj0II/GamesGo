@@ -176,6 +176,7 @@
       </div>
     </div>
   </footer>
+    <jsp:include page="../fragments/popup.jsp" />
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
