@@ -111,7 +111,7 @@ public class EmailManager {
 	    msg.setSubject("Ordine Confermato");
 
 	    // Carica il contenuto HTML dal file
-	    String htmlTemplate = loadHtmlTemplate("templateMail.html");
+	    String htmlTemplate = loadHtmlTemplate("templateMailSellRetail.html");
 	    
 	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
