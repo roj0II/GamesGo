@@ -85,8 +85,8 @@ public class EmailManager {
 	    String htmlContent = htmlTemplate.replace("{nomeCliente}", checkout.getTransactionName() + " " + checkout.getTransactionSurname())
 	    							.replace("{nomeGioco}", checkout.getGameTitle())
 	    							.replace("{prezzo}", String.valueOf(checkout.getGamePrice()))
-	    							.replace("{dataOrdine}", String.valueOf(checkout.getShippingOrderDate()))
-	    							.replace("{dataArrivo}", String.valueOf(checkout.getShippingScheduleDate()))
+	    							.replace("{dataOrdine}", DateManager.dateToString(checkout.getShippingOrderDate()))
+	    							.replace("{dataArrivo}", DateManager.dateToString(checkout.getShippingScheduleDate()))
 	    							.replace("{productImageUrl}", checkout.getGamePhotoUrl());
 
 	    msg.setContent(htmlContent, "text/html"); // Imposta il contenuto come HTML
