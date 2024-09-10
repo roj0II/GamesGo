@@ -61,7 +61,7 @@
 }
 
 .avatar:hover{
-   	filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.7));
+   	filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.8));
 }
 </style>
 
@@ -288,7 +288,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">RE DI ROMA</span>
+									<span class="category">ERRORISTA</span>
 									<h4>Alessio Marino</h4>
 									<a href="https://www.linkedin.com/in/marino-alessio/"><i
 										class="fa-brands fa-linkedin"></i></a>
@@ -303,7 +303,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">MIKEDMC.IT</span>
+									<span class="category">BACKENDISTA</span>
 									<h4>Michele Di Mezza Cutillo</h4>
 									<a href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/"><i
 										class="fa-brands fa-linkedin"></i></a>
@@ -318,7 +318,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category"></span>
+									<span class="category">ENTITISTA</span>
 									<h4>Andrea Sessa</h4>
 									<a href="https://www.linkedin.com/in/andrse/"><i
 										class="fa-brands fa-linkedin"></i></a>
@@ -333,7 +333,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category"></span>
+									<span class="category">FRONTENDISTA</span>
 									<h4>Rocco Santorsa</h4>
 									<a href="https://www.linkedin.com/in/roccosantorsa/"><i
 										class="fa-brands fa-linkedin"></i></a>
