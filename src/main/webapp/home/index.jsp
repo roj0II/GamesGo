@@ -318,7 +318,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">ANDRE</span>
+									<span class="category"></span>
 									<h4>Andrea Sessa</h4>
 									<a href="https://www.linkedin.com/in/andrse/"><i
 										class="fa-brands fa-linkedin"></i></a>
@@ -333,7 +333,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">IO</span>
+									<span class="category"></span>
 									<h4>Rocco Santorsa</h4>
 									<a href="https://www.linkedin.com/in/roccosantorsa/"><i
 										class="fa-brands fa-linkedin"></i></a>
