@@ -288,7 +288,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">ALE</span>
+									<span class="category">RE DI ROMA</span>
 									<h4>Alessio Marino</h4>
 									<a href="https://www.linkedin.com/in/marino-alessio/"><i
 										class="fa-brands fa-linkedin"></i></a>
@@ -303,7 +303,7 @@
 								</a>
 								</div>
 								<div class="down-content">
-									<span class="category">MIKE</span>
+									<span class="category">MIKEDMC.IT</span>
 									<h4>Michele Di Mezza Cutillo</h4>
 									<a href="https://www.linkedin.com/in/michele-di-mezza-cutillo-b839a6268/"><i
 										class="fa-brands fa-linkedin"></i></a>
