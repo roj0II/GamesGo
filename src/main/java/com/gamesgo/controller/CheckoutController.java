@@ -73,6 +73,7 @@ public class CheckoutController {
 		String message = (String) session.getAttribute("message");
 		if (message!=null) {
 			model.addAttribute("error", true);
+			model.addAttribute("show", "show");
 			model.addAttribute("message", (String) session.getAttribute("message"));
 			model.addAttribute("color", (String) session.getAttribute("color"));
 			model.addAttribute("title", (String) session.getAttribute("title"));
